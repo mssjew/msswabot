@@ -47,9 +47,11 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
-  schedule.scheduleJob('*/4 * * * *', () => {
+  const date = new Date(2022, 1, 5, 21, 30, 0);
+
+  schedule.scheduleJob(date, () => {
     client.sendMessage("97338999888@c.us", "VPS TEST").then(res => {
-      console.log('MESSAGE SENT');
+      console.log('THIS SHOULD TRIGGER AT 2.30PM SAT 5th Feb');
       }).catch((err) => {
         console.log('ERROR');
       });
