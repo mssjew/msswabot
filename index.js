@@ -47,8 +47,8 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
-  schedule.scheduleJob('12 * * * * *', () => {
-    client.sendMessage("97338999888@c.us", "YOOO").then(res => {
+  schedule.scheduleJob('*/5 * * * *', () => {
+    client.sendMessage("97338999888@c.us", "VPS TEST").then(res => {
       console.log('MESSAGE SENT');
       }).catch((err) => {
         console.log('ERROR');
