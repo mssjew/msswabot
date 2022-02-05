@@ -47,7 +47,7 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
-  schedule.scheduleJob('*/2 * * * *', () => {
+  schedule.scheduleJob('*/4 * * * *', () => {
     client.sendMessage("97338999888@c.us", "VPS TEST").then(res => {
       console.log('MESSAGE SENT');
       }).catch((err) => {
@@ -88,7 +88,7 @@ async function kenzGrab(range) {
 }
 
 async function qabGrab(range) {
-  let resp = await axios.get(kenzBuilder(range));
+  let resp = await axios.get(qabBuilder(range));
   return resp.data.values;
 }
 
