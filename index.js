@@ -47,11 +47,11 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
-  const date = new Date(2022, 1, 5, 22, 18, 0);
+  const date = new Date(2022, 1, 5, 22, 19, 0);
 
   schedule.scheduleJob(date, () => {
-    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 2.17PM SAT 5th Feb").then(res => {
-      console.log('THIS SHOULD TRIGGER AT 2.17PM SAT 5th Feb');
+    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 2.19PM SAT 5th Feb").then(res => {
+      console.log('THIS SHOULD TRIGGER AT 2.19PM SAT 5th Feb');
       }).catch((err) => {
         console.log('ERROR');
       });
