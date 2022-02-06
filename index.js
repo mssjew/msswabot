@@ -47,15 +47,53 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
-  const date = new Date(2022, 1, 5, 22, 19, 0);
+  const date1 = new Date(2022, 1, 6, 20, 30, 0);
+  const date2 = new Date(2022, 1, 6, 21, 34, 0);
+  const date3 = new Date(2022, 1, 6, 22, 08, 0);
+  const date4 = new Date(2022, 1, 6, 23, 19, 0);
+  const date5 = new Date(2022, 1, 7, 00, 15, 0);
 
-  schedule.scheduleJob(date, () => {
-    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 2.19PM SAT 5th Feb").then(res => {
-      console.log('THIS SHOULD TRIGGER AT 2.19PM SAT 5th Feb');
+  schedule.scheduleJob(date1, () => {
+    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 12.30PM SUN 6th Feb").then(res => {
+      console.log('SENT');
       }).catch((err) => {
         console.log('ERROR');
       });
   });
+
+  schedule.scheduleJob(date2, () => {
+    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 1.34PM SUN 6th Feb").then(res => {
+      console.log('SENT');
+      }).catch((err) => {
+        console.log('ERROR');
+      });
+  });
+
+  schedule.scheduleJob(date3, () => {
+    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 2.08PM SUN 6th Feb").then(res => {
+      console.log('SENT');
+      }).catch((err) => {
+        console.log('ERROR');
+      });
+  });
+
+  schedule.scheduleJob(date4, () => {
+    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 3.19PM SUN 6th Feb").then(res => {
+      console.log('SENT');
+      }).catch((err) => {
+        console.log('ERROR');
+      });
+  });
+
+  schedule.scheduleJob(date5, () => {
+    client.sendMessage("97338999888@c.us", "SB IN 15 MINS").then(res => {
+      console.log('SENT');
+      }).catch((err) => {
+        console.log('ERROR');
+      });
+  });
+
+  
 });
 
 client.initialize();
