@@ -37,14 +37,16 @@ client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
 });
 
-let button = new Buttons("Test", 
-[{body: "!mss sell", id: "id_btn1"},
-{body: "!mss buy", id: "id_btn2"},
-{body: "!mss profit", id: "id_btn3"}], "Choose Report", "Test");
-
 
 client.on("ready", () => {
   console.log("Client is ready!");
+
+  client.on('message', message => {
+    if(message.body === '!ping') {
+        console.log(message.from);
+        client.sendMessage(message.from, 'pong');
+    }
+});
 
 
 
