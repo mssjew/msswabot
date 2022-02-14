@@ -139,18 +139,18 @@ async function qabGrab(range) {
 }
 
 // ----------------- HELP START ----------------- 
-client.on("message", (message) => {
-    if (message.body === "!help") {
+// client.on("message", (message) => {
+//     if (message.body === "!help") {
 
-        message.reply("*COMMANDS:* \r\n\r\n\
-        `*!mss sell*` (MSS SELL POSITIONS)\n\
-        `*!mss sell*` (MSS BUY POSITIONS)\n\
-        `*!kenz sell*` (KENZ SELL POSITIONS)\n\
-        `*!kenz buy*` (KENZ BUY POSITIONS)\n\
-        `*!qab sell*` (QAB SELL POSITIONS)\n\
-        `*!qab buy*` (QAB BUY POSITIONS)");
-    }
-  });
+//         message.reply("*COMMANDS:* \r\n\r\n\
+//         `*!mss sell*` (MSS SELL POSITIONS)\n\
+//         `*!mss sell*` (MSS BUY POSITIONS)\n\
+//         `*!kenz sell*` (KENZ SELL POSITIONS)\n\
+//         `*!kenz buy*` (KENZ BUY POSITIONS)\n\
+//         `*!qab sell*` (QAB SELL POSITIONS)\n\
+//         `*!qab buy*` (QAB BUY POSITIONS)");
+//     }
+//   });
 
 // ----------------- HELP END -----------------
 
@@ -162,22 +162,22 @@ client.on("message", (message) => {
 
 // ----------------- MSS START -----------------
 
-client.on("message", (message) => {
-    if (message.body === "!mss buy") {
-      mssGrab(buyRange).then((data) =>
-        message.reply(`*MSS BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
+// client.on("message", (message) => {
+//     if (message.body === "!mss buy") {
+//       mssGrab(buyRange).then((data) =>
+//         message.reply(`*MSS BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
+//       );
 
-    }
-  });
+//     }
+//   });
   
-  client.on("message", (message) => {
-    if (message.body === "!mss sell") {
-      mssGrab(sellRange).then((data) =>
-        message.reply(`*MSS SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
-  });
+//   client.on("message", (message) => {
+//     if (message.body === "!mss sell") {
+//       mssGrab(sellRange).then((data) =>
+//         message.reply(`*MSS SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
+//       );
+//     }
+//   });
   
 // ----------------- MSS END -----------------
 
@@ -216,21 +216,21 @@ client.on("message", (message) => {
 
 // ----------------- KENZ START -----------------
 
-client.on("message", (message) => {
-    if (message.body === "!kenz buy") {
-      kenzGrab(buyRange).then((data) =>
-        message.reply(`*KENZ BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
-  });
+// client.on("message", (message) => {
+//     if (message.body === "!kenz buy") {
+//       kenzGrab(buyRange).then((data) =>
+//         message.reply(`*KENZ BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
+//       );
+//     }
+//   });
   
-  client.on("message", (message) => {
-    if (message.body === "!kenz sell") {
-      kenzGrab(sellRange).then((data) =>
-        message.reply(`*KENZ SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
-  });
+//   client.on("message", (message) => {
+//     if (message.body === "!kenz sell") {
+//       kenzGrab(sellRange).then((data) =>
+//         message.reply(`*KENZ SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
+//       );
+//     }
+//   });
   
 
 // ----------------- KENZ END -----------------
