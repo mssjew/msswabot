@@ -200,9 +200,15 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
 
+  console.log(message.body.slice(4, 5));
+  console.log(Number(message.body.slice(4, 5)));
+  console.log(parseInt(message.body.slice(4, 5)));
+
   if (message.body.includes("!fix")) {
 
     let quantity = parseInt(message.body.slice(4, 5));
+
+    
 
     message.reply(`${quantity} TT Booked for BDXXXX.\n\n*This message is your confirmation and proof of booking.*\n\nThank you.`)
 
