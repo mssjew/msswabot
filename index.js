@@ -199,7 +199,9 @@ client.on("message", (message) => {
 
 
 client.on("message", (message) => {
+  console.log(message.body);
   if (message.body === "!fix 2 TT") {
+
     message.reply("2 TT Booked for BD5174.\n\n*This message is your confirmation and proof of booking.*\n\nThank you.")
     client.sendMessage("120363041665012059@g.us", "Buy 2TT on screen.").then(res => {
       console.log('GROUP SENT');
