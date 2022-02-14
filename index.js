@@ -199,7 +199,7 @@ client.on("message", (message) => {
 
 
 client.on("message", (message) => {
-  console.log(message.body);
+  console.log(message.body.split());
   if (message.body === "!fix 2 TT") {
 
     message.reply("2 TT Booked for BD5174.\n\n*This message is your confirmation and proof of booking.*\n\nThank you.")
