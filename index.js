@@ -48,6 +48,7 @@ client.on("ready", () => {
 
   client.on('message', message => {
     if(message.body === '!ping') {
+        console.log(message.from);
         client.sendMessage(message.from, 'pong');
     }
 });
