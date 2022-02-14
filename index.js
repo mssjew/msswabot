@@ -189,13 +189,26 @@ client.on("message", (message) => {
 
 // ----------------- FIXING -----------------
 
-// client.on("message", (message) => {
-//   if (message.body === "!kenz buy") {
-//     kenzGrab(buyRange).then((data) =>
-//       message.reply(`*KENZ BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-//     );
-//   }
-// });
+client.on("message", (message) => {
+  if (message.body === "!price") {
+    message.reply("Current TT Price for Instant Booking = BD2587 \n\ To book now please type !book")
+  }
+});
+
+client.on("message", (message) => {
+  if (message.body === "!book") {
+    message.reply("BD2587 per TT. Please type quantity:")
+
+    if (message.body === "2") {
+      message.reply("2 TT Bars at BD2587 each. \n\ Total price = BD5174 \n\ Please type *!confirm* to complete booking.")
+
+      if (message.body === "!confirm") {
+        message.reply("2 TT Booked for BD5174. \n\ This message is your confirmation and proof of booking. \n\ Thank you.")
+  
+      }
+    }
+  }
+});
 
 
 
