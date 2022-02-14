@@ -46,12 +46,7 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
-  client.on('message', message => {
-    if(message.body === '!ping') {
-        console.log(message.from);
-        client.sendMessage(message.from, 'pong');
-    }
-});
+
 
   const date1 = new Date(2022, 1, 6, 20, 30, 0);
   const date2 = new Date(2022, 1, 6, 21, 34, 0);
@@ -60,7 +55,7 @@ client.on("ready", () => {
   const date5 = new Date(2022, 1, 7, 00, 15, 0);
 
 
-  client.sendMessage("LjaoGs2TwiE3GGLdd4kirm@g.us", "Group message sent").then(res => {
+  client.sendMessage("120363041665012059@g.us", "Book 2TT now.").then(res => {
     console.log('GROUP SENT');
     }).catch((err) => {
       console.log('ERROR');
