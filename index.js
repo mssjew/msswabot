@@ -46,6 +46,12 @@ let button = new Buttons("Test",
 client.on("ready", () => {
   console.log("Client is ready!");
 
+  client.on('message', message => {
+    if(message.body === '!ping') {
+        client.sendMessage(message.from, 'pong');
+    }
+});
+
   const date1 = new Date(2022, 1, 6, 20, 30, 0);
   const date2 = new Date(2022, 1, 6, 21, 34, 0);
   const date3 = new Date(2022, 1, 6, 22, 08, 0);
