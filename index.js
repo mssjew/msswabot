@@ -187,20 +187,20 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
   if (message.body === "!price") {
-    message.reply("Current TT Price for Instant Booking = BD2587 \n\n\ To book now please type !book")
+    message.reply("Current TT Price for Instant Booking = BD2587\n\n\To book now please type !book")
   }
 });
 
 client.on("message", (message) => {
   if (message.body === "!book") {
-    message.reply("BD2587 per TT. \n\n\ Please type `!fix X TT` where X is your quantity in numbers. \n\n So to fix 2 tt you will type `!fix 2 TT` ")
-  }
+    message.reply("BD2587 per TT.\n\n\Please type `!fix X TT` where X is your quantity in numbers.\n\nSo to fix 2 tt you will type `!fix 2 TT`")
+  
 });
 
 
 client.on("message", (message) => {
   if (message.body === "!fix 2 TT") {
-    message.reply("2 TT Booked for BD5174. \r This message is your confirmation and proof of booking. \r Thank you.")
+    message.reply("2 TT Booked for BD5174.\n\n*This message is your confirmation and proof of booking.*\n\n\Thank you.")
     client.sendMessage("120363041665012059@g.us", "Buy 2TT on screen.").then(res => {
       console.log('GROUP SENT');
       }).catch((err) => {
