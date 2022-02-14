@@ -57,11 +57,7 @@ client.on("ready", () => {
   const date5 = new Date(2022, 1, 7, 00, 15, 0);
 
 
-  client.sendMessage("120363041665012059@g.us", "Book 2TT now.").then(res => {
-    console.log('GROUP SENT');
-    }).catch((err) => {
-      console.log('ERROR');
-    });
+  
 
   schedule.scheduleJob(date1, () => {
     client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 12.30PM SUN 6th Feb").then(res => {
@@ -189,14 +185,29 @@ client.on("message", (message) => {
 
 // ----------------- FIXING -----------------
 
-// client.on("message", (message) => {
-//   if (message.body === "!kenz buy") {
-//     kenzGrab(buyRange).then((data) =>
-//       message.reply(`*KENZ BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-//     );
-//   }
-// });
+client.on("message", (message) => {
+  if (message.body === "!price") {
+    message.reply("Current TT Price for Instant Booking = BD2587 \n\n\ To book now please type !book")
+  }
+});
 
+client.on("message", (message) => {
+  if (message.body === "!book") {
+    message.reply("BD2587 per TT. \n\n\ Please type `!fix X TT` where X is your quantity in numbers. \n\n So to fix 2 tt you will type `!fix 2 TT` ")
+  }
+});
+
+
+client.on("message", (message) => {
+  if (message.body === "!fix 2 TT") {
+    message.reply("2 TT Booked for BD5174. \n\n This message is your confirmation and proof of booking. \n\n Thank you.")
+    client.sendMessage("120363041665012059@g.us", "Book 2TT now.").then(res => {
+      console.log('GROUP SENT');
+      }).catch((err) => {
+        console.log('ERROR');
+      });
+  }
+});
 
 
 
