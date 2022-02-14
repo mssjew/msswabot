@@ -187,25 +187,32 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
   if (message.body === "!price") {
-    message.reply("Current TT Price for Instant Booking = BD2587 \n\n\ To book now please type !book")
+    message.reply("Current TT Price for Instant Booking = BD2587\n\nTo book now please type !book")
   }
 });
 
 client.on("message", (message) => {
   if (message.body === "!book") {
-    message.reply("BD2587 per TT. \n\n\ Please type `!fix X TT` where X is your quantity in numbers. \n\n So to fix 2 tt you will type `!fix 2 TT` ")
+    message.reply("BD2587 per TT.\n\nPlease type `!fix X TT` where X is your quantity in numbers.\n\nSo to fix 2 tt you will type `!fix 2 TT`")
   }
 });
 
 
 client.on("message", (message) => {
-  if (message.body === "!fix 2 TT") {
-    message.reply("2 TT Booked for BD5174. \n\n This message is your confirmation and proof of booking. \n\n Thank you.")
-    client.sendMessage("120363041665012059@g.us", "Book 2TT now.").then(res => {
+
+  if (message.body.includes("!fix")) {
+
+    let quantity = parseInt(message.body.slice(4, 5));
+
+    message.reply(`${quantity} TT Booked for BDXXXX.\n\n*This message is your confirmation and proof of booking.*\n\nThank you.`)
+
+    client.sendMessage("120363041665012059@g.us", `Buy ${quantity} TT on screen.`).then(res => {
       console.log('GROUP SENT');
       }).catch((err) => {
         console.log('ERROR');
       });
+  } else {
+    message.reply("Please type the proper way. For fixing type `!fix X TT` where X is your quantity in digits.\n\nSo to fix 2 tt you will type `!fix 2 TT`")
   }
 });
 
