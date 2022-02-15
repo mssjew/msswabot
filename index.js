@@ -1,270 +1,181 @@
-const axios = require("axios");
-const fs = require("fs");
-const schedule = require('node-schedule');
+const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
+const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 
-const internalPos = "Summary!C3";
-const sellRange = "Summary!B11:B38";
-const buyRange = "Summary!C11:C38";
+const currentDate = document.getElementById("dateToday");
 
-const qabSellRange = "Summary!B11:B28";
-const qabBuyRange = "Summary!C11:C28";
+const currentTable = document.getElementById("currentTable");
+const monthTable = document.getElementById("monthTable");
 
-const qrcode = require("qrcode-terminal");
+const currentTableBody = document.getElementById("currentTableBody");
+const monthTableBody = document.getElementById("monthTableBody");
 
-const { Client, Buttons } = require("whatsapp-web.js");
+const ttDaily = document.getElementById("dailyTotal");
+const ttMonthly = document.getElementById("monthlyTotal");
 
-const SESSION_FILE_PATH = "./session.json";
+const dailyTotalSentence = document.getElementById("dailyTotalSummary");
 
-let sessionData;
-if (fs.existsSync(SESSION_FILE_PATH)) {
-  sessionData = require(SESSION_FILE_PATH);
+
+const mainRange = "Kenz_K00010!D2:L101";
+const dailyTotal = "Kenz_K00010!A22";
+const monthlyTotal = "Kenz_K00010!A24";
+const balancePending = "Kenz_K00010!A30";
+const dateToday = "Kenz_K00010!A6";
+
+const priceSpan = document.getElementById("livePrice");
+
+const outstandingBalance = document.getElementById("outBalance");
+
+function urlBuilder(range) {
+  return `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`;
 }
 
-const client = new Client({
-  session: sessionData,
-});
-
-client.on("authenticated", (session) => {
-  sessionData = session;
-  fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
-});
-
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-});
-
-
-client.on("ready", () => {
-  console.log("Client is ready!");
-
-  client.on('message', message => {
-    if(message.body === '!ping') {
-        console.log(message.from);
-        client.sendMessage(message.from, 'pong');
-    }
-});
-
-
-
-  const date1 = new Date(2022, 1, 6, 20, 30, 0);
-  const date2 = new Date(2022, 1, 6, 21, 34, 0);
-  const date3 = new Date(2022, 1, 6, 22, 08, 0);
-  const date4 = new Date(2022, 1, 6, 23, 19, 0);
-  const date5 = new Date(2022, 1, 7, 00, 15, 0);
-
-
-  
-
-  schedule.scheduleJob(date1, () => {
-    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 12.30PM SUN 6th Feb").then(res => {
-      console.log('SENT');
-      }).catch((err) => {
-        console.log('ERROR');
-      });
-  });
-
-  schedule.scheduleJob(date2, () => {
-    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 1.34PM SUN 6th Feb").then(res => {
-      console.log('SENT');
-      }).catch((err) => {
-        console.log('ERROR');
-      });
-  });
-
-  schedule.scheduleJob(date3, () => {
-    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 2.08PM SUN 6th Feb").then(res => {
-      console.log('SENT');
-      }).catch((err) => {
-        console.log('ERROR');
-      });
-  });
-
-  schedule.scheduleJob(date4, () => {
-    client.sendMessage("97338999888@c.us", "THIS SHOULD TRIGGER AT 3.19PM SUN 6th Feb").then(res => {
-      console.log('SENT');
-      }).catch((err) => {
-        console.log('ERROR');
-      });
-  });
-
-  schedule.scheduleJob(date5, () => {
-    client.sendMessage("97338999888@c.us", "SB IN 15 MINS").then(res => {
-      console.log('SENT');
-      }).catch((err) => {
-        console.log('ERROR');
-      });
-  });
-
-  
-});
-
-client.initialize();
-
-
-
-
-client.on("message", (message) => {
-  console.log(message.body);
-});
-
-function mssBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
-}
-
-function kenzBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/1_gYW1JXBL5Wqc-e--AHZ_Zgw56p132E858mJ1_v5Uzk/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
-}
-
-function qabBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/17eTp9cHVcdfu936Kt9feSPHUonicWm6RSvWeVLK2-zA/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
-}
-
-async function mssGrab(range) {
-  let resp = await axios.get(mssBuilder(range));
-  return resp.data.values;
-}
-
-async function kenzGrab(range) {
-  let resp = await axios.get(kenzBuilder(range));
-  return resp.data.values;
-}
-
-async function qabGrab(range) {
-  let resp = await axios.get(qabBuilder(range));
-  return resp.data.values;
-}
-
-// ----------------- HELP START ----------------- 
-client.on("message", (message) => {
-    if (message.body === "!help") {
-
-        message.reply("*COMMANDS:* \r\n\r\n\
-        `*!mss sell*` (MSS SELL POSITIONS)\n\
-        `*!mss sell*` (MSS BUY POSITIONS)\n\
-        `*!kenz sell*` (KENZ SELL POSITIONS)\n\
-        `*!kenz buy*` (KENZ BUY POSITIONS)\n\
-        `*!qab sell*` (QAB SELL POSITIONS)\n\
-        `*!qab buy*` (QAB BUY POSITIONS)");
-    }
-  });
-
-// ----------------- HELP END -----------------
-
-
-
-
-
-
-
-// ----------------- MSS START -----------------
-
-client.on("message", (message) => {
-    if (message.body === "!mss buy") {
-      mssGrab(buyRange).then((data) =>
-        message.reply(`*MSS BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-
-    }
-  });
-  
-  client.on("message", (message) => {
-    if (message.body === "!mss sell") {
-      mssGrab(sellRange).then((data) =>
-        message.reply(`*MSS SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
-  });
-  
-// ----------------- MSS END -----------------
-
-
-
-// ----------------- FIXING -----------------
-
-client.on("message", (message) => {
-  if (message.body === "!price") {
-    message.reply("Current TT Price for Instant Booking = BD2587\n\nTo book now please type !book")
+async function dataGrab(range) {
+  try {
+    let resp = await axios.get(urlBuilder(range));
+    return resp.data.values;
+  } catch (err) {
+    console.log(err);
   }
-});
+}
 
-client.on("message", (message) => {
-  if (message.body === "!book") {
-    message.reply("BD2587 per TT.\n\nPlease type `!fix X TT` where X is your quantity in numbers.\n\nSo to fix 2 tt you will type `!fix 2 TT`")
+const todayReturner = (arr) => {
+  return arr[0] === "*";
+};
+
+const monthReturner = (arr) => {
+  return arr[0] === "";
+};
+
+const monthSeparator = (arr) => {
+  let retArr = [];
+  for(x in arr) {
+    if (arr[x][1].includes("Feb")) retArr.push(arr[x]);
   }
-});
+  return retArr;
+}
 
+const quantityCalc = (arr) => {
+  
+  let quantArr = [];
+  for(x in arr) {
+    quantArr.push(arr[x][3])
+  }
+  
+  let retval = 0;
+  for(x in quantArr) {
+    retval += parseInt(quantArr[x]);
+  }
 
-client.on("message", (message) => {
+  ttMonthly.textContent = `${retval} TTs`;
+  
+}
 
-  console.log(message.body.slice(4, 5));
-  console.log(Number(message.body.slice(4, 5)));
-  console.log(parseInt(message.body.slice(4, 5)));
+dataGrab(mainRange)
+  .then((data) => {
+    const dayBookings = data.filter(todayReturner).reverse();
+    const monthBookings = data.filter(monthReturner).reverse();
 
-  if (message.body.includes("!fix")) {
+    const febBookings = monthSeparator(monthBookings);
 
-    let quantity = parseInt(message.body.slice(4, 5));
-
+    quantityCalc(febBookings);
     
+    if (dayBookings.length === 0) {
+      const tableRow = document.createElement("tr");
+      currentTableBody.appendChild(tableRow);
 
-    message.reply(`${quantity} TT Booked for BDXXXX.\n\n*This message is your confirmation and proof of booking.*\n\nThank you.`)
+      for (let i = 0; i < 8; i++) {
+        const cell = document.createElement("td");
+        tableRow.appendChild(cell);
+        cell.textContent = "---";
+      }
 
-    client.sendMessage("120363041665012059@g.us", `Buy ${quantity} TT on screen.`).then(res => {
-      console.log('GROUP SENT');
-      }).catch((err) => {
-        console.log('ERROR');
+      dailyTotalSentence.textContent = "No bookings today.";
+      dailyTotalSentence.style.color = "crimson";
+
+      
+
+    }
+
+    dayBookings.forEach((row) => {
+      row.shift();
+      const tableRow = document.createElement("tr");
+      currentTableBody.appendChild(tableRow);
+      row.forEach((cellData) => {
+        const cell = document.createElement("td");
+        tableRow.appendChild(cell);
+        cell.textContent = cellData;
+
+        if (cell.textContent === "PENDING") {
+          cell.classList.add("pending");
+        }
+        if (cell.textContent === "COMPLETE") {
+          cell.classList.add("complete");
+        }
       });
-  } else {
-    message.reply("Please type the proper way. For fixing type `!fix X TT` where X is your quantity in digits.\n\nSo to fix 2 tt you will type `!fix 2 TT`")
-  }
-});
+    });
 
+    febBookings.forEach((row) => {
+      row.shift();
+      const tableRow = document.createElement("tr");
+      monthTableBody.appendChild(tableRow);
+      row.forEach((cellData) => {
+        const cell = document.createElement("td");
+        tableRow.appendChild(cell);
+        cell.textContent = cellData;
 
-
-// ----------------- END -----------------
-
-
-// ----------------- KENZ START -----------------
-
-client.on("message", (message) => {
-    if (message.body === "!kenz buy") {
-      kenzGrab(buyRange).then((data) =>
-        message.reply(`*KENZ BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
+        if (cell.textContent === "PENDING") {
+          cell.classList.add("pending");
+        }
+        if (cell.textContent === "COMPLETE") {
+          cell.classList.add("complete");
+        }
+      });
+    });
+  })
+  .catch((err) => {
+    console.log(err);
   });
-  
-  client.on("message", (message) => {
-    if (message.body === "!kenz sell") {
-      kenzGrab(sellRange).then((data) =>
-        message.reply(`*KENZ SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
+
+dataGrab(dailyTotal)
+  .then((data) => {
+
+    if (data[0][0][1] === " ") console.log("true");
+
+    // console.log(parseInt(data[0][0][0]) + parseInt(data[0][0][1]));
+    ttDaily.textContent = data;
+  })
+  .catch((err) => {
+    console.log(err);
   });
-  
 
-// ----------------- KENZ END -----------------
-
-// ----------------- QAB START -----------------
-
-client.on("message", (message) => {
-    if (message.body === "!qab buy") {
-      qabGrab(qabBuyRange).then((data) =>
-        message.reply(`*QAB BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
+dataGrab(balancePending)
+  .then((data) => {
+    outstandingBalance.textContent = data;
+  })
+  .catch((err) => {
+    console.log(err);
   });
-  
-  client.on("message", (message) => {
-    if (message.body === "!qab sell") {
-      qabGrab(qabSellRange).then((data) =>
-        message.reply(`*QAB SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-      );
-    }
-  });
-  
 
-// ----------------- QAB END -----------------
+dataGrab(dateToday)
+  .then((data) => {
+    currentDate.textContent = data;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+  var myHeaders = new Headers();
+  myHeaders.append("x-access-token", "goldapi-f20pyjatkuagadm4-io"); 
+  myHeaders.append("Content-Type", "application/json");
+  
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+  
+  fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
+    .then((response) => response.json())
+    .then((result) => (priceSpan.textContent = `$${result.price}`))
+    .catch((error) => console.log("error", error));
+  
