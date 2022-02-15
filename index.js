@@ -53,20 +53,41 @@ const date2 = new Date(2022, 1, 16, 14, 20, 0);
 // FOMC Minutes 10PM Bahrain Time Wed 16th
 const date3 = new Date(2022, 1, 16, 19, 50, 0);
 
+// FOMC Minutes 1
+const date0 = new Date(2022, 1, 15, 8, 49, 0);
 
 
 
 
 
 
-// const date4 = new Date(2022, 1, 6, 23, 19, 0);
+
+
+
+
 // const date5 = new Date(2022, 1, 7, 00, 15, 0);
 
-schedule.scheduleJob(date1, () => {
+
+// schedule.scheduleJob(date0, () => {
+//   client
+//     .sendMessage(
+//       "97338999888@c.us",
+//       "Trigger 4.20PM BH Time - 6.20AM TUC Time\n\n*Alert*\n\nUS Inflation Data announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+//     )
+//     .then((res) => {
+//       console.log("SENT");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR");
+//     });
+// });
+
+
+schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       "97338999888@c.us",
-      "Trigger 4.20PM BH Time - 6.20AM TUC Time\n\n*Alert*\n\nUS Inflation Data announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+      "Trigger 10.48AM BH Time - 12.48AM TUC Time\n\n*Alert*\n\nUS Inflation Data announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
     )
     .then((res) => {
       console.log("SENT");
