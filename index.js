@@ -212,6 +212,12 @@ function getQuantity(msg) {
 // ----------------- FIXING -----------------
 
 client.on("message", (message) => {
+
+  if (message.body === "!.") {
+    console.log(message.from);
+  }
+
+
   if (message.body === "!price") {
     goldPrice().then((price) => {
       message.reply(`Current Price: $${price}`);
