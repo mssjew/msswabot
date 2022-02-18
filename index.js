@@ -1,6 +1,10 @@
 const axios = require("axios");
 const fs = require("fs");
-const schedule = require("node-schedule");
+// const schedule = require("node-schedule");
+var emoji = require('node-emoji')
+
+const greenTickEmoji = emoji.get('white_check_mark');
+const redXEmoji = emoji.get('x');
 
 const internalPos = "Summary!C3";
 const sellRange = "Summary!B11:B38";
@@ -10,6 +14,7 @@ const qabSellRange = "Summary!B11:B28";
 const qabBuyRange = "Summary!C11:C28";
 
 const qrcode = require("qrcode-terminal");
+const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
 const { Client, Buttons } = require("whatsapp-web.js");
 
@@ -43,138 +48,131 @@ client.on("ready", () => {
 
 client.initialize();
 
+// // US Inflation Data 4.30PM Bahrain Time Tue 15th
+// const date1 = new Date(2022, 1, 15, 14, 20, 0);
 
-// US Inflation Data 4.30PM Bahrain Time Tue 15th
-const date1 = new Date(2022, 1, 15, 14, 20, 0);
+// // US Retail Sales 4.30PM Bahrain Time Wed 16th
+// const date2 = new Date(2022, 1, 16, 14, 20, 0);
 
-// US Retail Sales 4.30PM Bahrain Time Wed 16th
-const date2 = new Date(2022, 1, 16, 14, 20, 0);
+// // FOMC Minutes 10PM Bahrain Time Wed 16th
+// const date3 = new Date(2022, 1, 16, 19, 50, 0);
 
-// FOMC Minutes 10PM Bahrain Time Wed 16th
-const date3 = new Date(2022, 1, 16, 19, 50, 0);
+// schedule.scheduleJob(date2, () => {
+//   client
+//     .sendMessage(
+//       "97339439432-1562572137@g.us",
+//       "*Price Alert*\n\nUS Retail Sales Data in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+//     )
+//     .then((res) => {
+//       console.log("SENT TO MSS GROUP #2");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR");
+//     });
+// });
 
+// schedule.scheduleJob(date3, () => {
+//   client
+//     .sendMessage(
+//       "97339439432-1562572137@g.us",
+//       "*Price Alert*\n\nUS Federal Reserve Interest Rate Announcement in 10 mins (At 10pm BH Time).\n\nGold price is expected to move."
+//     )
+//     .then((res) => {
+//       console.log("SENT TO MSS GROUP #3");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR");
+//     });
+// });
 
-schedule.scheduleJob(date1, () => {
-  client
-    .sendMessage(
-      "97339439432-1562572137@g.us",
-      "*Price Alert*\n\nUS Inflation Data announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
-    )
-    .then((res) => {
-      console.log("SENT TO MSS GROUP #1");
-    })
-    .catch((err) => {
-      console.log("ERROR");
-    });
-});
+const unixConverter = (timestamp) => {
+  var unix_timestamp = timestamp;
 
-schedule.scheduleJob(date2, () => {
-  client
-    .sendMessage(
-      "97339439432-1562572137@g.us",
-      "*Price Alert*\n\nUS Retail Sales Data in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
-    )
-    .then((res) => {
-      console.log("SENT TO MSS GROUP #2");
-    })
-    .catch((err) => {
-      console.log("ERROR");
-    });
-});
+  var date = new Date(unix_timestamp);
 
-schedule.scheduleJob(date3, () => {
-  client
-    .sendMessage(
-      "97339439432-1562572137@g.us",
-      "*Price Alert*\n\nUS Federal Reserve Interest Rate Announcement in 10 mins (At 10pm BH Time).\n\nGold price is expected to move."
-    )
-    .then((res) => {
-      console.log("SENT TO MSS GROUP #3");
-    })
-    .catch((err) => {
-      console.log("ERROR");
-    });
-});
+  var hours = date.getHours();
 
+  var minutes = "0" + date.getMinutes();
 
+  var seconds = "0" + date.getSeconds();
+
+  var formattedTime =
+    hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+
+  return formattedTime;
+};
 
 client.on("message", (message) => {
-  console.log(message.body);
+  console.log("MESSAGE: ", message.body);
+  console.log("^ MESSAGE ID: ", message.id.id);
+  console.log("^^ FROM: ", message.from);
+  console.log("^^^ AUTHOR: ", message.author);
+  console.log("^^^^ TIMESTAMP: ", unixConverter(Date.now()));
+  console.log("---------------------------------------------");
 });
 
-function mssBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
-}
+// function mssBuilder(range) {
+//   return `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
+// }
 
-function kenzBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/1_gYW1JXBL5Wqc-e--AHZ_Zgw56p132E858mJ1_v5Uzk/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
-}
+// function kenzBuilder(range) {
+//   return `https://sheets.googleapis.com/v4/spreadsheets/1_gYW1JXBL5Wqc-e--AHZ_Zgw56p132E858mJ1_v5Uzk/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
+// }
 
-function qabBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/17eTp9cHVcdfu936Kt9feSPHUonicWm6RSvWeVLK2-zA/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
-}
+// function qabBuilder(range) {
+//   return `https://sheets.googleapis.com/v4/spreadsheets/17eTp9cHVcdfu936Kt9feSPHUonicWm6RSvWeVLK2-zA/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
+// }
 
-async function mssGrab(range) {
-  let resp = await axios.get(mssBuilder(range));
-  return resp.data.values;
-}
+// async function mssGrab(range) {
+//   let resp = await axios.get(mssBuilder(range));
+//   return resp.data.values;
+// }
 
-async function kenzGrab(range) {
-  let resp = await axios.get(kenzBuilder(range));
-  return resp.data.values;
-}
+// async function kenzGrab(range) {
+//   let resp = await axios.get(kenzBuilder(range));
+//   return resp.data.values;
+// }
 
-async function qabGrab(range) {
-  let resp = await axios.get(qabBuilder(range));
-  return resp.data.values;
-}
-
+// async function qabGrab(range) {
+//   let resp = await axios.get(qabBuilder(range));
+//   return resp.data.values;
+// }
 
 async function goldPrice() {
-  let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", { 'headers': { 'x-access-token': "goldapi-9o7ltkznhulqi-io" } });
+  let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
+    headers: { "x-access-token": "goldapi-9o7ltkznhulqi-io" },
+  });
   return resp.data.price;
 }
 
-
 async function goldPriceStats() {
-  let resp = await axios.get("https://www.goldapi.io/api/stat", { 'headers': { 'x-access-token': "goldapi-9o7ltkznhulqi-io" } });
+  let resp = await axios.get("https://www.goldapi.io/api/stat", {
+    headers: { "x-access-token": "goldapi-9o7ltkznhulqi-io" },
+  });
   return resp.data;
 }
 
 async function goldAPIStatus() {
-  let resp = await axios.get("https://www.goldapi.io/api/status", { 'headers': { 'x-access-token': "goldapi-9o7ltkznhulqi-io" } });
+  let resp = await axios.get("https://www.goldapi.io/api/status", {
+    headers: { "x-access-token": "goldapi-9o7ltkznhulqi-io" },
+  });
   return resp.data.result;
 }
-
-
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function getQuantity(msg) {
-
-  if (msg.slice(6,7) === " ") {
-    return parseInt(msg.slice(5,6));
+  if (msg.slice(6, 7) === " ") {
+    return parseInt(msg.slice(5, 6));
   } else {
-    return parseInt(msg.slice(5,7)); 
+    return parseInt(msg.slice(5, 7));
   }
-  
 }
 
 // ----------------- HELP START -----------------
-// client.on("message", (message) => {
-//     if (message.body === "!help") {
 
-//         message.reply("*COMMANDS:* \r\n\r\n\
-//         `*!mss sell*` (MSS SELL POSITIONS)\n\
-//         `*!mss sell*` (MSS BUY POSITIONS)\n\
-//         `*!kenz sell*` (KENZ SELL POSITIONS)\n\
-//         `*!kenz buy*` (KENZ BUY POSITIONS)\n\
-//         `*!qab sell*` (QAB SELL POSITIONS)\n\
-//         `*!qab buy*` (QAB BUY POSITIONS)");
-//     }
-//   });
 
 // ----------------- HELP END -----------------
 
@@ -201,98 +199,149 @@ function getQuantity(msg) {
 
 // ----------------- FIXING -----------------
 
-client.on("message", (message) => {
+client.on("message", async (message) => {
 
-  if (message.body === "!.") {
-    console.log(message.from);
+
+  if (message.body.toLowerCase() === "!help") {
+    message.reply("MSS FIXING COMMANDS\n\n*!price* = Live XAUUSD price updated real-time.\n\n*!tt* = Live TT Bar rate updated real-time.\n\n\nCommand for fixing:\n\n*!fix X TT* where X is your quantity in digits.\n\nSo to fix 5 TT please type *!fix 5 TT*");
   }
 
 
-  if (message.body === "!price") {
+  if (message.body.toLowerCase() === "!price") {
     goldPrice().then((price) => {
       message.reply(`Current Price: $${price}`);
     });
   }
 
-
-  if (message.body === "!tt") {
+  if (message.body.toLowerCase() === "!tt") {
     goldPrice().then((price) => {
-      const ttRate = price*1.417;
+      const ttRate = price * 1.417;
       const ttPrice = Math.ceil(ttRate) + 5;
 
       message.reply(`Current TT Rate: BD${ttPrice}`);
     });
   }
 
+  if (message.body.toLowerCase().includes("!fix")) {
+    const input = message.body.trim();
 
-  if (message.body === "!book") {
+    let randTT = Math.ceil(Math.random() * 11);
 
-    goldPrice().then((price) => {
-      const ttRate = price*1.417;
-      const ttPrice = Math.ceil(ttRate) + 5;
-
+    if (input.length < 5 || input.length > 10) {
       message.reply(
-        `BD${ttPrice} per TT.\n\nPlease type **!fix X TT** where X is your quantity in numbers.\n\nSo to fix 2 tt you will type **!fix 2 TT**`
+        `${redXEmoji} Error\n\nPlease use correct format\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
       );
-    });
-   
-  }
-
-  if (message.body.includes("!fix")) {
-
-    if (message.body.length < 5) {
-      message.reply(`Error.\n\nPlease type *!fix X TT* where X is your quantity in numbers.\n
-      \nSo to fix 2 tt you will type **!fix 2 TT**\n\nOr to fix 5 tt you will type *!fix 5 TT*`);
     } else {
-
       const quantity = getQuantity(message.body);
 
-      goldPrice().then((price) => {
-        const ttRate = price*1.417;
-        const ttPrice = Math.ceil(ttRate) + 5;
-
-        const totalPrice = quantity * ttPrice;
-        const totalPriceFormatted = numberWithCommas(totalPrice);
-
-        client
-        .sendMessage("120363041665012059@g.us", `Buy ${quantity} TT on screen.`)
-        .then((res) => {
-          console.log("GROUP SENT");
-        })
-        .catch((err) => {
-          console.log("ERROR");
-        }); 
-
+      if (input !== `!fix ${quantity} TT` || quantity <= 0) {
         message.reply(
-          `${quantity} TT Bars Booked at BD${ttPrice} each.\n\nTotal = BD${totalPriceFormatted}\n\n*This message is your confirmation and proof of booking.*\n\nThank you.`
+          `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
+      } else {
+        goldPrice().then((price) => {
+          const ttRate = price * 1.417;
+          const ttPrice = Math.ceil(ttRate) + 5;
 
+          const totalPrice = quantity * ttPrice;
+          const totalPriceFormatted = numberWithCommas(totalPrice);
 
-      })// end of goldPrice
-      
-      
-    } // end of else 
+          message.reply(
+            `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please reply to this message with your 4-digit PIN code within *30 seconds*.\n\nDummy code for testing = '#4567'`
+          );
+        });
+      }
+    }
+  } // end of if !fix if/else
 
-  } // end of !fix if statement
+  if (message.body === "#4567") {
+    message
+      .getQuotedMessage()
+      .then((quoted) => {
+        let quantity = 0;
+        let unitPrice = 0;
+        const group = quoted.to;
+
+        if (quoted.body.slice(14, 15) === " ") {
+          quantity = parseInt(quoted.body.slice(13, 14));
+        } else {
+          quantity = parseInt(quoted.body.slice(13, 15));
+        }
+
+        if (quantity >= 10) {
+          unitPrice = parseInt(quoted.body.slice(24, 28));
+        } else {
+          unitPrice = parseInt(quoted.body.slice(23, 27));
+        }
+
+        const timeNow = Date.now();
+
+        const diff = parseInt(timeNow) - parseInt(quoted.timestamp * 1000);
+
+        if (
+          !quoted.fromMe ||
+          !quoted.hasQuotedMsg ||
+          quoted.body.length < 150
+        ) {
+          message.reply("Not a fixing message. PIN code not applicable.");
+          return;
+        }
+
+        if (diff > 30000) {
+          message.reply(
+            "Time limit exceeded and order cancelled.\n\nPlease start your order again."
+          );
+        } else {
+          message.reply(
+            `Verified as *Dummy Jewellers* ${greenTickEmoji}\n\nFixing order placed, please await final confirmation.`
+          );
+
+          client
+            .sendMessage(
+              "120363041665012059@g.us",
+              `Buy ${quantity} TT on screen.`
+            )
+            .then((res) => {
+              console.log("SENT FIXING MESSAGE TO PGR");
+              client
+                .sendMessage(
+                  group,
+                  `Order confirmed for *Dummy Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(unitPrice * quantity)}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
+                )
+                .then((res) => {
+                  console.log("CONFIRMATION SENT TO FIXER");
+                })
+                .catch((err) => {
+                  console.log("ERROR ON SENDING CONFIRMATION TO FIXER");
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log("ERROR ON SENDING FIXING MESSAGE TO PGR");
+              console.log(err);
+              message.reply("Sorry, we could not process your booking due to an error. Please contact MSS Jewellers directly.")
+            });
+        }
+      })
+      .catch((err) => {
+        console.log("ERROR ON GETTING QUOTED MESSAGE");
+        console.log(err);
+        return;
+      });
+  } // end if #4567
 
   if (message.body.includes("!stats")) {
-
-    goldPriceStats().then((stat) => { 
-
+    goldPriceStats().then((stat) => {
       message.reply(
         `Reqs Today: ${stat.requests_today}\n\nReqs Yesterday: ${stat.requests_yesterday}\n\nReqs Month: ${stat.requests_month}\n\nReqs Last Month: ${stat.requests_last_month}`
       );
-    })
-
+    });
   }
 
-
   if (message.body.includes("!gstatus")) {
-
-    goldAPIStatus().then((status) => { 
+    goldAPIStatus().then((status) => {
       message.reply(`${status}`);
-    })
-
+    });
   }
 });
 
