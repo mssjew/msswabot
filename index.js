@@ -1,10 +1,10 @@
 const axios = require("axios");
 const fs = require("fs");
 // const schedule = require("node-schedule");
-var emoji = require('node-emoji')
+var emoji = require("node-emoji");
 
-const greenTickEmoji = emoji.get('white_check_mark');
-const redXEmoji = emoji.get('x');
+const greenTickEmoji = emoji.get("white_check_mark");
+const redXEmoji = emoji.get("x");
 
 const internalPos = "Summary!C3";
 const sellRange = "Summary!B11:B38";
@@ -20,10 +20,15 @@ const { Client, Buttons } = require("whatsapp-web.js");
 
 const SESSION_FILE_PATH = "./session.json";
 
+let TT_PREMIUM = 5;
+
+
 let sessionData;
 if (fs.existsSync(SESSION_FILE_PATH)) {
   sessionData = require(SESSION_FILE_PATH);
 }
+
+
 
 const client = new Client({
   session: sessionData,
@@ -47,6 +52,7 @@ client.on("ready", () => {
 });
 
 client.initialize();
+
 
 // // US Inflation Data 4.30PM Bahrain Time Tue 15th
 // const date1 = new Date(2022, 1, 15, 14, 20, 0);
@@ -140,7 +146,7 @@ client.on("message", (message) => {
 
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
-    headers: { "x-access-token": "goldapi-9o7ltkznhulqi-io" },
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
   return resp.data.price;
 }
@@ -173,7 +179,6 @@ function getQuantity(msg) {
 
 // ----------------- HELP START -----------------
 
-
 // ----------------- HELP END -----------------
 
 // ----------------- MSS START -----------------
@@ -199,13 +204,14 @@ function getQuantity(msg) {
 
 // ----------------- FIXING -----------------
 
+const completedOrders = [];
+
 client.on("message", async (message) => {
-
-
   if (message.body.toLowerCase() === "!help") {
-    message.reply("MSS FIXING COMMANDS\n\n*!price* = Live XAUUSD price updated real-time.\n\n*!tt* = Live TT Bar rate updated real-time.\n\n\nCommand for fixing:\n\n*!fix X TT* where X is your quantity in digits.\n\nSo to fix 5 TT please type *!fix 5 TT*");
+    message.reply(
+      "MSS FIXING COMMANDS\n\n*!price* = Live XAUUSD price updated real-time.\n\n*!tt* = Live TT Bar rate updated real-time.\n\n\nCommand for fixing:\n\n*!fix X TT* where X is your quantity in digits. So to fix 5 TT please type *!fix 5 TT*\n\n*!setpremium* = Change premium"
+    );
   }
-
 
   if (message.body.toLowerCase() === "!price") {
     goldPrice().then((price) => {
@@ -216,7 +222,7 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase() === "!tt") {
     goldPrice().then((price) => {
       const ttRate = price * 1.417;
-      const ttPrice = Math.ceil(ttRate) + 5;
+      const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
 
       message.reply(`Current TT Rate: BD${ttPrice}`);
     });
@@ -241,7 +247,7 @@ client.on("message", async (message) => {
       } else {
         goldPrice().then((price) => {
           const ttRate = price * 1.417;
-          const ttPrice = Math.ceil(ttRate) + 5;
+          const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
 
           const totalPrice = quantity * ttPrice;
           const totalPriceFormatted = numberWithCommas(totalPrice);
@@ -287,9 +293,18 @@ client.on("message", async (message) => {
           return;
         }
 
+        if (completedOrders.includes(quoted.id.id)) {
+          message.reply(
+            "Time limit exceeded or order already placed.\n\nPlease start a new order."
+          );
+          return;
+        }
+
+        completedOrders.push(quoted.id.id);
+
         if (diff > 30000) {
           message.reply(
-            "Time limit exceeded and order cancelled.\n\nPlease start your order again."
+            "Time limit exceeded or order already placed.\n\nPlease start a new order."
           );
         } else {
           message.reply(
@@ -306,7 +321,9 @@ client.on("message", async (message) => {
               client
                 .sendMessage(
                   group,
-                  `Order confirmed for *Dummy Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(unitPrice * quantity)}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
+                  `Order confirmed for *Dummy Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+                    unitPrice * quantity
+                  )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
                 )
                 .then((res) => {
                   console.log("CONFIRMATION SENT TO FIXER");
@@ -319,7 +336,9 @@ client.on("message", async (message) => {
             .catch((err) => {
               console.log("ERROR ON SENDING FIXING MESSAGE TO PGR");
               console.log(err);
-              message.reply("Sorry, we could not process your booking due to an error. Please contact MSS Jewellers directly.")
+              message.reply(
+                "Sorry, we could not process your booking due to an error. Please contact MSS Jewellers directly."
+              );
             });
         }
       })
@@ -329,6 +348,26 @@ client.on("message", async (message) => {
         return;
       });
   } // end if #4567
+
+  if (message.body.includes("!setpremium")) {
+    
+    if(message.body.length !== 13) {
+      message.reply('Format:\n\n*!setpremium X*\n\nWhere X is a number from 0-9.')
+    } else {
+      TT_PREMIUM = parseInt(message.body.slice(-1));
+      
+      message.reply(`Premium changed. Type !getpremium to confirm.`)
+    }
+
+    
+
+
+
+  }
+
+  if (message.body === ("!getpremium")) {
+    message.reply(`Current Premium: BD${TT_PREMIUM}`)
+  }
 
   if (message.body.includes("!stats")) {
     goldPriceStats().then((stat) => {
