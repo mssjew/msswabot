@@ -56,7 +56,7 @@ client.initialize();
 
 
 // US Inflation Data 4.30PM Bahrain Time Fri 25th
-const date1 = new Date(2022, 1, 25, 07, 18, 07);
+const date1 = new Date(2022, 1, 25, 07, 20, 07);
 
 
 
@@ -67,7 +67,7 @@ schedule.scheduleJob(date1, () => {
   client
     .sendMessage(
       "97338999888@c.us",
-      "*SENT AT 7.18.07AM FRANKFURT TIME*"
+      "*SENT AT 7.20.07AM FRANKFURT TIME*"
     )
     .then((res) => {
       console.log("TESTER SENT");
