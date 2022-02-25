@@ -1,7 +1,8 @@
 const axios = require("axios");
 const fs = require("fs");
-// const schedule = require("node-schedule");
+const schedule = require("node-schedule");
 var emoji = require("node-emoji");
+
 
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
@@ -54,42 +55,41 @@ client.on("ready", () => {
 client.initialize();
 
 
-// // US Inflation Data 4.30PM Bahrain Time Tue 15th
-// const date1 = new Date(2022, 1, 15, 14, 20, 0);
+// US Inflation Data 4.30PM Bahrain Time Fri 25th
+const date1 = new Date(2022, 1, 25, 07, 18, 07);
 
-// // US Retail Sales 4.30PM Bahrain Time Wed 16th
-// const date2 = new Date(2022, 1, 16, 14, 20, 0);
 
-// // FOMC Minutes 10PM Bahrain Time Wed 16th
-// const date3 = new Date(2022, 1, 16, 19, 50, 0);
 
-// schedule.scheduleJob(date2, () => {
-//   client
-//     .sendMessage(
-//       "97339439432-1562572137@g.us",
-//       "*Price Alert*\n\nUS Retail Sales Data in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
-//     )
-//     .then((res) => {
-//       console.log("SENT TO MSS GROUP #2");
-//     })
-//     .catch((err) => {
-//       console.log("ERROR");
-//     });
-// });
+const date2 = new Date(2022, 1, 25, 14, 20, 01);
 
-// schedule.scheduleJob(date3, () => {
-//   client
-//     .sendMessage(
-//       "97339439432-1562572137@g.us",
-//       "*Price Alert*\n\nUS Federal Reserve Interest Rate Announcement in 10 mins (At 10pm BH Time).\n\nGold price is expected to move."
-//     )
-//     .then((res) => {
-//       console.log("SENT TO MSS GROUP #3");
-//     })
-//     .catch((err) => {
-//       console.log("ERROR");
-//     });
-// });
+
+schedule.scheduleJob(date1, () => {
+  client
+    .sendMessage(
+      "97338999888@c.us",
+      "*SENT AT 7.18.07AM FRANKFURT TIME*"
+    )
+    .then((res) => {
+      console.log("TESTER SENT");
+    })
+    .catch((err) => {
+      console.log("ERROR");
+    });
+});
+
+schedule.scheduleJob(date2, () => {
+  client
+    .sendMessage(
+      "97339439432-1562572137@g.us",
+      "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+    )
+    .then((res) => {
+      console.log("SENT TO MSS GROUP - INFLATION ANCMNT");
+    })
+    .catch((err) => {
+      console.log("ERROR");
+    });
+});
 
 const unixConverter = (timestamp) => {
   var unix_timestamp = timestamp;
