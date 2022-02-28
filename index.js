@@ -146,21 +146,21 @@ client.on("message", (message) => {
 
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
-    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
+    headers: { "x-access-token": "ggoldapi-f20pyjatkuagctl5-io" },
   });
   return resp.data.price;
 }
 
 async function goldPriceStats() {
   let resp = await axios.get("https://www.goldapi.io/api/stat", {
-    headers: { "x-access-token": "goldapi-9o7ltkznhulqi-io" },
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
   return resp.data;
 }
 
 async function goldAPIStatus() {
   let resp = await axios.get("https://www.goldapi.io/api/status", {
-    headers: { "x-access-token": "goldapi-9o7ltkznhulqi-io" },
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
   return resp.data.result;
 }
