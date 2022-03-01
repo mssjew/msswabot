@@ -22,6 +22,7 @@ const { Client, Buttons } = require("whatsapp-web.js");
 const SESSION_FILE_PATH = "./session.json";
 
 let TT_PREMIUM = 5;
+const VALID_CODES = ["#4567", "#9999", "#3358"]
 
 
 let sessionData;
@@ -55,41 +56,39 @@ client.on("ready", () => {
 client.initialize();
 
 
-// US Inflation Data 4.30PM Bahrain Time Fri 25th
-const date1 = new Date(2022, 1, 25, 07, 25, 07);
+// March 1st 4pm
+// const date1 = new Date(2022, 1, 25, 07, 25, 07);
+
+// const date2 = new Date(2022, 1, 25, 14, 20, 01);
 
 
+// schedule.scheduleJob(date1, () => {
+//   client
+//     .sendMessage(
+//       "97338999888@c.us",
+//       "*SENT AT 7.25.07AM FRANKFURT TIME*"
+//     )
+//     .then((res) => {
+//       console.log("TESTER SENT");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR");
+//     });
+// });
 
-const date2 = new Date(2022, 1, 25, 14, 20, 01);
-
-
-schedule.scheduleJob(date1, () => {
-  client
-    .sendMessage(
-      "97338999888@c.us",
-      "*SENT AT 7.25.07AM FRANKFURT TIME*"
-    )
-    .then((res) => {
-      console.log("TESTER SENT");
-    })
-    .catch((err) => {
-      console.log("ERROR");
-    });
-});
-
-schedule.scheduleJob(date2, () => {
-  client
-    .sendMessage(
-      "97339439432-1562572137@g.us",
-      "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
-    )
-    .then((res) => {
-      console.log("SENT TO MSS GROUP - INFLATION ANCMNT");
-    })
-    .catch((err) => {
-      console.log("ERROR");
-    });
-});
+// schedule.scheduleJob(date2, () => {
+//   client
+//     .sendMessage(
+//       "97339439432-1562572137@g.us",
+//       "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+//     )
+//     .then((res) => {
+//       console.log("SENT TO MSS GROUP - INFLATION ANCMNT");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR");
+//     });
+// });
 
 const unixConverter = (timestamp) => {
   var unix_timestamp = timestamp;
@@ -105,16 +104,28 @@ const unixConverter = (timestamp) => {
   var formattedTime =
     hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
 
-  return formattedTime;
+  let day = date.toJSON().slice(0,10).split('-').join('/');
+
+  return `${formattedTime} - ${day}`;
 };
 
-client.on("message", (message) => {
+
+
+
+client.on("message", async (message) => {
+
+  const chat = await message.getChat()
+
+  console.log("                                              ");
+  console.log("IS GROUP: ", chat.isGroup);
   console.log("MESSAGE: ", message.body);
-  console.log("^ MESSAGE ID: ", message.id.id);
-  console.log("^^ FROM: ", message.from);
-  console.log("^^^ AUTHOR: ", message.author);
-  console.log("^^^^ TIMESTAMP: ", unixConverter(Date.now()));
+  console.log("MESSAGE ID: ", message.id.id);
+  console.log("FROM: ", message.from);
+  console.log("GROUP AUTHOR: ", message.author);
+  console.log("GROUP NAME: ", chat.name);
+  console.log("TIMESTAMP: ", unixConverter(Date.now()));
   console.log("---------------------------------------------");
+  console.log("                                              ");
 });
 
 // function mssBuilder(range) {
@@ -146,7 +157,7 @@ client.on("message", (message) => {
 
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
-    headers: { "x-access-token": "ggoldapi-f20pyjatkuagctl5-io" },
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
   return resp.data.price;
 }
@@ -177,6 +188,21 @@ function getQuantity(msg) {
   }
 }
 
+function isACode(msg) {
+  if (msg.length === 5 && msg[0] === "#") {
+    return true
+  } else {
+    return false;
+  }
+}
+
+function codeValid(msg) {
+  if (msg.length === 5 && msg[0] === "#") {
+    return true
+  } else {
+    return false;
+  }
+}
 // ----------------- HELP START -----------------
 
 // ----------------- HELP END -----------------
@@ -207,10 +233,26 @@ function getQuantity(msg) {
 const completedOrders = [];
 
 client.on("message", async (message) => {
+
+  if (message.body.toLowerCase() === "!all") {
+    message.reply(
+       "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!stats\n!gstatus");
+ } // end !commands
+
+ 
   if (message.body.toLowerCase() === "!help") {
     message.reply(
-      "MSS FIXING COMMANDS\n\n*!price* = Live XAUUSD price updated real-time.\n\n*!tt* = Live TT Bar rate updated real-time.\n\n\nCommand for fixing:\n\n*!fix X TT* where X is your quantity in digits. So to fix 5 TT please type *!fix 5 TT*\n\n*!setpremium* = Change premium"
-    );
+      "MSS WhatsApp Bot.\n\nStill in development.\n\nPlease type !commands to view the list of services.");
+  }// end !help
+
+
+  if (message.body.toLowerCase() === "!commands") {
+     message.reply(
+        "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!booking* = 24/7 Fixing Service. (min. 5 TT)");
+  } // end !commands
+
+  if (message.body.toLowerCase() === "!booking") {
+    message.reply("24/7 TT Fixing Service. Minimum *5 TT* Required.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity in digits.\n\nTo fix 6 TT you will type *!fix 6 TT*.")
   }
 
   if (message.body.toLowerCase() === "!price") {
@@ -244,6 +286,10 @@ client.on("message", async (message) => {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
+      } else if (quantity <5) {
+        message.reply(
+          `Currently the minimum quantity required for instant fixing is 5 TT or more.`
+        );
       } else {
         goldPrice().then((price) => {
           const ttRate = price * 1.417;
@@ -260,7 +306,9 @@ client.on("message", async (message) => {
     }
   } // end of if !fix if/else
 
-  if (message.body === "#4567") {
+  if (isACode(message.body) && message.hasQuotedMsg) {
+
+    if (VALID_CODES.includes(message.body)) {
     message
       .getQuotedMessage()
       .then((quoted) => {
@@ -287,6 +335,7 @@ client.on("message", async (message) => {
         if (
           !quoted.fromMe ||
           !quoted.hasQuotedMsg ||
+          !quoted.body.startsWith("Order to fix") ||
           quoted.body.length < 150
         ) {
           message.reply("Not a fixing message. PIN code not applicable.");
@@ -295,7 +344,7 @@ client.on("message", async (message) => {
 
         if (completedOrders.includes(quoted.id.id)) {
           message.reply(
-            "Time limit exceeded or order already placed.\n\nPlease start a new order."
+            "Order place already.\n\nPlease start a new order."
           );
           return;
         }
@@ -304,7 +353,7 @@ client.on("message", async (message) => {
 
         if (diff > 30000) {
           message.reply(
-            "Time limit exceeded or order already placed.\n\nPlease start a new order."
+            "Time limit exceeded\n\nPlease start a new order."
           );
         } else {
           message.reply(
@@ -313,7 +362,7 @@ client.on("message", async (message) => {
 
           client
             .sendMessage(
-              "120363041665012059@g.us",
+              "120363041420698668@g.us",
               `Buy ${quantity} TT on screen.`
             )
             .then((res) => {
@@ -347,26 +396,39 @@ client.on("message", async (message) => {
         console.log(err);
         return;
       });
-  } // end if #4567
+    } // end if code valid
+    else {
+      message.reply("Invalid code.")
+    }
+  } // end if isCode()
 
   if (message.body.includes("!setpremium")) {
-    
-    if(message.body.length !== 13) {
-      message.reply('Format:\n\n*!setpremium X*\n\nWhere X is a number from 0-9.')
+    const chat = await message.getChat();
+
+    if(chat.isGroup || message.from !== "97338999888@c.us") {
+      message.reply("Not authorized.")
     } else {
-      TT_PREMIUM = parseInt(message.body.slice(-1));
-      
-      message.reply(`Premium changed. Type !getpremium to confirm.`)
+      if(message.body.trim().length !== 13) {
+        message.reply('Format:\n\n*!setpremium X*\n\nWhere X is a number from 0-9.')
+      } else {
+        TT_PREMIUM = parseInt(message.body.slice(-1));
+        
+        message.reply(`Premium changed. Type !getpremium to confirm.`)
+      }
     }
-
-    
-
-
-
+   
+   
   }
 
   if (message.body === ("!getpremium")) {
-    message.reply(`Current Premium: BD${TT_PREMIUM}`)
+    const chat = await message.getChat();
+
+    if (chat.isGroup) {
+      message.reply("Not authorized.")
+    } else {
+      message.reply(`Current Premium: BD${TT_PREMIUM}`)
+    }
+   
   }
 
   if (message.body.includes("!stats")) {
