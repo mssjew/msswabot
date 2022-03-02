@@ -62,19 +62,40 @@ client.initialize();
 // const date2 = new Date(2022, 1, 25, 14, 20, 01);
 
 
-// schedule.scheduleJob(date1, () => {
-//   client
-//     .sendMessage(
-//       "97338999888@c.us",
-//       "*SENT AT 7.25.07AM FRANKFURT TIME*"
-//     )
-//     .then((res) => {
-//       console.log("TESTER SENT");
-//     })
-//     .catch((err) => {
-//       console.log("ERROR");
-//     });
-// });
+schedule.scheduleJob("*/1 * * * *", () => {
+
+  goldPrice().then((price) => {
+    if(price > 1943) {
+      client
+      .sendMessage(
+      "97338999888@c.us",
+      "*Price Alert*\n\nGold above $1943."
+    )
+    .then((res) => {
+      console.log("Gold Alert Sent");
+    })
+    .catch((err) => {
+      console.log("Gold Alert Failed To Send");
+    });
+    } else if(price < 1940) {
+      client
+      .sendMessage(
+      "97338999888@c.us",
+      "*Price Alert*\n\nGold below $1940."
+    )
+    .then((res) => {
+      console.log("Gold Alert Sent");
+    })
+    .catch((err) => {
+      console.log("Gold Alert Failed To Send");
+    });
+    }
+
+  }).catch((err) => console.log("Error on gold price check per min: ", err));
+ 
+
+  
+});
 
 // schedule.scheduleJob(date2, () => {
 //   client
