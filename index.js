@@ -62,29 +62,31 @@ client.initialize();
 // const date2 = new Date(2022, 1, 25, 14, 20, 01);
 
 
-schedule.scheduleJob("*/1 * * * *", () => {
+const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 
   goldPrice().then((price) => {
-    if(price > 1943) {
+    if(price > 1942) {
       client
       .sendMessage(
       "97338999888@c.us",
-      "*Price Alert*\n\nGold above $1943."
+      "*Price Alert*\n\nGold above $1942."
     )
     .then((res) => {
       console.log("Gold Alert Sent");
+      priceCheck.cancel();
     })
     .catch((err) => {
       console.log("Gold Alert Failed To Send");
     });
-    } else if(price < 1940) {
+    } else if(price < 1942) {
       client
       .sendMessage(
       "97338999888@c.us",
-      "*Price Alert*\n\nGold below $1940."
+      "*Price Alert*\n\nGold below $1942."
     )
     .then((res) => {
       console.log("Gold Alert Sent");
+      priceCheck.cancel();
     })
     .catch((err) => {
       console.log("Gold Alert Failed To Send");
