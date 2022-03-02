@@ -56,47 +56,32 @@ client.on("ready", () => {
 client.initialize();
 
 
-// March 1st 4pm
-// const date1 = new Date(2022, 1, 25, 07, 25, 07);
 
-// const date2 = new Date(2022, 1, 25, 14, 20, 01);
-
+let pCounter = 0;
 
 const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
+  pCounter++;
+  console.log("Running Price Check: ", pCounter);
 
   goldPrice().then((price) => {
-    if(price > 1942) {
+    if(price > 2000) {
       client
       .sendMessage(
-      "97338999888@c.us",
-      "*Price Alert*\n\nGold above $1942."
+      "97339439432-1562572137@g.us",
+      "*Price Alert*\n\nGold above $2000."
     )
     .then((res) => {
       console.log("Gold Alert Sent");
       priceCheck.cancel();
+      console.log("Price Check Cancelled Due to Success");
     })
     .catch((err) => {
       console.log("Gold Alert Failed To Send");
     });
-    } else if(price < 1942) {
-      client
-      .sendMessage(
-      "97338999888@c.us",
-      "*Price Alert*\n\nGold below $1942."
-    )
-    .then((res) => {
-      console.log("Gold Alert Sent");
-      priceCheck.cancel();
-    })
-    .catch((err) => {
-      console.log("Gold Alert Failed To Send");
-    });
-    }
+    } 
 
   }).catch((err) => console.log("Error on gold price check per min: ", err));
  
-
-  
 });
 
 // schedule.scheduleJob(date2, () => {
