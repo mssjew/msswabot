@@ -61,9 +61,10 @@ let pCounter = 0;
 
 const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
   pCounter++;
-  console.log("Running Price Check: ", pCounter);
+  
 
   goldPrice().then((price) => {
+    console.log(`Running Price Check No. ${pCounter} - $${price}`);
     if(price > 2000) {
       client
       .sendMessage(
