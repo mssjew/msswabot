@@ -3,9 +3,10 @@ const fs = require("fs");
 const schedule = require("node-schedule");
 var emoji = require("node-emoji");
 
-
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
+const redCircle = emoji.get("red_circle");
+
 
 const internalPos = "Summary!C3";
 const sellRange = "Summary!B11:B38";
@@ -17,32 +18,25 @@ const qabBuyRange = "Summary!C11:C28";
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
-const { Client, Buttons } = require("whatsapp-web.js");
-
-const SESSION_FILE_PATH = "./session.json";
+const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 5;
-const VALID_CODES = ["#4567", "#9999", "#3358"]
-
-
-let sessionData;
-if (fs.existsSync(SESSION_FILE_PATH)) {
-  sessionData = require(SESSION_FILE_PATH);
-}
-
-
+const VALID_CODES = ["#4567", "#9999", "#3358"];
 
 const client = new Client({
-  session: sessionData,
+  authStrategy: new LocalAuth(),
+  puppeteer: { headless: true },
 });
 
-client.on("authenticated", (session) => {
-  sessionData = session;
-  fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
+client.initialize();
+
+client.on("authenticated", () => {
+  console.log("AUTHENTICATED");
+});
+
+client.on("auth_failure", (msg) => {
+  // Fired if session restore was unsuccessful
+  console.error("AUTHENTICATION FAILURE", msg);
 });
 
 client.on("qr", (qr) => {
@@ -53,15 +47,11 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-client.initialize();
-
-
 // 2000 PRICE CHECKER
 // let pCounter = 0;
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
-  
 
 //   goldPrice().then((price) => {
 //     console.log(`Running Price Check No. ${pCounter} - $${price}`);
@@ -79,12 +69,11 @@ client.initialize();
 //     .catch((err) => {
 //       console.log("Gold Alert Failed To Send");
 //     });
-//     } 
+//     }
 
 //   }).catch((err) => console.log("Error on gold price check per min: ", err));
- 
-// });
 
+// });
 
 // schedule.scheduleJob(date2, () => {
 //   client
@@ -114,17 +103,13 @@ const unixConverter = (timestamp) => {
   var formattedTime =
     hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
 
-  let day = date.toJSON().slice(0,10).split('-').join('/');
+  let day = date.toJSON().slice(0, 10).split("-").join("/");
 
   return `${formattedTime} - ${day}`;
 };
 
-
-
-
 client.on("message", async (message) => {
-
-  const chat = await message.getChat()
+  const chat = await message.getChat();
 
   console.log("                                              ");
   console.log("IS GROUP: ", chat.isGroup);
@@ -137,6 +122,7 @@ client.on("message", async (message) => {
   console.log("---------------------------------------------");
   console.log("                                              ");
 });
+
 
 // function mssBuilder(range) {
 //   return `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
@@ -200,7 +186,7 @@ function getQuantity(msg) {
 
 function isACode(msg) {
   if (msg.length === 5 && msg[0] === "#") {
-    return true
+    return true;
   } else {
     return false;
   }
@@ -208,7 +194,7 @@ function isACode(msg) {
 
 function codeValid(msg) {
   if (msg.length === 5 && msg[0] === "#") {
-    return true
+    return true;
   } else {
     return false;
   }
@@ -243,26 +229,29 @@ function codeValid(msg) {
 const completedOrders = [];
 
 client.on("message", async (message) => {
-
+  const chat = await message.getChat();
   if (message.body.toLowerCase() === "!all") {
     message.reply(
-       "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!stats\n!gstatus");
- } // end !commands
+      "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!stats\n!gstatus"
+    );
+  } // end !commands
 
- 
   if (message.body.toLowerCase() === "!help") {
     message.reply(
-      "MSS WhatsApp Bot.\n\nStill in development.\n\nPlease type !commands to view the list of services.");
-  }// end !help
-
+      "MSS WhatsApp Bot.\n\nStill in development.\n\nPlease type !commands to view the list of services."
+    );
+  } // end !help
 
   if (message.body.toLowerCase() === "!commands") {
-     message.reply(
-        "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!booking* = 24/7 Fixing Service. (min. 5 TT)");
+    message.reply(
+      "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!booking* = 24/7 Fixing Service. (min. 5 TT)"
+    );
   } // end !commands
 
   if (message.body.toLowerCase() === "!booking") {
-    message.reply("24/7 TT Fixing Service. Minimum *5 TT* Required.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity in digits.\n\nTo fix 6 TT you will type *!fix 6 TT*.")
+    message.reply(
+      "24/7 TT Fixing Service. Minimum *5 TT* Required.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity in digits.\n\nTo fix 6 TT you will type *!fix 6 TT*."
+    );
   }
 
   if (message.body.toLowerCase() === "!price") {
@@ -296,9 +285,13 @@ client.on("message", async (message) => {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
-      } else if (quantity <5) {
+      } else if (quantity < 5) {
         message.reply(
-          `Currently the minimum quantity required for instant fixing is 5 TT or more.`
+          `Sorry, the minimum quantity required for instant fixing is 5 TT or more.\n\nPlease enter your order again if you want to fix 5+ TT.`
+        );
+      } else if (quantity > 20) {
+        message.reply(
+          `Sorry, please contact MSS Jewellers directly to fix more than 20TT.`
         );
       } else {
         goldPrice().then((price) => {
@@ -309,136 +302,145 @@ client.on("message", async (message) => {
           const totalPriceFormatted = numberWithCommas(totalPrice);
 
           message.reply(
-            `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please reply to this message with your 4-digit PIN code within *30 seconds*.\n\nDummy code for testing = '#4567'`
+            `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please swipe on this message and reply with your 4-digit PIN code within *30 seconds*.\n\nDummy code for testing = '#4567'`
           );
         });
       }
     }
   } // end of if !fix if/else
 
+  if (isACode(message.body) && !message.hasQuotedMsg) {
+    message.reply(
+      `${redXEmoji} Error.\n\nYou did not quote reply an order message.\n\nPlease swipe on the message and then reply with your code.`
+    );
+  }
+
   if (isACode(message.body) && message.hasQuotedMsg) {
-
     if (VALID_CODES.includes(message.body)) {
-    message
-      .getQuotedMessage()
-      .then((quoted) => {
-        let quantity = 0;
-        let unitPrice = 0;
-        const group = quoted.to;
+      message
+        .getQuotedMessage()
+        .then((quoted) => {
+          let quantity = 0;
+          let unitPrice = 0;
+          const group = quoted.to;
+          const groupName = chat.name;
 
-        if (quoted.body.slice(14, 15) === " ") {
-          quantity = parseInt(quoted.body.slice(13, 14));
-        } else {
-          quantity = parseInt(quoted.body.slice(13, 15));
-        }
+          if (quoted.body.slice(14, 15) === " ") {
+            quantity = parseInt(quoted.body.slice(13, 14));
+          } else {
+            quantity = parseInt(quoted.body.slice(13, 15));
+          }
 
-        if (quantity >= 10) {
-          unitPrice = parseInt(quoted.body.slice(24, 28));
-        } else {
-          unitPrice = parseInt(quoted.body.slice(23, 27));
-        }
+          if (quantity >= 10) {
+            unitPrice = parseInt(quoted.body.slice(24, 28));
+          } else {
+            unitPrice = parseInt(quoted.body.slice(23, 27));
+          }
 
-        const timeNow = Date.now();
+          const timeNow = Date.now();
 
-        const diff = parseInt(timeNow) - parseInt(quoted.timestamp * 1000);
+          const diff = parseInt(timeNow) - parseInt(quoted.timestamp * 1000);
 
-        if (
-          !quoted.fromMe ||
-          !quoted.hasQuotedMsg ||
-          !quoted.body.startsWith("Order to fix") ||
-          quoted.body.length < 150
-        ) {
-          message.reply("Not a fixing message. PIN code not applicable.");
+          if (
+            !quoted.fromMe ||
+            !quoted.hasQuotedMsg ||
+            !quoted.body.startsWith("Order to fix") ||
+            quoted.body.length < 150
+          ) {
+            message.reply("Not a fixing message. PIN code not applicable.");
+            return;
+          }
+
+          if (completedOrders.includes(quoted.id.id)) {
+            message.reply("Order place already.\n\nPlease start a new order.");
+            return;
+          }
+
+          completedOrders.push(quoted.id.id);
+          
+
+          if (diff > 30000) {
+            message.reply("Time limit exceeded\n\nPlease start a new order.");
+          } else {
+            message.reply(
+              `Verified as *Dummy Jewellers* ${greenTickEmoji}\n\nFixing order started, please await final confirmation.`
+            );
+
+            client
+              .sendMessage(
+                 "120363041420698668@g.us",
+                `Buy ${quantity} TT on screen.`
+              )
+              .then((res) => {
+                console.log("SENT FIXING MESSAGE TO PGR");
+                client
+                  .sendMessage(
+                    group,
+                    `Order confirmed for *Dummy Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+                      unitPrice * quantity
+                    )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
+                  )
+                  .then((res) => {
+                    console.log("CONFIRMATION SENT TO FIXER");
+                    client
+                      .sendMessage(
+                        "120363023099866055@g.us",
+                        `${redCircle} Fixing Alert ${redCircle}\n\n*${groupName}* just placed an automated fixing order for ${quantity} TT at BD${unitPrice} each.\n\nCheck and confirm that fixing message was sent to PGR group.`
+                      )
+                      .then(() => console.log("internal alert sent"))
+                      .catch(() => console.log(`failed to send internal alert for ${groupName} order`) )
+                  })
+                  .catch((err) => {
+                    console.log("ERROR ON SENDING CONFIRMATION TO FIXER");
+                    console.log(err);
+                  });
+              })
+              .catch((err) => {
+                console.log("ERROR ON SENDING FIXING MESSAGE TO PGR");
+                console.log(err);
+                message.reply(
+                  "Sorry, we could not process your booking due to an error. Please contact MSS Jewellers directly."
+                );
+              });
+          }
+        })
+        .catch((err) => {
+          console.log("ERROR ON GETTING QUOTED MESSAGE");
+          console.log(err);
           return;
-        }
-
-        if (completedOrders.includes(quoted.id.id)) {
-          message.reply(
-            "Order place already.\n\nPlease start a new order."
-          );
-          return;
-        }
-
-        completedOrders.push(quoted.id.id);
-
-        if (diff > 30000) {
-          message.reply(
-            "Time limit exceeded\n\nPlease start a new order."
-          );
-        } else {
-          message.reply(
-            `Verified as *Dummy Jewellers* ${greenTickEmoji}\n\nFixing order placed, please await final confirmation.`
-          );
-
-          client
-            .sendMessage(
-              "120363041420698668@g.us",
-              `Buy ${quantity} TT on screen.`
-            )
-            .then((res) => {
-              console.log("SENT FIXING MESSAGE TO PGR");
-              client
-                .sendMessage(
-                  group,
-                  `Order confirmed for *Dummy Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
-                    unitPrice * quantity
-                  )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
-                )
-                .then((res) => {
-                  console.log("CONFIRMATION SENT TO FIXER");
-                })
-                .catch((err) => {
-                  console.log("ERROR ON SENDING CONFIRMATION TO FIXER");
-                  console.log(err);
-                });
-            })
-            .catch((err) => {
-              console.log("ERROR ON SENDING FIXING MESSAGE TO PGR");
-              console.log(err);
-              message.reply(
-                "Sorry, we could not process your booking due to an error. Please contact MSS Jewellers directly."
-              );
-            });
-        }
-      })
-      .catch((err) => {
-        console.log("ERROR ON GETTING QUOTED MESSAGE");
-        console.log(err);
-        return;
-      });
+        });
     } // end if code valid
     else {
-      message.reply("Invalid code.")
+      message.reply("Invalid code.");
     }
   } // end if isCode()
 
   if (message.body.includes("!setpremium")) {
     const chat = await message.getChat();
 
-    if(chat.isGroup || message.from !== "97338999888@c.us") {
-      message.reply("Not authorized.")
+    // if(message.author !== "97333737302@c.us"|| message.author !== "97338999888@c.us") {
+    //   message.reply("Not authorized.")
+    // } else {
+    if (message.body.trim().length !== 13) {
+      message.reply(
+        "Format:\n\n*!setpremium X*\n\nWhere X is a number from 0-9.\n\nAdds digit value to Live Price*1.417"
+      );
     } else {
-      if(message.body.trim().length !== 13) {
-        message.reply('Format:\n\n*!setpremium X*\n\nWhere X is a number from 0-9.')
-      } else {
-        TT_PREMIUM = parseInt(message.body.slice(-1));
-        
-        message.reply(`Premium changed. Type !getpremium to confirm.`)
-      }
+      TT_PREMIUM = parseInt(message.body.slice(-1));
+
+      message.reply(`Premium changed. Type !getpremium to confirm.`);
     }
-   
-   
+    //}
   }
 
-  if (message.body === ("!getpremium")) {
+  if (message.body === "!getpremium") {
     const chat = await message.getChat();
 
-    if (chat.isGroup) {
-      message.reply("Not authorized.")
-    } else {
-      message.reply(`Current Premium: BD${TT_PREMIUM}`)
-    }
-   
+    // if (message.author !== "97333737302@c.us" || message.author !== "97338999888@c.us") {
+    //   message.reply("Not authorized.")
+    // } else {
+    message.reply(`Current Premium: BD${TT_PREMIUM}`);
+    //}
   }
 
   if (message.body.includes("!stats")) {
