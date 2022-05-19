@@ -7,13 +7,17 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
+// const internalPos = "Summary!C3";
+// const sellRange = "Summary!B11:B38";
+// const buyRange = "Summary!C11:C38";
 
-const internalPos = "Summary!C3";
-const sellRange = "Summary!B11:B38";
-const buyRange = "Summary!C11:C38";
+// const qabSellRange = "Summary!B11:B28";
+// const qabBuyRange = "Summary!C11:C28";
 
-const qabSellRange = "Summary!B11:B28";
-const qabBuyRange = "Summary!C11:C28";
+const MAHARANI_GROUP = "120363037936208858@g.us";
+
+
+const EVERSHINE_GROUP = "120363041152671102@g.us";
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
