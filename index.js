@@ -15,8 +15,6 @@ const redCircle = emoji.get("red_circle");
 // const qabBuyRange = "Summary!C11:C28";
 
 const MAHARANI_GROUP = "120363037936208858@g.us";
-
-
 const EVERSHINE_GROUP = "120363041152671102@g.us";
 
 const qrcode = require("qrcode-terminal");
@@ -127,7 +125,6 @@ client.on("message", async (message) => {
   console.log("                                              ");
 });
 
-
 // function mssBuilder(range) {
 //   return `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${range}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`;
 // }
@@ -236,7 +233,7 @@ client.on("message", async (message) => {
   const chat = await message.getChat();
   if (message.body.toLowerCase() === "!all") {
     message.reply(
-      "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!stats\n!gstatus"
+      "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!apiStats\n!apiWorking"
     );
   } // end !commands
 
@@ -266,10 +263,15 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!tt") {
     goldPrice().then((price) => {
-      const ttRate = price * 1.417;
-      const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
-
-      message.reply(`Current TT Rate: BD${ttPrice}`);
+      if (isNaN(TT_PREMIUM)) {
+        message.reply(
+          "Application error.\nSorry, please contact MSS directly for fixing."
+        );
+      } else {
+        const ttRate = price * 1.417;
+        const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
+        message.reply(`Current TT Rate: BD${ttPrice}`);
+      }
     });
   }
 
@@ -299,15 +301,21 @@ client.on("message", async (message) => {
         );
       } else {
         goldPrice().then((price) => {
-          const ttRate = price * 1.417;
-          const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
+          if (isNaN(TT_PREMIUM)) {
+            message.reply(
+              "Application error.\nSorry, please contact MSS directly for fixing."
+            );
+          } else {
+            const ttRate = price * 1.417;
+            const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
 
-          const totalPrice = quantity * ttPrice;
-          const totalPriceFormatted = numberWithCommas(totalPrice);
+            const totalPrice = quantity * ttPrice;
+            const totalPriceFormatted = numberWithCommas(totalPrice);
 
-          message.reply(
-            `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please swipe on this message and reply with your 4-digit PIN code within *30 seconds*.\n\nDummy code for testing = '#4567'`
-          );
+            message.reply(
+              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please swipe on this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\nDummy codes for testing = *#4567* or *#9999* or *#3358*`
+            );
+          }
         });
       }
     }
@@ -341,6 +349,28 @@ client.on("message", async (message) => {
             unitPrice = parseInt(quoted.body.slice(23, 27));
           }
 
+          if (isNaN(quantity)) {
+            message.reply(
+              "Calculation error, please try again.\nIf you receive this error again please contact MSS directly for fixing."
+            );
+            return;
+          }
+
+          if (isNaN(unitPrice)) {
+            message.reply(
+              "Calculation error, please try again.\nIf you receive this error again please contact MSS directly for fixing."
+            );
+            return;
+          }
+
+          if (quantity >= 20) {
+            message.reply("Quantity error, please restart your order.");
+            return;
+          } else if (quantity < 0) {
+            message.reply("Quantity error, please restart your order.");
+            return;
+          }
+
           const timeNow = Date.now();
 
           const diff = parseInt(timeNow) - parseInt(quoted.timestamp * 1000);
@@ -361,7 +391,6 @@ client.on("message", async (message) => {
           }
 
           completedOrders.push(quoted.id.id);
-          
 
           if (diff > 30000) {
             message.reply("Time limit exceeded\n\nPlease start a new order.");
@@ -372,7 +401,8 @@ client.on("message", async (message) => {
 
             client
               .sendMessage(
-                 "120363041420698668@g.us",
+                // "120363041420698668@g.us"
+                "120363022593517974@g.us",
                 `Buy ${quantity} TT on screen.`
               )
               .then((res) => {
@@ -392,7 +422,11 @@ client.on("message", async (message) => {
                         `${redCircle} Fixing Alert ${redCircle}\n\n*${groupName}* just placed an automated fixing order for ${quantity} TT at BD${unitPrice} each.\n\nCheck and confirm that fixing message was sent to PGR group.`
                       )
                       .then(() => console.log("internal alert sent"))
-                      .catch(() => console.log(`failed to send internal alert for ${groupName} order`) )
+                      .catch(() =>
+                        console.log(
+                          `failed to send internal alert for ${groupName} order`
+                        )
+                      );
                   })
                   .catch((err) => {
                     console.log("ERROR ON SENDING CONFIRMATION TO FIXER");
@@ -403,12 +437,15 @@ client.on("message", async (message) => {
                 console.log("ERROR ON SENDING FIXING MESSAGE TO PGR");
                 console.log(err);
                 message.reply(
-                  "Sorry, we could not process your booking due to an error. Please contact MSS Jewellers directly."
+                  "Sorry, we could not process your fixing order due to an error. Please contact MSS Jewellers directly."
                 );
               });
           }
         })
         .catch((err) => {
+          message.reply(
+            "Sorry, we could not process your fixing order due to an error. Please contact MSS Jewellers directly."
+          );
           console.log("ERROR ON GETTING QUOTED MESSAGE");
           console.log(err);
           return;
@@ -425,14 +462,36 @@ client.on("message", async (message) => {
     // if(message.author !== "97333737302@c.us"|| message.author !== "97338999888@c.us") {
     //   message.reply("Not authorized.")
     // } else {
-    if (message.body.trim().length !== 13) {
+    if (message.body.trim().length < 13 || message.body.trim().length > 14) {
       message.reply(
-        "Format:\n\n*!setpremium X*\n\nWhere X is a number from 0-9.\n\nAdds digit value to Live Price*1.417"
+        "Format:\n\n*!setpremium X*\n\nNegative premium: *!setpremium -X*\n\nX is a number from 0-9.\n\nAdds digit value 1.417 rate."
       );
-    } else {
-      TT_PREMIUM = parseInt(message.body.slice(-1));
+      return;
+    } else if (message.body.trim().length === 13) {
+      if (isNaN(parseInt(message.body.slice(-1)))) {
+        message.reply(
+          `${redXEmoji} Error\n\nPlease enter a digit from 0-9.`
+        );
+      } else {
+        TT_PREMIUM = parseInt(message.body.slice(-1));
+  
+        message.reply(`Premium changed. Type !getpremium to confirm.`);
+      }
+    } else if (message.body.trim().length === 14) {
+      if (message.body.trim()[12] !== "-") {
+        message.reply(
+          `${redXEmoji} Error\n\nPlease use the correct format for negative premium:\n\n*!setpremium -X* where X is between 0-9.`
+        );
+      } else if (isNaN(parseInt(message.body.slice(-1)))) {
+        message.reply(
+          `${redXEmoji} Error\n\nPlease enter a digit from 0-9.`
+        );
+      } else {
+        TT_PREMIUM = 0 - parseInt(message.body.slice(-1));
+  
+        message.reply(`Premium changed to *negative*. Type !getpremium to confirm.`);
+      }
 
-      message.reply(`Premium changed. Type !getpremium to confirm.`);
     }
     //}
   }
@@ -447,7 +506,7 @@ client.on("message", async (message) => {
     //}
   }
 
-  if (message.body.includes("!stats")) {
+  if (message.body.includes("!apiStats")) {
     goldPriceStats().then((stat) => {
       message.reply(
         `Reqs Today: ${stat.requests_today}\n\nReqs Yesterday: ${stat.requests_yesterday}\n\nReqs Month: ${stat.requests_month}\n\nReqs Last Month: ${stat.requests_last_month}`
@@ -455,51 +514,9 @@ client.on("message", async (message) => {
     });
   }
 
-  if (message.body.includes("!gstatus")) {
+  if (message.body.includes("!apiWorking")) {
     goldAPIStatus().then((status) => {
       message.reply(`${status}`);
     });
   }
 });
-
-// ----------------- END -----------------
-
-// ----------------- KENZ START -----------------
-
-// client.on("message", (message) => {
-//     if (message.body === "!kenz buy") {
-//       kenzGrab(buyRange).then((data) =>
-//         message.reply(`*KENZ BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-//       );
-//     }
-//   });
-
-//   client.on("message", (message) => {
-//     if (message.body === "!kenz sell") {
-//       kenzGrab(sellRange).then((data) =>
-//         message.reply(`*KENZ SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-//       );
-//     }
-//   });
-
-// ----------------- KENZ END -----------------
-
-// ----------------- QAB START -----------------
-
-// client.on("message", (message) => {
-//     if (message.body === "!qab buy") {
-//       qabGrab(qabBuyRange).then((data) =>
-//         message.reply(`*QAB BUY POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-//       );
-//     }
-//   });
-
-//   client.on("message", (message) => {
-//     if (message.body === "!qab sell") {
-//       qabGrab(qabSellRange).then((data) =>
-//         message.reply(`*QAB SELL POSITIONS* \r\n\r\n${data.join("\r\n")}`)
-//       );
-//     }
-//   });
-
-// ----------------- QAB END -----------------
