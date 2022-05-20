@@ -401,8 +401,7 @@ client.on("message", async (message) => {
 
             client
               .sendMessage(
-                // "120363041420698668@g.us"
-                "120363022593517974@g.us",
+                "120363041420698668@g.us",
                 `Buy ${quantity} TT on screen.`
               )
               .then((res) => {
