@@ -29,7 +29,7 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
-const VALID_CODES = ["#4567", "#9999", "#3358", "6572"];
+const VALID_CODES = ["6572"];
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -315,7 +315,7 @@ client.on("message", async (message) => {
             const totalPriceFormatted = numberWithCommas(totalPrice);
 
             message.reply(
-              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.`
+              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is #6572*, please include the #.`
             );
           }
         });
@@ -399,51 +399,18 @@ client.on("message", async (message) => {
           } else {
             message.reply(
 
-              `Order confirmed for *Al Sarraj Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+              `Order confirmed for *Al Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
               )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
             );
 
             client
               .sendMessage(
-                "120363041420698668@g.us",
-                `Buy ${quantity} TT on screen.`
+                "97333737302@c.us",
+                `${redCircle} Fixing Alert ${redCircle}\n\nAl Sarraj just booked ${quantity} TT at BD${unitPrice} each. Total = BD${numberWithCommas(unitPrice * quantity
+                )}.\n\nUpdate Daily Fixing Sheet.`
               )
-              .then((res) => {
-                console.log("SENT FIXING MESSAGE TO PGR");
-                client
-                  .sendMessage(
-                    group,
-                    `Order confirmed for *Dummy Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
-                      unitPrice * quantity
-                    )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
-                  )
-                  .then((res) => {
-                    console.log("CONFIRMATION SENT TO FIXER");
-                    client
-                      .sendMessage(
-                        "120363023099866055@g.us",
-                        `${redCircle} Fixing Alert ${redCircle}\n\n*${groupName}* just placed an automated fixing order for ${quantity} TT at BD${unitPrice} each.\n\nCheck and confirm that fixing message was sent to PGR group.`
-                      )
-                      .then(() => console.log("internal alert sent"))
-                      .catch(() =>
-                        console.log(
-                          `failed to send internal alert for ${groupName} order`
-                        )
-                      );
-                  })
-                  .catch((err) => {
-                    console.log("ERROR ON SENDING CONFIRMATION TO FIXER");
-                    console.log(err);
-                  });
-              })
-              .catch((err) => {
-                console.log("ERROR ON SENDING FIXING MESSAGE TO PGR");
-                console.log(err);
-                message.reply(
-                  "Sorry, we could not process your fixing order due to an error. Please contact MSS Jewellers directly."
-                );
-              });
+              
           }
         })
         .catch((err) => {
