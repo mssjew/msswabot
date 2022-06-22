@@ -398,16 +398,14 @@ client.on("message", async (message) => {
             message.reply("Time limit exceeded\n\nPlease start a new order.");
           } else {
             message.reply(
-
-              `Order confirmed for *Al Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+              `Order confirmed for *Al Sarraj Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
               )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
             );
-
             client
               .sendMessage(
-                "97333737302@c.us",
-                `${redCircle} Fixing Alert ${redCircle}\n\nAl Sarraj just booked ${quantity} TT at BD${unitPrice} each. Total = BD${numberWithCommas(unitPrice * quantity
+                "97338999888@c.us",
+                `${redCircle} Fixing Alert ${redCircle}\n\nAl Sarraj Jewellers just booked ${quantity} TT at BD${unitPrice} each. Total = BD${numberWithCommas(unitPrice * quantity
                 )}.\n\nUpdate Daily Fixing Sheet.`
               )
               
