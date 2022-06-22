@@ -282,7 +282,7 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase().includes("!fix")) {
-    const input = message.body.trim();
+    const input = message.body.trim().toLowerCase();
 
     let randTT = Math.ceil(Math.random() * 5);
 
@@ -293,7 +293,7 @@ client.on("message", async (message) => {
     } else {
       const quantity = getQuantity(message.body);
 
-      if (input !== `!fix ${quantity} TT` || quantity <= 0) {
+      if (input !== `!fix ${quantity} tt` || quantity <= 0) {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
@@ -400,12 +400,12 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *Al Sarraj Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
+              )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!`
             );
             client
               .sendMessage(
-                "97338999888@c.us",
-                `${redCircle} Fixing Alert ${redCircle}\n\nAl Sarraj Jewellers just booked ${quantity} TT at BD${unitPrice} each. Total = BD${numberWithCommas(unitPrice * quantity
+                "919946147016@c.us",
+                `${redCircle} Fixing Alert ${redCircle}\n\nAl Sarraj Jewellers just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
                 )}.\n\nUpdate Daily Fixing Sheet.`
               )
               
