@@ -29,7 +29,7 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
-const VALID_CODES = ["6572"];
+const VALID_CODES = ["#6572"];
 
 const client = new Client({
   authStrategy: new LocalAuth(),
