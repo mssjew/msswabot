@@ -7,6 +7,7 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
+
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
@@ -15,15 +16,20 @@ const redCircle = emoji.get("red_circle");
 // const qabBuyRange = "Summary!C11:C28";
 
 const MAHARANI_GROUP = "120363037936208858@g.us";
+
 const EVERSHINE_GROUP = "120363041152671102@g.us";
+
+const AL_SARRAJ_GROUP = "120363023532089325@g.us";
+
+const KENZ_GROUP = "120363039742894365@g.us";
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-let TT_PREMIUM = 5;
-const VALID_CODES = ["#4567", "#9999", "#3358"];
+let TT_PREMIUM = 0;
+const VALID_CODES = ["#4567", "#9999", "#3358", "6572"];
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -251,7 +257,7 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!booking") {
     message.reply(
-      "24/7 TT Fixing Service. Minimum *5 TT* Required.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity in digits.\n\nTo fix 6 TT you will type *!fix 6 TT*."
+      "24/7 TT Booking Service. Maximum *5 TT* allowed.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity required.\n\nTo fix 3 TT you will type *!fix 3 TT*."
     );
   }
 
@@ -278,7 +284,7 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase().includes("!fix")) {
     const input = message.body.trim();
 
-    let randTT = Math.ceil(Math.random() * 11);
+    let randTT = Math.ceil(Math.random() * 5);
 
     if (input.length < 5 || input.length > 10) {
       message.reply(
@@ -291,19 +297,15 @@ client.on("message", async (message) => {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
-      } else if (quantity < 5) {
+      } else if (quantity > 5) {
         message.reply(
-          `Sorry, the minimum quantity required for instant fixing is 5 TT or more.\n\nPlease enter your order again if you want to fix 5+ TT.`
-        );
-      } else if (quantity > 20) {
-        message.reply(
-          `Sorry, please contact MSS Jewellers directly to fix more than 20TT.`
+          `Sorry, please contact MSS Jewellers directly to fix more than 5TT.`
         );
       } else {
         goldPrice().then((price) => {
           if (isNaN(TT_PREMIUM)) {
             message.reply(
-              "Application error.\nSorry, please contact MSS directly for fixing."
+              "Sorry, we are unable to process your request at this time.\nPlease contact MSS directly for fixing."
             );
           } else {
             const ttRate = price * 1.417;
@@ -313,7 +315,7 @@ client.on("message", async (message) => {
             const totalPriceFormatted = numberWithCommas(totalPrice);
 
             message.reply(
-              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please swipe on this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\nDummy codes for testing = *#4567* or *#9999* or *#3358*`
+              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.`
             );
           }
         });
@@ -396,7 +398,10 @@ client.on("message", async (message) => {
             message.reply("Time limit exceeded\n\nPlease start a new order.");
           } else {
             message.reply(
-              `Verified as *Dummy Jewellers* ${greenTickEmoji}\n\nFixing order started, please await final confirmation.`
+
+              `Order confirmed for *Al Sarraj Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+                unitPrice * quantity
+              )}*\n\n*This message is your confirmation and proof of booking*\n\nThank you!`
             );
 
             client
@@ -519,3 +524,5 @@ client.on("message", async (message) => {
     });
   }
 });
+
+
