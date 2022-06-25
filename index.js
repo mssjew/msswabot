@@ -35,12 +35,13 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
-const VALID_CODES = ["#6572", "#6950", "#1317", "#1299", "#0000"];
+const VALID_CODES = ["#6572", "#6950", "#1317", "#1299", "#1393", "#0000"];
 
 // 6572 sarraj
 // 6950 om
 // 1317 maharani
 // 1299 new marhaba
+// 1393 kenz
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -376,7 +377,10 @@ client.on("message", async (message) => {
         fixerName = "Maharani Jewellers";
       } else if (message.body === "#1299") {
         fixerName = "New Marhaba Jewellery";
+      } else if (message.body === "#1393") {
+        fixerName = "Kenz Al Bahrain";
       }
+
 
       message
         .getQuotedMessage()
