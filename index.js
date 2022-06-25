@@ -305,6 +305,14 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase().includes("!fix")) {
+
+    // 6572 sarraj
+    // 6950 om
+    // 1317 maharani
+    // 1299 new marhaba
+    // 1393 kenz
+
+    let fixingCode = "";
     const input = message.body.trim().toLowerCase();
 
     let randTT = Math.ceil(Math.random() * 5);
@@ -313,16 +321,28 @@ client.on("message", async (message) => {
       message.reply(
         `${redXEmoji} Error\n\nPlease use correct format\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
       );
-    } else {
+    } else { 
 
-      if(message.from === MAHARANI_GROUP || message.from === NEW_MARHABA_GROUP ) {
+      if(message.from === MAHARANI_GROUP) {
         TT_PREMIUM = -2;
+        fixingCode = "#1317";
+      } else if (message.from === NEW_MARHABA_GROUP) {
+        TT_PREMIUM = -2;
+        fixingCode = "#1299";
       } else if (message.from === KENZ_GROUP) {
         console.log("MESSAGE FROM KENZ");
         TT_PREMIUM = -3;
+        fixingCode = "#1393";
+      } else if (message.from === AL_SARRAJ_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#6572";
+      } else if (message.from === OM_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#6950";
       } else {
         TT_PREMIUM = 0;
       }
+
   
       const quantity = getQuantity(message.body);
 
@@ -348,7 +368,7 @@ client.on("message", async (message) => {
             const totalPriceFormatted = numberWithCommas(totalPrice);
 
             message.reply(
-              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is #6572*, please include the #.`
+              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is *${fixingCode}*, please include the #.`
             );
           }
         });
@@ -455,7 +475,7 @@ client.on("message", async (message) => {
             message.reply("Time limit exceeded\n\nPlease start a new order.");
           } else {
             message.reply(
-              `Order confirmed for ${fixerName} ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+              `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
               )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!`
             );
