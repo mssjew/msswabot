@@ -305,13 +305,22 @@ client.on("message", async (message) => {
         `${redXEmoji} Error\n\nPlease use correct format\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
       );
     } else {
+
+      if(message.from === MAHARANI_GROUP) {
+        TT_PREMIUM = -2;
+      } else if (message.from === KENZ_GROUP) {
+        TT_PREMIUM = -3;
+      } else {
+        TT_PREMIUM = 0;
+      }
+  
       const quantity = getQuantity(message.body);
 
       if (input !== `!fix ${quantity} tt` || quantity <= 0) {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
-      } else if (quantity > 5) {
+      } else if (quantity > 10) {
         message.reply(
           `Sorry, please contact MSS Jewellers directly to fix more than 5TT.`
         );
