@@ -331,7 +331,7 @@ client.on("message", async (message) => {
         );
       } else if (quantity > 10) {
         message.reply(
-          `Sorry, please contact MSS Jewellers directly to fix more than 5TT.`
+          `Sorry, please contact MSS Jewellers directly to fix more than 10TT in one trade.`
         );
       } else {
         goldPrice().then((price) => {
