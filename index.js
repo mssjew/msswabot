@@ -27,7 +27,7 @@ const OM_GROUP = "120363040482937774@g.us";
 
 const NEW_MARHABA_GROUP = "120363020954397995@g.us";
 
-
+const MUNTHER_GROUP = "120363040785247106@g.us";
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
@@ -35,13 +35,14 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
-const VALID_CODES = ["#6572", "#6950", "#1317", "#1299", "#1393", "#0000"];
+const VALID_CODES = ["#6572", "#6950", "#1317", "#1299", "#1393", "#9643", "#0000"];
 
 // 6572 sarraj
 // 6950 om
 // 1317 maharani
 // 1299 new marhaba
 // 1393 kenz
+// 9643 Munther
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -281,11 +282,19 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!tt") {
 
-    if(message.from === MAHARANI_GROUP || message.from === NEW_MARHABA_GROUP ) {
+    if(message.from === MAHARANI_GROUP) {
+      TT_PREMIUM = -2;
+    } else if (message.from === NEW_MARHABA_GROUP) {
       TT_PREMIUM = -2;
     } else if (message.from === KENZ_GROUP) {
       console.log("MESSAGE FROM KENZ");
       TT_PREMIUM = -3;
+    } else if (message.from === AL_SARRAJ_GROUP) {
+      TT_PREMIUM = 0;
+    } else if (message.from === OM_GROUP) {
+      TT_PREMIUM = 0;
+    } else if (message.from === MUNTHER_GROUP) {
+      TT_PREMIUM = -2;
     } else {
       TT_PREMIUM = 0;
     }
@@ -309,8 +318,9 @@ client.on("message", async (message) => {
     // 6572 sarraj
     // 6950 om
     // 1317 maharani
-    // 1299 new marhaba
-    // 1393 kenz
+   // 1299 new marhaba
+   // 1393 kenz
+    // 9643 Munther
 
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
@@ -339,6 +349,9 @@ client.on("message", async (message) => {
       } else if (message.from === OM_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#6950";
+      } else if (message.from === MUNTHER_GROUP) {
+        TT_PREMIUM = -2;
+        fixingCode = "#9643";
       } else {
         TT_PREMIUM = 0;
       }
