@@ -333,23 +333,24 @@ client.on("message", async (message) => {
 
   if (isACode(message.body) && message.hasQuotedMsg) {
     if (VALID_CODES.includes(message.body)) {
+      const fixerName = "";
+      
+      // ["#6572", "#6950", "#0000"];
+      if(message.body === "#6572") {
+        fixerName = "Al Sarraj Jewellers";
+      } else if (message.body === "#6950") {
+        fixerName = "Om Jewellery";
+      } else if (message.body === "#0000") {
+        fixerName = "Dummy Jewellers";
+      }
+
       message
         .getQuotedMessage()
         .then((quoted) => {
           let quantity = 0;
           let unitPrice = 0;
           const group = quoted.to;
-          const fixerName = "";
-
-          // ["#6572", "#6950", "#0000"];
-          if(message.body === "#6572") {
-            fixerName = "Al Sarraj Jewellers";
-          } else if (message.body === "#6950") {
-            fixerName = "Om Jewellery";
-          } else if (message.body === "#0000") {
-            fixerName = "Dummy Jewellers";
-          }
-
+        
           
 
 
