@@ -25,13 +25,15 @@ const KENZ_GROUP = "120363039742894365@g.us";
 
 const OM_GROUP = "120363040482937774@g.us";
 
+
+
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
-const VALID_CODES = ["#6572", "#6950", "#0000"];
+const VALID_CODES = ["#6572", "#6950", "#1317", "#0000"];
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -270,6 +272,16 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase() === "!tt") {
+
+    if(message.from === MAHARANI_GROUP) {
+      TT_PREMIUM = -2;
+    } else if (message.from === KENZ_GROUP) {
+      TT_PREMIUM = -3;
+    } else {
+      TT_PREMIUM = 0;
+    }
+
+
     goldPrice().then((price) => {
       if (isNaN(TT_PREMIUM)) {
         message.reply(
@@ -335,13 +347,15 @@ client.on("message", async (message) => {
     if (VALID_CODES.includes(message.body)) {
       let fixerName = "";
 
-      // ["#6572", "#6950", "#0000"];
+      // ["#6572", "#6950", "#0000", "#1317"];
       if(message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
         fixerName = "Om Jewellery";
       } else if (message.body === "#0000") {
         fixerName = "Dummy Jewellers";
+      } else if (message.body === "#1317") {
+        fixerName = "Maharani Jewellers";
       }
 
       message
@@ -424,6 +438,12 @@ client.on("message", async (message) => {
             client
               .sendMessage(
                 "919946147016@c.us",
+                `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
+                )}.\n\nUpdate Daily Fixing Sheet.`
+              )
+            client
+              .sendMessage(
+                "97339007836@c.us",
                 `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
                 )}.\n\nUpdate Daily Fixing Sheet.`
               )
