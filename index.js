@@ -333,8 +333,8 @@ client.on("message", async (message) => {
 
   if (isACode(message.body) && message.hasQuotedMsg) {
     if (VALID_CODES.includes(message.body)) {
-      const fixerName = "";
-      
+      let fixerName = "";
+
       // ["#6572", "#6950", "#0000"];
       if(message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
