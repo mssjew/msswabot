@@ -23,13 +23,15 @@ const AL_SARRAJ_GROUP = "120363023532089325@g.us";
 
 const KENZ_GROUP = "120363039742894365@g.us";
 
+const OM_GROUP = "120363040482937774@g.us";
+
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
-const VALID_CODES = ["#6572"];
+const VALID_CODES = ["#6572", "#6950", "#0000"];
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -337,7 +339,23 @@ client.on("message", async (message) => {
           let quantity = 0;
           let unitPrice = 0;
           const group = quoted.to;
-          const groupName = chat.name;
+          const fixerName = "";
+
+          // ["#6572", "#6950", "#0000"];
+          if(message.body === "#6572") {
+            fixerName = "Al Sarraj Jewellers";
+          } else if (message.body === "#6950") {
+            fixerName = "Om Jewellery";
+          } else if (message.body === "#0000") {
+            fixerName = "Dummy Jewellers";
+          }
+
+          
+
+
+          const groupID = chat.from; 
+
+          
 
           if (quoted.body.slice(14, 15) === " ") {
             quantity = parseInt(quoted.body.slice(13, 14));
@@ -398,14 +416,14 @@ client.on("message", async (message) => {
             message.reply("Time limit exceeded\n\nPlease start a new order.");
           } else {
             message.reply(
-              `Order confirmed for *Al Sarraj Jewellers* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+              `Order confirmed for ${fixerName} ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
               )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!`
             );
             client
               .sendMessage(
                 "919946147016@c.us",
-                `${redCircle} Fixing Alert ${redCircle}\n\nAl Sarraj Jewellers just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
+                `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
                 )}.\n\nUpdate Daily Fixing Sheet.`
               )
               
