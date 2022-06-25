@@ -368,7 +368,7 @@ client.on("message", async (message) => {
             const totalPriceFormatted = numberWithCommas(totalPrice);
 
             message.reply(
-              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is *${fixingCode}*, please include the #.`
+              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
             );
           }
         });
