@@ -535,6 +535,14 @@ client.on("message", async (message) => {
       let fixerName = "";
 
       // ["#6572", "#6950", "#1317", "#1299", "#0000"];
+      // 6572 sarraj
+     // 6950 om
+      // 1317 maharani
+     // 1299 new marhaba
+     // 1393 kenz
+     // 9643 Munther
+     // 9236 Chandni
+    // 9473 Sudeep
       if (message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
@@ -549,6 +557,10 @@ client.on("message", async (message) => {
         fixerName = "Kenz Al Bahrain";
       } else if (message.body === "#9643") {
         fixerName = "Munther Jewellery";
+      } else if (message.body === "#9236") {
+        fixerName = "Chandni Jewellers";
+      } else if (message.body === "#9473") {
+        fixerName = "Sudeep Jewellery";
       }
 
       message
