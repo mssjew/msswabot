@@ -11,6 +11,9 @@ const CURR_MONTH = "June";
 const MONTH_SEP = "June";
 const SHEET_NAME = "Kenz_K00010";
 
+const mainRange = `${SHEET_NAME}!D2:L101`;
+
+
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
