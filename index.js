@@ -7,6 +7,9 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
+const CURR_MONTH = "June";
+const MONTH_SEP = "June";
+const SHEET_NAME = "Kenz_K00010";
 
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
@@ -29,13 +32,49 @@ const NEW_MARHABA_GROUP = "120363020954397995@g.us";
 
 const MUNTHER_GROUP = "120363040785247106@g.us";
 
+const CHANDNI_GROUP = "120363038513888999@g.us";
+
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
+function urlBuilder(range) {
+  return `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`;
+}
+
+async function dataGrab(range) {
+  try {
+    let resp = await axios.get(urlBuilder(range));
+    return resp.data.values;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const monthReturner = (arr) => {
+  return arr[0] === "";
+};
+
+const monthSeparator = (arr, month) => {
+  let retArr = [];
+  for(x in arr) {
+    if (arr[x][1].includes(month)) retArr.push(arr[x]);
+  }
+  return retArr;
+}
+
 let TT_PREMIUM = 0;
-const VALID_CODES = ["#6572", "#6950", "#1317", "#1299", "#1393", "#9643", "#0000"];
+const VALID_CODES = [
+  "#6572",
+  "#6950",
+  "#1317",
+  "#1299",
+  "#1393",
+  "#9643",
+  "#9236",
+  "#0000",
+];
 
 // 6572 sarraj
 // 6950 om
@@ -43,6 +82,8 @@ const VALID_CODES = ["#6572", "#6950", "#1317", "#1299", "#1393", "#9643", "#000
 // 1299 new marhaba
 // 1393 kenz
 // 9643 Munther
+
+// 9236 Chandni
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -212,13 +253,6 @@ function isACode(msg) {
   }
 }
 
-function codeValid(msg) {
-  if (msg.length === 5 && msg[0] === "#") {
-    return true;
-  } else {
-    return false;
-  }
-}
 // ----------------- HELP START -----------------
 
 // ----------------- HELP END -----------------
@@ -268,7 +302,90 @@ client.on("message", async (message) => {
     );
   } // end !commands
 
-  if (message.body.toLowerCase() === "!booking") {
+  if (message.body.toLowerCase() === "!bookings") {
+
+    dataGrab(mainRange).then((data) => {
+    const allBookings = data.filter(monthReturner).reverse();
+
+    const monthBookings = monthSeparator(allBookings, MONTH_SEP);
+
+    console.log(monthBookings);
+
+    quantityCalc(monthBookings, ttMonthly);
+    
+
+    // if (dayBookings.length === 0) {
+    //   const tableRow = document.createElement("tr");
+    //   currentTableBody.appendChild(tableRow);
+
+    //   for (let i = 0; i < 8; i++) {
+    //     const cell = document.createElement("td");
+    //     tableRow.appendChild(cell);
+    //     cell.textContent = "---";
+    //   }
+
+    //   dailyTotalSentence.textContent = "No bookings today.";
+    //   dailyTotalSentence.style.color = "crimson";
+
+      
+
+    // }
+
+    // dayBookings.forEach((row) => {
+    //   row.shift();
+    //   const tableRow = document.createElement("tr");
+    //   currentTableBody.appendChild(tableRow);
+    //   row.forEach((cellData) => {
+    //     const cell = document.createElement("td");
+    //     tableRow.appendChild(cell);
+    //     cell.textContent = cellData;
+
+    //     if (cell.textContent === "PENDING") {
+    //       cell.classList.add("pending");
+    //     }
+    //     if (cell.textContent === "COMPLETE") {
+    //       cell.classList.add("complete");
+    //     }
+    //   });
+    // });
+
+    // if (monthBookings.length === 0) {
+    //   const tableRow = document.createElement("tr");
+    //   monthTableBody.appendChild(tableRow);
+
+    //   for (let i = 0; i < 8; i++) {
+    //     const cell = document.createElement("td");
+    //     tableRow.appendChild(cell);
+    //     cell.textContent = "---";
+    //   }
+
+    //   monthlyTotalSentence.textContent = "No bookings this month.";
+    //   monthlyTotalSentence.style.color = "crimson";
+      
+    // }
+
+    // monthBookings.forEach((row) => {
+    //   row.shift();
+    //   const tableRow = document.createElement("tr");
+    //   monthTableBody.appendChild(tableRow);
+    //   row.forEach((cellData) => {
+    //     const cell = document.createElement("td");
+    //     tableRow.appendChild(cell);
+    //     cell.textContent = cellData;
+
+    //     if (cell.textContent === "PENDING") {
+    //       cell.classList.add("pending");
+    //     }
+    //     if (cell.textContent === "COMPLETE") {
+    //       cell.classList.add("complete");
+    //     }
+    //   });
+    // });//end febBookings
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
     message.reply(
       "24/7 TT Booking Service. Maximum *5 TT* allowed.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity required.\n\nTo fix 3 TT you will type *!fix 3 TT*."
     );
@@ -281,8 +398,7 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase() === "!tt") {
-
-    if(message.from === MAHARANI_GROUP) {
+    if (message.from === MAHARANI_GROUP) {
       TT_PREMIUM = -2;
     } else if (message.from === NEW_MARHABA_GROUP) {
       TT_PREMIUM = -2;
@@ -295,10 +411,11 @@ client.on("message", async (message) => {
       TT_PREMIUM = 0;
     } else if (message.from === MUNTHER_GROUP) {
       TT_PREMIUM = -2;
+    } else if (message.from === CHANDNI_GROUP) {
+      TT_PREMIUM = -2;
     } else {
       TT_PREMIUM = 0;
     }
-
 
     goldPrice().then((price) => {
       if (isNaN(TT_PREMIUM)) {
@@ -314,13 +431,13 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase().includes("!fix")) {
-
     // 6572 sarraj
     // 6950 om
     // 1317 maharani
-   // 1299 new marhaba
-   // 1393 kenz
+    // 1299 new marhaba
+    // 1393 kenz
     // 9643 Munther
+    // 9236 Chandni
 
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
@@ -331,9 +448,8 @@ client.on("message", async (message) => {
       message.reply(
         `${redXEmoji} Error\n\nPlease use correct format\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
       );
-    } else { 
-
-      if(message.from === MAHARANI_GROUP) {
+    } else {
+      if (message.from === MAHARANI_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#1317";
       } else if (message.from === NEW_MARHABA_GROUP) {
@@ -352,11 +468,13 @@ client.on("message", async (message) => {
       } else if (message.from === MUNTHER_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9643";
+      } else if (message.from === CHANDNI_GROUP) {
+        TT_PREMIUM = -2;
+        fixingCode = "#9236";
       } else {
         TT_PREMIUM = 0;
       }
 
-  
       const quantity = getQuantity(message.body);
 
       if (input !== `!fix ${quantity} tt` || quantity <= 0) {
@@ -400,7 +518,7 @@ client.on("message", async (message) => {
       let fixerName = "";
 
       // ["#6572", "#6950", "#1317", "#1299", "#0000"];
-      if(message.body === "#6572") {
+      if (message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
         fixerName = "Om Jewellery";
@@ -416,20 +534,14 @@ client.on("message", async (message) => {
         fixerName = "Munther Jewellery";
       }
 
-
       message
         .getQuotedMessage()
         .then((quoted) => {
           let quantity = 0;
           let unitPrice = 0;
           const group = quoted.to;
-        
-          
 
-
-          const groupID = chat.from; 
-
-          
+          const groupID = chat.from;
 
           if (quoted.body.slice(14, 15) === " ") {
             quantity = parseInt(quoted.body.slice(13, 14));
@@ -494,19 +606,18 @@ client.on("message", async (message) => {
                 unitPrice * quantity
               )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!`
             );
-            client
-              .sendMessage(
-                "919946147016@c.us",
-                `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
-                )}.\n\nUpdate Daily Fixing Sheet.`
-              )
-            client
-              .sendMessage(
-                "97339007836@c.us",
-                `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(unitPrice * quantity
-                )}.\n\nUpdate Daily Fixing Sheet.`
-              )
-              
+            client.sendMessage(
+              "919946147016@c.us",
+              `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
+                unitPrice * quantity
+              )}.\n\nUpdate Daily Fixing Sheet.`
+            );
+            client.sendMessage(
+              "97339007836@c.us",
+              `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
+                unitPrice * quantity
+              )}.\n\nUpdate Daily Fixing Sheet.`
+            );
           }
         })
         .catch((err) => {
@@ -536,12 +647,10 @@ client.on("message", async (message) => {
       return;
     } else if (message.body.trim().length === 13) {
       if (isNaN(parseInt(message.body.slice(-1)))) {
-        message.reply(
-          `${redXEmoji} Error\n\nPlease enter a digit from 0-9.`
-        );
+        message.reply(`${redXEmoji} Error\n\nPlease enter a digit from 0-9.`);
       } else {
         TT_PREMIUM = parseInt(message.body.slice(-1));
-  
+
         message.reply(`Premium changed. Type !getpremium to confirm.`);
       }
     } else if (message.body.trim().length === 14) {
@@ -550,27 +659,28 @@ client.on("message", async (message) => {
           `${redXEmoji} Error\n\nPlease use the correct format for negative premium:\n\n*!setpremium -X* where X is between 0-9.`
         );
       } else if (isNaN(parseInt(message.body.slice(-1)))) {
-        message.reply(
-          `${redXEmoji} Error\n\nPlease enter a digit from 0-9.`
-        );
+        message.reply(`${redXEmoji} Error\n\nPlease enter a digit from 0-9.`);
       } else {
         TT_PREMIUM = 0 - parseInt(message.body.slice(-1));
-  
-        message.reply(`Premium changed to *negative*. Type !getpremium to confirm.`);
-      }
 
+        message.reply(
+          `Premium changed to *negative*. Type !getpremium to confirm.`
+        );
+      }
     }
     //}
   }
 
   if (message.body === "!getpremium") {
     const chat = await message.getChat();
-
-    // if (message.author !== "97333737302@c.us" || message.author !== "97338999888@c.us") {
-    //   message.reply("Not authorized.")
-    // } else {
-    message.reply(`Current Premium: BD${TT_PREMIUM}`);
-    //}
+    if (
+      message.author === "97333737302@c.us" ||
+      message.author === "97338999888@c.us"
+    ) {
+      message.reply(`Current Premium: BD${TT_PREMIUM}`);
+    } else {
+      message.reply("Not authorized.");
+    }
   }
 
   if (message.body.includes("!apiStats")) {
@@ -587,5 +697,3 @@ client.on("message", async (message) => {
     });
   }
 });
-
-
