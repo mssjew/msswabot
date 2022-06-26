@@ -13,6 +13,8 @@ const SHEET_NAME = "Kenz_K00010";
 
 const mainRange = `${SHEET_NAME}!D2:L101`;
 
+const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
+const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
