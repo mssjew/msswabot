@@ -316,7 +316,6 @@ client.on("message", async (message) => {
 
     console.log(monthBookings);
 
-    quantityCalc(monthBookings, ttMonthly);
     
 
     // if (dayBookings.length === 0) {
