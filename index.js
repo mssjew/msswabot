@@ -39,6 +39,10 @@ const MUNTHER_GROUP = "120363040785247106@g.us";
 
 const CHANDNI_GROUP = "120363038513888999@g.us";
 
+const SUDEEP_GROUP = "120363021960532393@g.us";
+
+
+
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
@@ -78,6 +82,7 @@ const VALID_CODES = [
   "#1393",
   "#9643",
   "#9236",
+  "#9473",
   "#0000",
 ];
 
@@ -87,8 +92,8 @@ const VALID_CODES = [
 // 1299 new marhaba
 // 1393 kenz
 // 9643 Munther
-
 // 9236 Chandni
+// 9473 Sudeep
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -419,6 +424,8 @@ client.on("message", async (message) => {
       TT_PREMIUM = -2;
     } else if (message.from === CHANDNI_GROUP) {
       TT_PREMIUM = -2;
+    } else if (message.from === SUDEEP_GROUP) {
+      TT_PREMIUM = 0;
     } else {
       TT_PREMIUM = 0;
     }
@@ -444,6 +451,7 @@ client.on("message", async (message) => {
     // 1393 kenz
     // 9643 Munther
     // 9236 Chandni
+    // 9473 Sudeep
 
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
@@ -477,6 +485,9 @@ client.on("message", async (message) => {
       } else if (message.from === CHANDNI_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9236";
+      } else if (message.from === SUDEEP_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#9473";
       } else {
         TT_PREMIUM = 0;
       }
