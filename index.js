@@ -314,7 +314,9 @@ client.on("message", async (message) => {
 
     const monthBookings = monthSeparator(allBookings, MONTH_SEP);
 
-    console.log(monthBookings);
+    monthBookings.forEach(x => console.log(x));
+
+
 
     
 
