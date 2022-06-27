@@ -344,10 +344,12 @@ client.on("message", async (message) => {
         const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
 
         monthBookings.forEach((x) => {
-          bookingsList += `\nDate: ${x[1]}\nAmount: ${x[3]} TT\nPrice: ${x[4]}\n`;
+          bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n`;
 
-          message.reply(bookingsList);
         });
+
+
+        message.reply(bookingsList);
 
         // if (dayBookings.length === 0) {
         //   const tableRow = document.createElement("tr");
