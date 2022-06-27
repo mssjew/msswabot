@@ -337,16 +337,18 @@ client.on("message", async (message) => {
 
     dataGrab(mainRange)
       .then((data) => {
-        let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n\n`;
+        let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n`;
 
         const allBookings = data.filter(monthReturner).reverse();
 
         const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
 
         monthBookings.forEach((x) => {
-          bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n`;
-
+          bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}`;
         });
+
+        bookingsList += "\nPlease note, new bookings may take some time to update in our system."
+
 
 
         message.reply(bookingsList);
