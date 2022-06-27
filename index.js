@@ -16,6 +16,8 @@ let mainRange = `${SHEET_NAME}!D2:L101`;
 const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 
+
+
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
@@ -49,7 +51,7 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 function urlBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`;
+  return `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${mainRange}?key=${URL_TWO}`;
 }
 
 async function dataGrab(range) {
