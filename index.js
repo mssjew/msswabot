@@ -360,7 +360,7 @@ client.on("message", async (message) => {
       SHEET_NAME = "Sudeep_";
     } else {
       company = "";
-      SHEET_NAME = "Kenz_K00010";
+      SHEET_NAME = "";
     }
 
     dataGrab(mainRange)
