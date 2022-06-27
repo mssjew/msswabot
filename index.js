@@ -367,7 +367,7 @@ client.on("message", async (message) => {
 
         // const allBookings = data.filter(monthReturner).reverse();
 
-        const monthBookings = monthSeparator(data, MONTH_SEP).reverse();
+        const monthBookings = monthSeparator(data, MONTH_SEP);
 
         let totalMonthly = quantityCalc(monthBookings);
 
