@@ -315,12 +315,15 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase() === "!bookings") {
 
     dataGrab(mainRange).then((data) => {
+
+    console.log("Entered here.");
+    data.forEach(x => console.log(x));
+
     const allBookings = data.filter(monthReturner).reverse();
 
     const monthBookings = monthSeparator(allBookings, MONTH_SEP);
 
-    monthBookings.forEach(x => console.log(x));
-
+    // monthBookings.forEach(x => console.log(x));
 
 
     
