@@ -11,7 +11,7 @@ const CURR_MONTH = "June 2022";
 const MONTH_SEP = "Jun";
 var SHEET_NAME = "";
 
-let mainRange = `${SHEET_NAME}!D2:L101`;
+var mainRange = `${SHEET_NAME}!D2:L101`;
 
 const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
@@ -51,7 +51,7 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 function urlBuilder(range) {
-  return `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${mainRange}?key=${URL_TWO}`;
+  return `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`;
 }
 
 async function dataGrab(range) {
@@ -332,41 +332,47 @@ client.on("message", async (message) => {
   } // end !commands
 
   if (message.body.toLowerCase() === "!bookings") {
-    console.log("Entered here.");
+    console.log("BEFORE IF STATEMENT: ", SHEET_NAME);
 
     let company = "";
 
     if (message.from === MAHARANI_GROUP) {
       company = "Maharani Jewellers";
-      SHEET_NAME = "Maharani_K00014";
+      SHEET_NAME = "Maharani_K00014!D2:L101";
     } else if (message.from === NEW_MARHABA_GROUP) {
       company = "New Marhaba Jewellery";
-      SHEET_NAME = "NewMarhaba_N00001";
+      SHEET_NAME = "NewMarhaba_N00001!D2:L101";
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
-      SHEET_NAME = "Kenz_K00010";
+      SHEET_NAME = "Kenz_K00010!D2:L101";
     } else if (message.from === AL_SARRAJ_GROUP || message.from === DUMMY_SARAJ) {
       company = "Al Sarraj Jewellers";
-      SHEET_NAME = "AlSarraj_";
+      SHEET_NAME = "AlSarraj_!D2:L101";
     } else if (message.from === OM_GROUP) {
       company = "Om Jewellery";
-      SHEET_NAME = "Om_O0001";
+      SHEET_NAME = "Om_O0001!D2:L101";
     } else if (message.from === MUNTHER_GROUP) {
       company = "Munther Jewellery";
-      SHEET_NAME = "Munther_M";
+      SHEET_NAME = "Munther_M!D2:L101";
     } else if (message.from === CHANDNI_GROUP) {
       company = "Chandni Jewellers";
-      SHEET_NAME = "Chandni";
+      SHEET_NAME = "Chandni!D2:L101";
     } else if (message.from === SUDEEP_GROUP) {
       company = "Sudeep Jewellery";
-      SHEET_NAME = "Sudeep_";
+      SHEET_NAME = "Sudeep_!D2:L101";
     } else {
       company = "";
-      SHEET_NAME = "";
+      SHEET_NAME = "NA";
     }
 
+    console.log("AFTER IF STATEMENT BEFORE GRAB: ", SHEET_NAME);
+
+    console.log("MAIN RANGE BEFORE GRAB: ", mainRange);
     dataGrab(mainRange)
       .then((data) => {
+        console.log("MAIN RANGE AFTER GRAB: ", mainRange);
+
+        console.log("AFTER GRAB STATEMENT: ", SHEET_NAME);
         let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n`;
 
         // const allBookings = data.filter(monthReturner).reverse();
