@@ -71,6 +71,23 @@ const monthSeparator = (arr, month) => {
   return retArr;
 };
 
+const quantityCalc = (arr) => {
+  
+  let quantArr = [];
+  for(x in arr) {
+    quantArr.push(arr[x][3])
+  }
+  
+  let retval = 0;
+  for(x in quantArr) {
+    retval += parseInt(quantArr[x]);
+  }
+
+  return retval;
+  
+}
+
+
 let TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
@@ -343,13 +360,13 @@ client.on("message", async (message) => {
 
         const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
 
+        let totalMonthly = quantityCalc(monthBookings, ttMonthly);
+
         monthBookings.forEach((x) => {
-          bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}`;
+          bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}\n`;
         });
 
-        bookingsList += "\nPlease note, new bookings may take some time to update in our system."
-
-
+        bookingsList += `${CURR_MONTH} Total For ${company}: *${totalMonthly} TTs*\n\nPlease note, new bookings may take some time to update in our system.`;
 
         message.reply(bookingsList);
 
