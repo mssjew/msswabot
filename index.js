@@ -7,8 +7,8 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
-const CURR_MONTH = "June";
-const MONTH_SEP = "June";
+const CURR_MONTH = "Jun";
+const MONTH_SEP = "Jun";
 const SHEET_NAME = "Kenz_K00010";
 
 const mainRange = `${SHEET_NAME}!D2:L101`;
@@ -317,13 +317,12 @@ client.on("message", async (message) => {
     dataGrab(mainRange).then((data) => {
 
     console.log("Entered here.");
-    data.forEach(x => console.log(x));
 
     const allBookings = data.filter(monthReturner).reverse();
 
     const monthBookings = monthSeparator(allBookings, MONTH_SEP);
 
-    // monthBookings.forEach(x => console.log(x));
+    monthBookings.forEach(x => console.log(x));
 
 
     
@@ -401,7 +400,7 @@ client.on("message", async (message) => {
   });
 
     message.reply(
-      "24/7 TT Booking Service. Maximum *5 TT* allowed.\n\nTo view the current TT Rate please type *!tt*.\n\n\nFor fixing:\n\nType *!fix X TT* where X is your quantity required.\n\nTo fix 3 TT you will type *!fix 3 TT*."
+      "Bookings Called."
     );
   }
 
