@@ -332,8 +332,6 @@ client.on("message", async (message) => {
 
     let company = "";
 
-   
-
     if (message.from === MAHARANI_GROUP) {
       company = "Maharani Jewellers";
       SHEET_NAME = "Maharani_K00014";
@@ -367,9 +365,9 @@ client.on("message", async (message) => {
       .then((data) => {
         let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n`;
 
-        const allBookings = data.filter(monthReturner).reverse();
+        // const allBookings = data.filter(monthReturner).reverse();
 
-        const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
+        const monthBookings = monthSeparator(data, MONTH_SEP).reverse();
 
         let totalMonthly = quantityCalc(monthBookings);
 
@@ -753,8 +751,8 @@ client.on("message", async (message) => {
   if (message.body === "!getpremium") {
     const chat = await message.getChat();
     if (
-      message.author === "97333737302@c.us" ||
-      message.author === "97338999888@c.us"
+      message.from === "97333737302@c.us" ||
+      message.from === "97338999888@c.us"
     ) {
       message.reply(`Current Premium: BD${TT_PREMIUM}`);
     } else {
