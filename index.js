@@ -7,7 +7,7 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
-const CURR_MONTH = "Jun";
+const CURR_MONTH = "June 2022";
 const MONTH_SEP = "Jun";
 const SHEET_NAME = "Kenz_K00010";
 
@@ -313,16 +313,46 @@ client.on("message", async (message) => {
   } // end !commands
 
   if (message.body.toLowerCase() === "!bookings") {
+    console.log("Entered here.");
+
+    let company = "";
+
+    if (message.from === MAHARANI_GROUP) {
+      company = "Maharani Jewellers";
+    } else if (message.from === NEW_MARHABA_GROUP) {
+      company = "New Marhaba Jewellery";
+    } else if (message.from === KENZ_GROUP) {
+      company = "Kenz Al Bahrain";
+    } else if (message.from === AL_SARRAJ_GROUP) {
+      company = "Al Sarraj Jewellers";
+    } else if (message.from === OM_GROUP) {
+      company = "Om Jewellery";
+    } else if (message.from === MUNTHER_GROUP) {
+      company = "Munther Jewellery";
+    } else if (message.from === CHANDNI_GROUP) {
+      company = "Chandni Jewellers";
+    } else if (message.from === SUDEEP_GROUP) {
+      company = "Sudeep Jewellery";
+    } else {
+      company = "";
+    }
+
+    let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*:\n\n`;
 
     dataGrab(mainRange).then((data) => {
 
-    console.log("Entered here.");
+   
 
     const allBookings = data.filter(monthReturner).reverse();
 
-    const monthBookings = monthSeparator(allBookings, MONTH_SEP);
+    const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
 
-    monthBookings.forEach(x => console.log(x));
+    
+
+    monthBookings.forEach(x => {
+      bookingsList += `\nDate: ${x[1]}\nAmount: ${x[3]} TT\nPrice: ${x[4]}\n`;
+    });
+
 
 
     
@@ -400,7 +430,7 @@ client.on("message", async (message) => {
   });
 
     message.reply(
-      "Bookings Called."
+      bookingsList
     );
   }
 
