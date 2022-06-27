@@ -9,9 +9,9 @@ const redCircle = emoji.get("red_circle");
 
 const CURR_MONTH = "June 2022";
 const MONTH_SEP = "Jun";
-const SHEET_NAME = "Kenz_K00010";
+var SHEET_NAME = "";
 
-const mainRange = `${SHEET_NAME}!D2:L101`;
+let mainRange = `${SHEET_NAME}!D2:L101`;
 
 const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
@@ -332,24 +332,35 @@ client.on("message", async (message) => {
 
     let company = "";
 
+   
+
     if (message.from === MAHARANI_GROUP) {
       company = "Maharani Jewellers";
+      SHEET_NAME = "Maharani_K00014";
     } else if (message.from === NEW_MARHABA_GROUP) {
       company = "New Marhaba Jewellery";
+      SHEET_NAME = "NewMarhaba_N00001";
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
+      SHEET_NAME = "Kenz_K00010";
     } else if (message.from === AL_SARRAJ_GROUP) {
       company = "Al Sarraj Jewellers";
+      SHEET_NAME = "AlSarraj_";
     } else if (message.from === OM_GROUP) {
       company = "Om Jewellery";
+      SHEET_NAME = "Om_O0001";
     } else if (message.from === MUNTHER_GROUP) {
       company = "Munther Jewellery";
+      SHEET_NAME = "Munther_M";
     } else if (message.from === CHANDNI_GROUP) {
       company = "Chandni Jewellers";
+      SHEET_NAME = "Chandni";
     } else if (message.from === SUDEEP_GROUP) {
       company = "Sudeep Jewellery";
+      SHEET_NAME = "Sudeep_";
     } else {
       company = "";
+      SHEET_NAME = "";
     }
 
     dataGrab(mainRange)
@@ -366,7 +377,7 @@ client.on("message", async (message) => {
           bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}\n`;
         });
 
-        bookingsList += `${CURR_MONTH} Total For ${company}: *${totalMonthly} TTs*\n\nPlease note, new bookings may take some time to update in our system.`;
+        bookingsList += `\n${CURR_MONTH} Total For ${company}: *${totalMonthly} TTs*\n\nPlease note, new bookings may take some time to update in our system.`;
 
         message.reply(bookingsList);
 
