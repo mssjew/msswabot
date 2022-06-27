@@ -360,7 +360,7 @@ client.on("message", async (message) => {
 
         const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
 
-        let totalMonthly = quantityCalc(monthBookings, ttMonthly);
+        let totalMonthly = quantityCalc(monthBookings);
 
         monthBookings.forEach((x) => {
           bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}\n`;
