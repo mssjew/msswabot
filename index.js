@@ -41,6 +41,8 @@ const CHANDNI_GROUP = "120363038513888999@g.us";
 
 const SUDEEP_GROUP = "120363021960532393@g.us";
 
+const DUMMY_SARAJ = "120363024046301336@g.us";
+
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
@@ -341,7 +343,7 @@ client.on("message", async (message) => {
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
       SHEET_NAME = "Kenz_K00010";
-    } else if (message.from === AL_SARRAJ_GROUP) {
+    } else if (message.from === AL_SARRAJ_GROUP || message.from === DUMMY_SARAJ) {
       company = "Al Sarraj Jewellers";
       SHEET_NAME = "AlSarraj_";
     } else if (message.from === OM_GROUP) {
