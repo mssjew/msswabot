@@ -41,8 +41,6 @@ const CHANDNI_GROUP = "120363038513888999@g.us";
 
 const SUDEEP_GROUP = "120363021960532393@g.us";
 
-
-
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
@@ -67,11 +65,11 @@ const monthReturner = (arr) => {
 
 const monthSeparator = (arr, month) => {
   let retArr = [];
-  for(x in arr) {
+  for (x in arr) {
     if (arr[x][1].includes(month)) retArr.push(arr[x]);
   }
   return retArr;
-}
+};
 
 let TT_PREMIUM = 0;
 const VALID_CODES = [
@@ -337,101 +335,89 @@ client.on("message", async (message) => {
       company = "";
     }
 
-    let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*:\n\n`;
+    dataGrab(mainRange)
+      .then((data) => {
+        let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n\n`;
 
-    dataGrab(mainRange).then((data) => {
+        const allBookings = data.filter(monthReturner).reverse();
 
-   
+        const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
 
-    const allBookings = data.filter(monthReturner).reverse();
+        monthBookings.forEach((x) => {
+          bookingsList += `\nDate: ${x[1]}\nAmount: ${x[3]} TT\nPrice: ${x[4]}\n`;
 
-    const monthBookings = monthSeparator(allBookings, MONTH_SEP).reverse();
+          message.reply(bookingsList);
+        });
 
-    
+        // if (dayBookings.length === 0) {
+        //   const tableRow = document.createElement("tr");
+        //   currentTableBody.appendChild(tableRow);
 
-    monthBookings.forEach(x => {
-      bookingsList += `\nDate: ${x[1]}\nAmount: ${x[3]} TT\nPrice: ${x[4]}\n`;
-    });
+        //   for (let i = 0; i < 8; i++) {
+        //     const cell = document.createElement("td");
+        //     tableRow.appendChild(cell);
+        //     cell.textContent = "---";
+        //   }
 
+        //   dailyTotalSentence.textContent = "No bookings today.";
+        //   dailyTotalSentence.style.color = "crimson";
 
+        // }
 
-    
+        // dayBookings.forEach((row) => {
+        //   row.shift();
+        //   const tableRow = document.createElement("tr");
+        //   currentTableBody.appendChild(tableRow);
+        //   row.forEach((cellData) => {
+        //     const cell = document.createElement("td");
+        //     tableRow.appendChild(cell);
+        //     cell.textContent = cellData;
 
-    // if (dayBookings.length === 0) {
-    //   const tableRow = document.createElement("tr");
-    //   currentTableBody.appendChild(tableRow);
+        //     if (cell.textContent === "PENDING") {
+        //       cell.classList.add("pending");
+        //     }
+        //     if (cell.textContent === "COMPLETE") {
+        //       cell.classList.add("complete");
+        //     }
+        //   });
+        // });
 
-    //   for (let i = 0; i < 8; i++) {
-    //     const cell = document.createElement("td");
-    //     tableRow.appendChild(cell);
-    //     cell.textContent = "---";
-    //   }
+        // if (monthBookings.length === 0) {
+        //   const tableRow = document.createElement("tr");
+        //   monthTableBody.appendChild(tableRow);
 
-    //   dailyTotalSentence.textContent = "No bookings today.";
-    //   dailyTotalSentence.style.color = "crimson";
+        //   for (let i = 0; i < 8; i++) {
+        //     const cell = document.createElement("td");
+        //     tableRow.appendChild(cell);
+        //     cell.textContent = "---";
+        //   }
 
-      
+        //   monthlyTotalSentence.textContent = "No bookings this month.";
+        //   monthlyTotalSentence.style.color = "crimson";
 
-    // }
+        // }
 
-    // dayBookings.forEach((row) => {
-    //   row.shift();
-    //   const tableRow = document.createElement("tr");
-    //   currentTableBody.appendChild(tableRow);
-    //   row.forEach((cellData) => {
-    //     const cell = document.createElement("td");
-    //     tableRow.appendChild(cell);
-    //     cell.textContent = cellData;
+        // monthBookings.forEach((row) => {
+        //   row.shift();
+        //   const tableRow = document.createElement("tr");
+        //   monthTableBody.appendChild(tableRow);
+        //   row.forEach((cellData) => {
+        //     const cell = document.createElement("td");
+        //     tableRow.appendChild(cell);
+        //     cell.textContent = cellData;
 
-    //     if (cell.textContent === "PENDING") {
-    //       cell.classList.add("pending");
-    //     }
-    //     if (cell.textContent === "COMPLETE") {
-    //       cell.classList.add("complete");
-    //     }
-    //   });
-    // });
-
-    // if (monthBookings.length === 0) {
-    //   const tableRow = document.createElement("tr");
-    //   monthTableBody.appendChild(tableRow);
-
-    //   for (let i = 0; i < 8; i++) {
-    //     const cell = document.createElement("td");
-    //     tableRow.appendChild(cell);
-    //     cell.textContent = "---";
-    //   }
-
-    //   monthlyTotalSentence.textContent = "No bookings this month.";
-    //   monthlyTotalSentence.style.color = "crimson";
-      
-    // }
-
-    // monthBookings.forEach((row) => {
-    //   row.shift();
-    //   const tableRow = document.createElement("tr");
-    //   monthTableBody.appendChild(tableRow);
-    //   row.forEach((cellData) => {
-    //     const cell = document.createElement("td");
-    //     tableRow.appendChild(cell);
-    //     cell.textContent = cellData;
-
-    //     if (cell.textContent === "PENDING") {
-    //       cell.classList.add("pending");
-    //     }
-    //     if (cell.textContent === "COMPLETE") {
-    //       cell.classList.add("complete");
-    //     }
-    //   });
-    // });//end febBookings
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-    message.reply(
-      bookingsList
-    );
+        //     if (cell.textContent === "PENDING") {
+        //       cell.classList.add("pending");
+        //     }
+        //     if (cell.textContent === "COMPLETE") {
+        //       cell.classList.add("complete");
+        //     }
+        //   });
+        // });//end febBookings
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   if (message.body.toLowerCase() === "!price") {
@@ -568,13 +554,13 @@ client.on("message", async (message) => {
 
       // ["#6572", "#6950", "#1317", "#1299", "#0000"];
       // 6572 sarraj
-     // 6950 om
+      // 6950 om
       // 1317 maharani
-     // 1299 new marhaba
-     // 1393 kenz
-     // 9643 Munther
-     // 9236 Chandni
-    // 9473 Sudeep
+      // 1299 new marhaba
+      // 1393 kenz
+      // 9643 Munther
+      // 9236 Chandni
+      // 9473 Sudeep
       if (message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
