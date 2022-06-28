@@ -47,9 +47,13 @@ const DUMMY_SARAJ = "120363024046301336@g.us";
 
 const INTERNAL9 = "120363023099866055@g.us";
 
-const hsNumber = "97338999888@c.us";
+const hamzaNumber = "97338999888@c.us";
 
-const alertsGroup = [DUMMY_SARAJ, INTERNAL9, hsNumber]
+const sajeevNumber = "919946147016@c.us";
+
+const izharNumber = "97333737302@c.us";
+
+const alertsGroup = [KENZ_GROUP, hamzaNumber, sajeevNumber, izharNumber]
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
@@ -144,7 +148,7 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-const date = new Date(2022, 5, 28, 13, 17, 0);
+const date = new Date(2022, 5, 28, 14, 00, 0);
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
@@ -171,17 +175,18 @@ const date = new Date(2022, 5, 28, 13, 17, 0);
 
 // });
 
+// "*Price Movement Alert Test*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+
 schedule.scheduleJob(date, () => {
 
   alertsGroup.forEach(group => {
-
     client
     .sendMessage(
       group,
-      "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Test Alert*\n\nThis test message should be sent at 3pm Bahrain Time on Tuesday 28th June.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
-      console.log("SENT ALERT MESSAGE");
+      console.log("SENT ALERT MESSAGE TO ", group);
     })
     .catch((err) => {
       console.log("ERROR");
