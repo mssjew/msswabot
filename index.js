@@ -53,7 +53,10 @@ const sajeevNumber = "919946147016@c.us";
 
 const izharNumber = "97333737302@c.us";
 
-const alertsGroup = [KENZ_GROUP, hamzaNumber, sajeevNumber, izharNumber]
+const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP];
+const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
+
+
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
@@ -146,9 +149,18 @@ client.on("qr", (qr) => {
 
 client.on("ready", () => {
   console.log("Client is ready!");
+  console.log(Date.now());
 });
 
-const date = new Date(2022, 5, 28, 14, 00, 0);
+
+const date0 = new Date(2022, 5, 28, 15, 40, 0);
+const date1 = new Date(2022, 5, 28, 15, 45, 0);
+const date2 = new Date(2022, 5, 28, 15, 45, 35);
+
+
+
+
+
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
@@ -177,19 +189,53 @@ const date = new Date(2022, 5, 28, 14, 00, 0);
 
 // "*Price Movement Alert Test*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
 
-schedule.scheduleJob(date, () => {
+schedule.scheduleJob(date0, () => {
+    client
+    .sendMessage(
+      hamzaNumber,
+      "Alert will send in 5 mins, it should be 4.40pm now"
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO HS");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
 
-  alertsGroup.forEach(group => {
+
+ 
+});
+
+schedule.scheduleJob(date1, () => {
+  alertsGroup1.forEach(group => {
     client
     .sendMessage(
       group,
-      "*Test Alert*\n\nThis test message should be sent at 3pm Bahrain Time on Tuesday 28th June.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nUSA Consumer Confidence Report will be published in 15 minutes, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
     })
     .catch((err) => {
-      console.log("ERROR");
+      console.log("ERROR WHILE SENDING TO ", group);
+    });
+
+  })
+ 
+});
+
+schedule.scheduleJob(date2, () => {
+  alertsGroup2.forEach(group => {
+    client
+    .sendMessage(
+      group,
+      "*Price Movement Alert*\n\nUSA Consumer Confidence Report will be published in 15 minutes, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+    )
+    .then((res) => {
+      console.log("SENT ALERT MESSAGE TO ", group);
+    })
+    .catch((err) => {
+      console.log("ERROR WHILE SENDING TO ", group);
     });
 
   })
