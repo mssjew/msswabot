@@ -138,7 +138,6 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-const schedule = require('node-schedule');
 const date = new Date(2022, 5, 28, 13, 10, 0);
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
