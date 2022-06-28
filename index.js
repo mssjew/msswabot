@@ -138,8 +138,8 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-// 2000 PRICE CHECKER
-// let pCounter = 0;
+const schedule = require('node-schedule');
+const date = new Date(2022, 5, 28, 13, 10, 0);
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
@@ -166,19 +166,19 @@ client.on("ready", () => {
 
 // });
 
-// schedule.scheduleJob(date2, () => {
-//   client
-//     .sendMessage(
-//       "97339439432-1562572137@g.us",
-//       "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
-//     )
-//     .then((res) => {
-//       console.log("SENT TO MSS GROUP - INFLATION ANCMNT");
-//     })
-//     .catch((err) => {
-//       console.log("ERROR");
-//     });
-// });
+schedule.scheduleJob(date, () => {
+  client
+    .sendMessage(
+      "97338999888@c.us",
+      "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+    )
+    .then((res) => {
+      console.log("SENT ALERT MESSAGE");
+    })
+    .catch((err) => {
+      console.log("ERROR");
+    });
+});
 
 const unixConverter = (timestamp) => {
   var unix_timestamp = timestamp;
