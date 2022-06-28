@@ -671,6 +671,7 @@ client.on("message", async (message) => {
       // 9643 Munther
       // 9236 Chandni
       // 9473 Sudeep
+      // 5784 Mukesh
       if (message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
@@ -689,6 +690,8 @@ client.on("message", async (message) => {
         fixerName = "Chandni Jewellers";
       } else if (message.body === "#9473") {
         fixerName = "Sudeep Jewellery";
+      } else if (message.body === "#5784") {
+        fixerName = "Mukesh & Brothers";
       }
 
       message
