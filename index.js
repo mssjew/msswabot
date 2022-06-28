@@ -52,6 +52,10 @@ const sajeevNumber = "919946147016@c.us";
 
 const izharNumber = "97333737302@c.us";
 
+const MUKESH_GROUP = "120363024035832201@g.us";
+
+
+
 const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP];
 const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
 
@@ -122,6 +126,7 @@ const VALID_CODES = [
 // 9643 Munther
 // 9236 Chandni
 // 9473 Sudeep
+// 5784 Mukesh
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -402,7 +407,7 @@ client.on("message", async (message) => {
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
       mainRange = "Kenz_K00010!D2:L101";
-    } else if (message.from === AL_SARRAJ_GROUP || message.from === DUMMY_SARAJ) {
+    } else if (message.from === AL_SARRAJ_GROUP) {
       company = "Al Sarraj Jewellers";
       mainRange = "AlSarraj_!D2:L101";
     } else if (message.from === OM_GROUP) {
@@ -417,10 +422,15 @@ client.on("message", async (message) => {
     } else if (message.from === SUDEEP_GROUP) {
       company = "Sudeep Jewellery";
       mainRange = "Sudeep_!D2:L101";
+    } else if (message.from === MUKESH_GROUP || message.from === DUMMY_SARAJ) {
+      company = "Mukesh & Brothers";
+      mainRange = "MukeshBros_!D2:L101";
     } else {
       company = "";
       mainRange = "NA";
     }
+
+
 
 
     console.log("MAIN RANGE BEFORE GRAB: ", mainRange);
@@ -565,6 +575,8 @@ client.on("message", async (message) => {
     // 9643 Munther
     // 9236 Chandni
     // 9473 Sudeep
+    // 5784 Mukesh
+
 
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
@@ -601,6 +613,9 @@ client.on("message", async (message) => {
       } else if (message.from === SUDEEP_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#9473";
+      } else if (message.from === MUKESH_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#5784";
       } else {
         TT_PREMIUM = 0;
       }
