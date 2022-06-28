@@ -45,6 +45,12 @@ const SUDEEP_GROUP = "120363021960532393@g.us";
 
 const DUMMY_SARAJ = "120363024046301336@g.us";
 
+const INTERNAL9 = "120363023099866055@g.us";
+
+const hsNumber = "97338999888@c.us";
+
+const alertsGroup = [DUMMY_SARAJ, INTERNAL9, hsNumber]
+
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
@@ -138,7 +144,7 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-const date = new Date(2022, 5, 28, 13, 10, 0);
+const date = new Date(2022, 5, 28, 13, 17, 0);
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
@@ -166,10 +172,13 @@ const date = new Date(2022, 5, 28, 13, 10, 0);
 // });
 
 schedule.scheduleJob(date, () => {
-  client
+
+  alertsGroup.forEach(group => {
+
+    client
     .sendMessage(
-      "97338999888@c.us",
-      "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move."
+      group,
+      "*Price Alert*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE");
@@ -177,6 +186,9 @@ schedule.scheduleJob(date, () => {
     .catch((err) => {
       console.log("ERROR");
     });
+
+  })
+ 
 });
 
 const unixConverter = (timestamp) => {
