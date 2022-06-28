@@ -408,7 +408,7 @@ client.on("message", async (message) => {
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
       mainRange = "Kenz_K00010!D2:L101";
-    } else if (message.from === AL_SARRAJ_GROUP) {
+    } else if (message.from === AL_SARRAJ_GROUP || message.from === DUMMY_SARAJ) {
       company = "Al Sarraj Jewellers";
       mainRange = "AlSarraj_!D2:L101";
     } else if (message.from === OM_GROUP) {
@@ -423,7 +423,7 @@ client.on("message", async (message) => {
     } else if (message.from === SUDEEP_GROUP) {
       company = "Sudeep Jewellery";
       mainRange = "Sudeep_!D2:L101";
-    } else if (message.from === MUKESH_GROUP || message.from === DUMMY_SARAJ) {
+    } else if (message.from === MUKESH_GROUP) {
       company = "Mukesh & Brothers";
       mainRange = "MukeshBros_!D2:L101";
     } else {
