@@ -390,7 +390,6 @@ client.on("message", async (message) => {
   } // end !commands
 
   if (message.body.toLowerCase() === "!bookings") {
-    console.log("BEFORE IF STATEMENT: ", SHEET_NAME);
 
     let company = "";
 
@@ -423,14 +422,12 @@ client.on("message", async (message) => {
       mainRange = "NA";
     }
 
-    console.log("AFTER IF STATEMENT BEFORE GRAB: ", SHEET_NAME);
 
     console.log("MAIN RANGE BEFORE GRAB: ", mainRange);
     dataGrab(mainRange)
       .then((data) => {
         console.log("MAIN RANGE AFTER GRAB: ", mainRange);
 
-        console.log("AFTER GRAB STATEMENT: ", SHEET_NAME);
         let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n`;
 
         // const allBookings = data.filter(monthReturner).reverse();
