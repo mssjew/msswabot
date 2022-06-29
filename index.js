@@ -54,10 +54,12 @@ const izharNumber = "97333737302@c.us";
 
 const MUKESH_GROUP = "120363024035832201@g.us";
 
+const MSS_DAILY_REPORT = "97339439432-1562572137@g.us";
+
 
 
 const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP];
-const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
+const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, MSS_DAILY_REPORT];
 
 
 
@@ -89,7 +91,7 @@ const monthSeparator = (arr, month) => {
 };
 
 const quantityCalc = (arr) => {
-  
+
   let quantArr = [];
   for(x in arr) {
     quantArr.push(arr[x][3])
@@ -99,9 +101,7 @@ const quantityCalc = (arr) => {
   for(x in quantArr) {
     retval += parseInt(quantArr[x]);
   }
-
   return retval;
-  
 }
 
 
@@ -154,15 +154,9 @@ client.on("ready", () => {
   console.log(Date.now());
 });
 
-
-const date0 = new Date(2022, 5, 28, 15, 40, 0);
-const date1 = new Date(2022, 5, 28, 15, 45, 0);
-const date2 = new Date(2022, 5, 28, 15, 45, 35);
-
-
-
-
-
+const date0 = new Date(2022, 5, 29, 14, 35, 0);
+const date1 = new Date(2022, 5, 29, 14, 45, 0);
+const date2 = new Date(2022, 5, 29, 14, 45, 35);
 
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
@@ -195,7 +189,7 @@ schedule.scheduleJob(date0, () => {
     client
     .sendMessage(
       hamzaNumber,
-      "Alert will send in 5 mins, it should be 4.40pm now"
+      "Powell alert will send in 10 mins, it should be 3.35pm now"
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -213,7 +207,7 @@ schedule.scheduleJob(date1, () => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUSA Consumer Confidence Report will be published in 15 minutes, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nUS Fed Chairman Jerome Powell will be speaking in 15 mins, at 4pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
@@ -223,7 +217,6 @@ schedule.scheduleJob(date1, () => {
     });
 
   })
- 
 });
 
 schedule.scheduleJob(date2, () => {
@@ -231,7 +224,7 @@ schedule.scheduleJob(date2, () => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUSA Consumer Confidence Report will be published in 15 minutes, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nUS Fed Chairman Jerome Powell will be speaking in 15 mins, at 4pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
@@ -241,7 +234,6 @@ schedule.scheduleJob(date2, () => {
     });
 
   })
- 
 });
 
 const unixConverter = (timestamp) => {
