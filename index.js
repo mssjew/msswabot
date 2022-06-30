@@ -58,8 +58,9 @@ const MSS_DAILY_REPORT = "97339439432-1562572137@g.us";
 
 
 
-const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP, MUKESH_GROUP];
-const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, MSS_DAILY_REPORT];
+// const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP, MUKESH_GROUP];
+// const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
+const internalGroups = [MSS_DAILY_REPORT];
 
 
 
@@ -203,7 +204,7 @@ schedule.scheduleJob(date0, () => {
 });
 
 schedule.scheduleJob(date1, () => {
-  alertsGroup1.forEach(group => {
+  internalGroups.forEach(group => {
     client
     .sendMessage(
       group,
@@ -219,22 +220,22 @@ schedule.scheduleJob(date1, () => {
   })
 });
 
-schedule.scheduleJob(date2, () => {
-  alertsGroup2.forEach(group => {
-    client
-    .sendMessage(
-      group,
-      "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-    )
-    .then((res) => {
-      console.log("SENT ALERT MESSAGE TO ", group);
-    })
-    .catch((err) => {
-      console.log("ERROR WHILE SENDING TO ", group);
-    });
+// schedule.scheduleJob(date2, () => {
+//   alertsGroup2.forEach(group => {
+//     client
+//     .sendMessage(
+//       group,
+//       "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT MESSAGE TO ", group);
+//     })
+//     .catch((err) => {
+//       console.log("ERROR WHILE SENDING TO ", group);
+//     });
 
-  })
-});
+//   })
+// });
 
 const unixConverter = (timestamp) => {
   var unix_timestamp = timestamp;
