@@ -198,9 +198,6 @@ schedule.scheduleJob(date0, () => {
     .catch((err) => {
       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
     });
-
-
- 
 });
 
 schedule.scheduleJob(date1, () => {
