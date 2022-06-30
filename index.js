@@ -522,6 +522,16 @@ client.on("message", async (message) => {
     });
   }
 
+// 6572 sarraj
+// 6950 om
+// 1317 maharani
+// 1299 new marhaba
+// 1393 kenz
+// 9643 Munther
+// 9236 Chandni
+// 9473 Sudeep
+// 5784 Mukesh
+
   if (message.body.toLowerCase() === "!tt") {
     if (message.from === MAHARANI_GROUP) {
       TT_PREMIUM = -2;
