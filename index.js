@@ -15,7 +15,7 @@ var mainRange = ``;
 const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 
-//test
+
 
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
@@ -56,13 +56,9 @@ const MUKESH_GROUP = "120363024035832201@g.us";
 
 const MSS_DAILY_REPORT = "97339439432-1562572137@g.us";
 
-
-
 // const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP, MUKESH_GROUP];
 // const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
-const internalGroups = [MSS_DAILY_REPORT];
-
-
+const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
@@ -70,40 +66,7 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 
-async function dataGrab(range) {
-  try {
-    let resp = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`);
-    return resp.data.values;
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-const monthReturner = (arr) => {
-  return arr[0] === "";
-};
-
-const monthSeparator = (arr, month) => {
-  let retArr = [];
-  for (x in arr) {
-    if (arr[x][1].includes(month)) retArr.push(arr[x]);
-  }
-  return retArr;
-};
-
-const quantityCalc = (arr) => {
-
-  let quantArr = [];
-  for(x in arr) {
-    quantArr.push(arr[x][3])
-  }
-  
-  let retval = 0;
-  for(x in quantArr) {
-    retval += parseInt(quantArr[x]);
-  }
-  return retval;
-}
 
 
 let TT_PREMIUM = 0;
@@ -155,6 +118,41 @@ client.on("ready", () => {
   console.log(Date.now());
 });
 
+async function dataGrab(range) {
+  try {
+    let resp = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`);
+    return resp.data.values;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const monthReturner = (arr) => {
+  return arr[0] === "";
+};
+
+const monthSeparator = (arr, month) => {
+  let retArr = [];
+  for (x in arr) {
+    if (arr[x][1].includes(month)) retArr.push(arr[x]);
+  }
+  return retArr;
+};
+
+const quantityCalc = (arr) => {
+
+  let quantArr = [];
+  for(x in arr) {
+    quantArr.push(arr[x][3])
+  }
+  
+  let retval = 0;
+  for(x in quantArr) {
+    retval += parseInt(quantArr[x]);
+  }
+  return retval;
+}
+
 const date0 = new Date(2022, 5, 30, 14, 10, 0);
 const date1 = new Date(2022, 5, 30, 14, 15, 0);
 const date2 = new Date(2022, 5, 30, 14, 15, 35);
@@ -198,6 +196,8 @@ schedule.scheduleJob(date0, () => {
     .catch((err) => {
       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
     });
+
+
 });
 
 schedule.scheduleJob(date1, () => {
