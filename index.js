@@ -15,51 +15,44 @@ var mainRange = ``;
 const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 
-
-
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
 
 // const qabSellRange = "Summary!B11:B28";
 // const qabBuyRange = "Summary!C11:C28";
-
-const MAHARANI_GROUP = "120363037936208858@g.us";
-
-const EVERSHINE_GROUP = "120363041152671102@g.us";
-
-const AL_SARRAJ_GROUP = "120363023532089325@g.us";
-
-const KENZ_GROUP = "120363039742894365@g.us";
-
-const OM_GROUP = "120363040482937774@g.us";
-
-const NEW_MARHABA_GROUP = "120363020954397995@g.us";
-
-const MUNTHER_GROUP = "120363040785247106@g.us";
-
-const CHANDNI_GROUP = "120363038513888999@g.us";
-
-const SUDEEP_GROUP = "120363021960532393@g.us";
-
 const DUMMY_SARAJ = "120363024046301336@g.us";
-
 const INTERNAL9 = "120363023099866055@g.us";
-
-const hamzaNumber = "97338999888@c.us";
-
-const sajeevNumber = "919946147016@c.us";
-
-const izharNumber = "97333737302@c.us";
-
-const MUKESH_GROUP = "120363024035832201@g.us";
 
 const MSS_DAILY_REPORT = "97339439432-1562572137@g.us";
 
+const MAHARANI_GROUP = "120363037936208858@g.us";
+const AL_SARRAJ_GROUP = "120363023532089325@g.us";
+const KENZ_GROUP = "120363039742894365@g.us";
+const OM_GROUP = "120363040482937774@g.us";
+const NEW_MARHABA_GROUP = "120363020954397995@g.us";
+const MUNTHER_GROUP = "120363040785247106@g.us";
+const CHANDNI_GROUP = "120363038513888999@g.us";
+const SUDEEP_GROUP = "120363021960532393@g.us";
+const MUKESH_GROUP = "120363024035832201@g.us";
 const MATTATHIL_GROUP = "120363024899872156@g.us";
+const JALAL_GROUP = "120363021530408858@g.us"; //1293 Al-Jalal Jewellery
+const AREFI_GROUP = "120363040375751137@g.us"; //9152 Al-Arefi Jewellery
+const DDEVJI_GROUP = "120363039610631875@g.us"; //1124 Dinesh Devji Jewellers
+const DILU_GROUP = "120363041484099411@g.us"; //5324 Dilu Jewellery
+const ALAA_GROUP = "120363040279144042@g.us"; //1175  Alaa Jewellery
+const LIBERTY_GROUP = "120363020737570895@g.us"; //6309 Liberty Jewellery
+const SHAHZAIB_GROUP = "120363041490887614@g.us"; //9325 Shahzaib Jewellers
+const FAIZA_GROUP = "120363024241328715@g.us"; //4841 FAIZA JEWELLERY
+const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
+const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
+const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 
 const PRICE_CORRECTOR = -2;
 
+const hamzaNumber = "97338999888@c.us";
+const sajeevNumber = "919946147016@c.us";
+const izharNumber = "97333737302@c.us";
 
 // const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP, MUKESH_GROUP];
 // const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
@@ -69,10 +62,6 @@ const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
-
-
-
-
 
 let TT_PREMIUM = 0;
 const VALID_CODES = [
@@ -86,7 +75,18 @@ const VALID_CODES = [
   "#9473",
   "#5784",
   "#5016",
-  "#0000",
+  "#1293",
+  "#9152",
+  "#1124",
+  "#5324",
+  "#1175",
+  "#6309",
+  "#9325",
+  "#4841",
+  "#6555",
+  "#4897",
+  "#4496",
+  "#0001",
 ];
 
 // 6572 sarraj
@@ -99,6 +99,18 @@ const VALID_CODES = [
 // 9473 Sudeep
 // 5784 Mukesh
 // 5016 Mattathil
+
+//1293 Al-Jalal Jewellery *
+//9152 Al-Arefi Jewellery*
+//1124 Dinesh Devji Jewellers*
+//5324 Dilu Jewellery
+//1175 Alaa Jewellery
+//6309 Liberty Jewellery
+//9325 Shahzaib Jewellers
+//4841 FAIZA JEWELLERY
+//6555 Evershine Jewellery
+//4897 FAREEDA JEWELLERY
+//4496 J AND P JEWELLERS
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -127,7 +139,9 @@ client.on("ready", () => {
 
 async function dataGrab(range) {
   try {
-    let resp = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`);
+    let resp = await axios.get(
+      `https://sheets.googleapis.com/v4/spreadsheets/${URL_ONE}/values/${range}?key=${URL_TWO}`
+    );
     return resp.data.values;
   } catch (err) {
     console.log(err);
@@ -147,18 +161,17 @@ const monthSeparator = (arr, month) => {
 };
 
 const quantityCalc = (arr) => {
-
   let quantArr = [];
-  for(x in arr) {
-    quantArr.push(arr[x][3])
+  for (x in arr) {
+    quantArr.push(arr[x][3]);
   }
-  
+
   let retval = 0;
-  for(x in quantArr) {
+  for (x in quantArr) {
     retval += parseInt(quantArr[x]);
   }
   return retval;
-}
+};
 
 const date0 = new Date(2022, 5, 30, 14, 10, 0);
 const date1 = new Date(2022, 5, 30, 14, 15, 0);
@@ -192,7 +205,7 @@ const date2 = new Date(2022, 5, 30, 14, 15, 35);
 // "*Price Movement Alert Test*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
 
 schedule.scheduleJob(date0, () => {
-    client
+  client
     .sendMessage(
       hamzaNumber,
       "Inflation alert will send in 5 mins, it should be 3.10pm now"
@@ -203,25 +216,22 @@ schedule.scheduleJob(date0, () => {
     .catch((err) => {
       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
     });
-
-
 });
 
 schedule.scheduleJob(date1, () => {
-  internalGroups.forEach(group => {
+  internalGroups.forEach((group) => {
     client
-    .sendMessage(
-      group,
-      "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-    )
-    .then((res) => {
-      console.log("SENT ALERT MESSAGE TO ", group);
-    })
-    .catch((err) => {
-      console.log("ERROR WHILE SENDING TO ", group);
-    });
-
-  })
+      .sendMessage(
+        group,
+        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      )
+      .then((res) => {
+        console.log("SENT ALERT MESSAGE TO ", group);
+      })
+      .catch((err) => {
+        console.log("ERROR WHILE SENDING TO ", group);
+      });
+  });
 });
 
 // schedule.scheduleJob(date2, () => {
@@ -393,7 +403,6 @@ client.on("message", async (message) => {
   } // end !commands
 
   if (message.body.toLowerCase() === "!bookings") {
-
     let company = "";
 
     if (message.from === MAHARANI_GROUP) {
@@ -405,7 +414,10 @@ client.on("message", async (message) => {
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
       mainRange = "Kenz_K00010!D2:L101";
-    } else if (message.from === AL_SARRAJ_GROUP || message.from === DUMMY_SARAJ) {
+    } else if (
+      message.from === AL_SARRAJ_GROUP ||
+      message.from === DUMMY_SARAJ
+    ) {
       company = "Al Sarraj Jewellers";
       mainRange = "AlSarraj_!D2:L101";
     } else if (message.from === OM_GROUP) {
@@ -426,13 +438,52 @@ client.on("message", async (message) => {
     } else if (message.from === MATTATHIL_GROUP) {
       company = "Mattathil Jewellers";
       mainRange = "MATTATHIL_JEWELLERY!D2:L101";
+    } else if (message.from === JALAL_GROUP) {
+      company = "Al-Jalal Jewellers";
+      mainRange = "Jalal_Jewellery!D2:L101";
+    } else if (message.from === DDEVJI_GROUP) {
+      company = "Dinesh Devji Jewellers";
+      mainRange = "Devji21_D00001!D2:L101";
+    } else if (message.from === DILU_GROUP) {
+      company = "Dilu Jewellers";
+      mainRange = "Dilu!D2:L101";
+    } else if (message.from === ALAA_GROUP) {
+      company = "Alaa Jewellery";
+      mainRange = "Alaa_A00086!D2:L101";
+    } else if (message.from === LIBERTY_GROUP) {
+      company = "Liberty Jewellery";
+      mainRange = "Liberty_L00001!D2:L101";
+    } else if (message.from === SHAHZAIB_GROUP) {
+      company = "Shahzaib Jewellery";
+      mainRange = "Shahzaib_!D2:L101";
+    } else if (message.from === FAIZA_GROUP) {
+      company = "Faiza Jewellery";
+      mainRange = "Faiza!D2:L101";
+    } else if (message.from === EVERSHINE_GROUP) {
+      company = "Evershine Jewellery";
+      mainRange = "Evershine_Jewellery!D2:L101";
+    } else if (message.from === FAREEDA_GROUP) {
+      company = "Fareeda Jewellery";
+      mainRange = "FAREEDA_JEWELLERY!D2:L101";
+    } else if (message.from === JP_GROUP) {
+      company = "J and P Jewellers";
+      mainRange = "J_and_P!D2:L101";
     } else {
       company = "";
       mainRange = "NA";
     }
 
-
-
+    //1293 Al-Jalal Jewellery *
+    //9152 Al-Arefi Jewellery*
+    //1124 Dinesh Devji Jewellers*
+    //5324 Dilu Jewellery
+    //1175  Alaa Jewellery
+    //6309 Liberty Jewellery
+    //9325 Shahzaib Jewellers
+    //4841 FAIZA JEWELLERY
+    //6555  Evershine Jewellery
+    //4897 FAREEDA JEWELLERY
+    //4496 J AND P JEWELLERS
 
     console.log("MAIN RANGE BEFORE GRAB: ", mainRange);
     dataGrab(mainRange)
@@ -532,38 +583,62 @@ client.on("message", async (message) => {
     });
   }
 
-// 6572 sarraj
-// 6950 om
-// 1317 maharani
-// 1299 new marhaba
-// 1393 kenz
-// 9643 Munther
-// 9236 Chandni
-// 9473 Sudeep
-// 5784 Mukesh
-// 5016 Mattathil
+  // 6572 sarraj *
+  // 6950 om *
+  // 1317 maharani *
+  // 1299 new marhaba *
+  // 1393 kenz *
+  // 9643 Munther *
+  // 9236 Chandni *
+  // 9473 Sudeep *
+  // 5784 Mukesh
+  // 5016 Mattathil *
+
+  //1293 Al-Jalal Jewellery 0 *
+  //9152 Al-Arefi Jewellery N/A
+  //1124 Dinesh Devji Jewellers -1 *
+  //5324 Dilu Jewellery -1 *
+  //1175  Alaa Jewellery 0 *
+  //6309 Liberty Jewellery 0 *
+  //9325 Shahzaib Jewellers -1 *
+  //4841 FAIZA JEWELLERY 0 *
+  //6555  Evershine Jewellery -2 *
+  //4897 FAREEDA JEWELLERY 0 *
+  //4496 J AND P JEWELLERS -2 *
 
   if (message.body.toLowerCase() === "!tt") {
-    if (message.from === MAHARANI_GROUP) {
-      TT_PREMIUM = -2;
-    } else if (message.from === NEW_MARHABA_GROUP) {
+    if (
+      message.from === MAHARANI_GROUP ||
+      message.from === NEW_MARHABA_GROUP ||
+      message.from === EVERSHINE_GROUP ||
+      message.from === JP_GROUP ||
+      message.from === MUNTHER_GROUP ||
+      message.from === CHANDNI_GROUP ||
+      message.from === MUKESH_GROUP
+    ) {
       TT_PREMIUM = -2;
     } else if (message.from === KENZ_GROUP) {
       console.log("MESSAGE FROM KENZ");
       TT_PREMIUM = -3;
-    } else if (message.from === AL_SARRAJ_GROUP) {
+    } else if (
+      message.from === AL_SARRAJ_GROUP ||
+      message.from === OM_GROUP ||
+      message.from === JALAL_GROUP ||
+      message.from === ALAA_GROUP ||
+      message.from === LIBERTY_GROUP ||
+      message.from === FAIZA_GROUP ||
+      message.from === FAREEDA_GROUP
+    ) {
       TT_PREMIUM = 0;
-    } else if (message.from === OM_GROUP) {
-      TT_PREMIUM = 0;
-    } else if (message.from === MUNTHER_GROUP) {
-      TT_PREMIUM = -2;
-    } else if (message.from === CHANDNI_GROUP) {
-      TT_PREMIUM = -2;
-    } else if (message.from === SUDEEP_GROUP) {
+    } else if (
+      message.from === SUDEEP_GROUP ||
+      message.from === MATTATHIL_GROUP ||
+      message.from === DDEVJI_GROUP ||
+      message.from === DILU_GROUP ||
+      message.from === SHAHZAIB_GROUP
+    ) {
       TT_PREMIUM = -1;
-    } else if (message.from === MATTATHIL_GROUP) {
-      TT_PREMIUM = -1;
-    }  else {
+    } else {
       TT_PREMIUM = 0;
     }
 
@@ -573,7 +648,7 @@ client.on("message", async (message) => {
           "Application error.\nSorry, please contact MSS directly for fixing."
         );
       } else {
-        const ttRate = (price+PRICE_CORRECTOR) * 1.417;
+        const ttRate = (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
         message.reply(`Current TT Rate: BD${ttPrice}`);
       }
@@ -592,7 +667,17 @@ client.on("message", async (message) => {
     // 5784 Mukesh
     // 5016 Mattathil
 
-
+  //1293 Al-Jalal Jewellery 0 *
+  //9152 Al-Arefi Jewellery N/A
+  //1124 Dinesh Devji Jewellers -1 *
+  //5324 Dilu Jewellery -1 *
+  //1175  Alaa Jewellery 0 *
+  //6309 Liberty Jewellery 0 *
+  //9325 Shahzaib Jewellers -1 *
+  //4841 FAIZA JEWELLERY 0 *
+  //6555  Evershine Jewellery -2 *
+  //4897 FAREEDA JEWELLERY 0 *
+  //4496 J AND P JEWELLERS -2 *
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
 
@@ -629,11 +714,41 @@ client.on("message", async (message) => {
         TT_PREMIUM = -1;
         fixingCode = "#9473";
       } else if (message.from === MUKESH_GROUP) {
-        TT_PREMIUM = 0;
+        TT_PREMIUM = -2;
         fixingCode = "#5784";
       } else if (message.from === MATTATHIL_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#5016";
+      } else if (message.from === JALAL_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#1293";
+      } else if (message.from === DDEVJI_GROUP) {
+        TT_PREMIUM = -1;
+        fixingCode = "#1124";
+      } else if (message.from === DILU_GROUP) {
+        TT_PREMIUM = -1;
+        fixingCode = "#5324";
+      } else if (message.from === ALAA_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#1175";
+      } else if (message.from === LIBERTY_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#6309";
+      } else if (message.from === SHAHZAIB_GROUP) {
+        TT_PREMIUM = -1;
+        fixingCode = "#9325";
+      } else if (message.from === FAIZA_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#4841";
+      } else if (message.from === EVERSHINE_GROUP) {
+        TT_PREMIUM = -2;
+        fixingCode = "#6555";
+      } else if (message.from === FAREEDA_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#4897";
+      } else if (message.from === JP_GROUP) {
+        TT_PREMIUM = -2;
+        fixingCode = "#4496";
       } else {
         TT_PREMIUM = 0;
       }
@@ -645,9 +760,7 @@ client.on("message", async (message) => {
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
       } else if (quantity > 10) {
-        message.reply(
-          `Sorry, please contact MSS Jewellers directly to fix more than 10TT in one trade.`
-        );
+        message.reply(`Sorry, `);
       } else {
         goldPrice().then((price) => {
           if (isNaN(TT_PREMIUM)) {
@@ -655,7 +768,7 @@ client.on("message", async (message) => {
               "Sorry, we are unable to process your request at this time.\nPlease contact MSS directly for fixing."
             );
           } else {
-            const ttRate = (price+PRICE_CORRECTOR) * 1.417;
+            const ttRate = (price + PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
@@ -711,8 +824,28 @@ client.on("message", async (message) => {
         fixerName = "Sudeep Jewellery";
       } else if (message.body === "#5784") {
         fixerName = "Mukesh & Brothers";
-      }  else if (message.body === "#5016") {
+      } else if (message.body === "#5016") {
         fixerName = "Mattathil Jewellers";
+      } else if (message.body === "#1293") {
+        fixerName = "Al-Jalal Jewellers";
+      } else if (message.body === "#1124") {
+        fixerName = "Dinesh Devji Jewellers";
+      } else if (message.body === "#5324") {
+        fixerName = "Dilu Jewellery";
+      } else if (message.body === "#1175") {
+        fixerName = "Alaa Jewellery";
+      } else if (message.body === "#6309") {
+        fixerName = "Liberty Jewellery";
+      } else if (message.body === "#9325") {
+        fixerName = "Shahzaib Jewellery";
+      }  else if (message.body === "#4841") {
+        fixerName = "Faiza Jewellery";
+      }  else if (message.body === "#6555") {
+        fixerName = "Evershine Jewellery";
+      } else if (message.body === "#4897") {
+        fixerName = "Fareeda Jewellery";
+      } else if (message.body === "#4496") {
+        fixerName = "J and P Jewellers";
       }
 
       message
