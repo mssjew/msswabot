@@ -573,7 +573,7 @@ client.on("message", async (message) => {
           "Application error.\nSorry, please contact MSS directly for fixing."
         );
       } else {
-        const ttRate = (price-PRICE_CORRECTOR) * 1.417;
+        const ttRate = (price+PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
         message.reply(`Current TT Rate: BD${ttPrice}`);
       }
@@ -655,7 +655,7 @@ client.on("message", async (message) => {
               "Sorry, we are unable to process your request at this time.\nPlease contact MSS directly for fixing."
             );
           } else {
-            const ttRate = (price-PRICE_CORRECTOR) * 1.417;
+            const ttRate = (price+PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
