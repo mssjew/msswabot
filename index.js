@@ -56,6 +56,9 @@ const MUKESH_GROUP = "120363024035832201@g.us";
 
 const MSS_DAILY_REPORT = "97339439432-1562572137@g.us";
 
+const MATTATHIL_GROUP = "120363024899872156@g.us";
+
+
 // const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP, MUKESH_GROUP];
 // const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
@@ -80,6 +83,7 @@ const VALID_CODES = [
   "#9236",
   "#9473",
   "#5784",
+  "#5016",
   "#0000",
 ];
 
@@ -92,6 +96,7 @@ const VALID_CODES = [
 // 9236 Chandni
 // 9473 Sudeep
 // 5784 Mukesh
+// 5016 Mattathil
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -416,6 +421,9 @@ client.on("message", async (message) => {
     } else if (message.from === MUKESH_GROUP) {
       company = "Mukesh & Brothers";
       mainRange = "MukeshBros_!D2:L101";
+    } else if (message.from === MATTATHIL_GROUP) {
+      company = "Mattathil Jewellers";
+      mainRange = "MATTATHIL_JEWELLERY!D2:L101";
     } else {
       company = "";
       mainRange = "NA";
@@ -531,6 +539,7 @@ client.on("message", async (message) => {
 // 9236 Chandni
 // 9473 Sudeep
 // 5784 Mukesh
+// 5016 Mattathil
 
   if (message.body.toLowerCase() === "!tt") {
     if (message.from === MAHARANI_GROUP) {
@@ -550,7 +559,9 @@ client.on("message", async (message) => {
       TT_PREMIUM = -2;
     } else if (message.from === SUDEEP_GROUP) {
       TT_PREMIUM = -1;
-    } else {
+    } else if (message.from === MATTATHIL_GROUP) {
+      TT_PREMIUM = -1;
+    }  else {
       TT_PREMIUM = 0;
     }
 
@@ -577,6 +588,7 @@ client.on("message", async (message) => {
     // 9236 Chandni
     // 9473 Sudeep
     // 5784 Mukesh
+    // 5016 Mattathil
 
 
     let fixingCode = "";
@@ -611,12 +623,15 @@ client.on("message", async (message) => {
       } else if (message.from === CHANDNI_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9236";
-      } else if (message.from === SUDEEP_GROUP) {
+      } else if (message.from === f_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#9473";
       } else if (message.from === MUKESH_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#5784";
+      } else if (message.from === MATTATHIL_GROUP) {
+        TT_PREMIUM = -1;
+        fixingCode = "#5016";
       } else {
         TT_PREMIUM = 0;
       }
@@ -673,6 +688,7 @@ client.on("message", async (message) => {
       // 9236 Chandni
       // 9473 Sudeep
       // 5784 Mukesh
+      // 5016 Mattathil
       if (message.body === "#6572") {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
@@ -693,6 +709,8 @@ client.on("message", async (message) => {
         fixerName = "Sudeep Jewellery";
       } else if (message.body === "#5784") {
         fixerName = "Mukesh & Brothers";
+      }  else if (message.body === "#5016") {
+        fixerName = "Mattathil Jewellers";
       }
 
       message
