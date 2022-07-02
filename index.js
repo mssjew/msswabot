@@ -623,7 +623,7 @@ client.on("message", async (message) => {
       } else if (message.from === CHANDNI_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9236";
-      } else if (message.from === f_GROUP) {
+      } else if (message.from === SUDEEP_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#9473";
       } else if (message.from === MUKESH_GROUP) {
