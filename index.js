@@ -58,6 +58,8 @@ const MSS_DAILY_REPORT = "97339439432-1562572137@g.us";
 
 const MATTATHIL_GROUP = "120363024899872156@g.us";
 
+const PRICE_CORRECTOR = -2;
+
 
 // const alertsGroup1 = [KENZ_GROUP, MAHARANI_GROUP, AL_SARRAJ_GROUP, MUKESH_GROUP];
 // const alertsGroup2 = [OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP];
@@ -571,7 +573,7 @@ client.on("message", async (message) => {
           "Application error.\nSorry, please contact MSS directly for fixing."
         );
       } else {
-        const ttRate = price * 1.417;
+        const ttRate = (price-PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
         message.reply(`Current TT Rate: BD${ttPrice}`);
       }
@@ -653,7 +655,7 @@ client.on("message", async (message) => {
               "Sorry, we are unable to process your request at this time.\nPlease contact MSS directly for fixing."
             );
           } else {
-            const ttRate = price * 1.417;
+            const ttRate = (price-PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
