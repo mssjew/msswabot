@@ -48,7 +48,7 @@ const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
 const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 
-const PRICE_CORRECTOR = -2;
+const PRICE_CORRECTOR = 0;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
@@ -913,7 +913,7 @@ client.on("message", async (message) => {
           completedOrders.push(quoted.id.id);
 
           if (diff > 30000) {
-            message.reply("Time limit exceeded\n\nPlease start a new order.");
+            message.reply(`${redXEmoji} You did not complete your order within the 30 second time limit.\n\nPlease start a new order again.`);
           } else {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
