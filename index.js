@@ -7,8 +7,8 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
-const CURR_MONTH = "June 2022";
-const MONTH_SEP = "Jun";
+const CURR_MONTH = "July 2022";
+const MONTH_SEP = "Jul";
 
 var mainRange = ``;
 
