@@ -808,7 +808,7 @@ client.on("message", async (message) => {
         fixerName = "Al Sarraj Jewellers";
       } else if (message.body === "#6950") {
         fixerName = "Om Jewellery";
-      } else if (message.body === "#0000") {
+      } else if (message.body === "#0001") {
         fixerName = "Dummy Jewellers";
       } else if (message.body === "#1317") {
         fixerName = "Maharani Jewellers";
