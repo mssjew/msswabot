@@ -918,7 +918,7 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!\n\n${redCircle} *Please Note:* Stock will arrive Thursday 7pm. ${redCircle}`
+              )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!\n\n${redCircle} *Please Note:* TT Bar stock will arrive Thursday 7pm.`
             );
             client.sendMessage(
               "919946147016@c.us",
