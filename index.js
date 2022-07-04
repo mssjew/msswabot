@@ -918,7 +918,7 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!`
+              )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!\n\n${redCircle} *Please Note:* Stock will arrive Thursday 7pm. ${redCircle}`
             );
             client.sendMessage(
               "919946147016@c.us",
@@ -936,7 +936,7 @@ client.on("message", async (message) => {
         })
         .catch((err) => {
           message.reply(
-            "Sorry, we could not process your fixing order due to an error. Please contact MSS Jewellers directly."
+            "Sorry, we could not process your fixing order due to an error. Someone from our team will process your order manually."
           );
           console.log("ERROR ON GETTING QUOTED MESSAGE");
           console.log(err);
