@@ -645,11 +645,11 @@ client.on("message", async (message) => {
     goldPrice().then((price) => {
       if (isNaN(TT_PREMIUM)) {
         message.reply(
-          "Application error.\nSorry, please contact MSS directly for fixing."
+          "Application error.\nSorry, someone from our team will respond to your query now."
         );
       } else {
         const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
+        const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(`Current TT Rate: BD${ttPrice}`);
       }
     });
@@ -681,7 +681,7 @@ client.on("message", async (message) => {
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
 
-    let randTT = Math.ceil(Math.random() * 5);
+    let randTT = Math.ceil(Math.random() * 10);
 
     if (input.length < 5 || input.length > 10) {
       message.reply(
@@ -760,12 +760,12 @@ client.on("message", async (message) => {
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
       } else if (quantity > 10) {
-        message.reply(`Sorry, `);
+        message.reply(`${redXEmoji} Sorry, you can only fix a maximum 10TT in one order.\n\nPlease start a new order if you would like to fix more.`);
       } else {
         goldPrice().then((price) => {
           if (isNaN(TT_PREMIUM)) {
             message.reply(
-              "Sorry, we are unable to process your request at this time.\nPlease contact MSS directly for fixing."
+              "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
             );
           } else {
             const ttRate = (price + PRICE_CORRECTOR) * 1.417;
@@ -785,7 +785,7 @@ client.on("message", async (message) => {
 
   if (isACode(message.body) && !message.hasQuotedMsg) {
     message.reply(
-      `${redXEmoji} Error.\n\nYou did not quote reply an order message.\n\nPlease swipe on the message and then reply with your code.`
+      `${redXEmoji} Error.\n\nYou did not quote reply to an order message.\n\nPlease swipe right on the order message above and then reply with your fixing code.`
     );
   }
 
@@ -857,6 +857,13 @@ client.on("message", async (message) => {
 
           const groupID = chat.from;
 
+          if (quoted.body.length < 35) {
+            message.reply(
+              `${redXEmoji} Error.\n\nYou did not quote reply to an order message.\n\nPlease swipe right on your order message and then enter your fixing code.`
+            );
+            return;
+          }
+
           if (quoted.body.slice(14, 15) === " ") {
             quantity = parseInt(quoted.body.slice(13, 14));
           } else {
@@ -868,6 +875,8 @@ client.on("message", async (message) => {
           } else {
             unitPrice = parseInt(quoted.body.slice(23, 27));
           }
+
+          
 
           if (isNaN(quantity)) {
             message.reply(
@@ -918,7 +927,7 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.*\n\nThank you!\n\n${redCircle} *Please Note:* TT Bar stock will arrive Thursday 7pm.`
+              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!\n\n${redCircle} *Please Note:* TT Bar stock will arrive Thursday 7pm.`
             );
             client.sendMessage(
               "919946147016@c.us",
