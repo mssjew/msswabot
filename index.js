@@ -56,7 +56,7 @@ const sajeevNumber = "919946147016@c.us";
 const izharNumber = "97333737302@c.us";
 
 const alertsGroup1 = [MAHARANI_GROUP, AL_SARRAJ_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, MSS_DAILY_REPORT];
-const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, KENZ_GROUP];
+const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP];
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 
 const qrcode = require("qrcode-terminal");
@@ -174,14 +174,9 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 6, 15, 40, 0);
-const date1 = new Date(2022, 6, 6, 15, 45, 0);
-const date2 = new Date(2022, 6, 6, 15, 45, 30);
-
-
-const date20 = new Date(2022, 6, 6, 19, 40, 0);
-const date21 = new Date(2022, 6, 6, 19, 45, 0);
-const date22 = new Date(2022, 6, 6, 19, 45, 30);
+const date0 = new Date(2022, 6, 8, 14, 10, 0);
+const date1 = new Date(2022, 6, 8, 14, 15, 0);
+const date2 = new Date(2022, 6, 8, 14, 15, 30);
 // const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
 //   pCounter++;
 
@@ -213,21 +208,7 @@ schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Jobs alert will send in 5 mins, it should be 5.40pm now"
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO HS");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
-
-schedule.scheduleJob(date20, () => {
-  client
-    .sendMessage(
-      hamzaNumber,
-      "FOMC alert will send in 5 mins, it should be 9.40pm now"
+      "Unemployment alert will send in 5 mins, it should be 3.10pm now"
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -242,7 +223,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Jobs Data will be published in 15 mins, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -258,7 +239,7 @@ schedule.scheduleJob(date2, () => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUS Jobs Data will be published in 15 mins, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
@@ -268,38 +249,6 @@ schedule.scheduleJob(date2, () => {
     });
 
   })
-});
-
-schedule.scheduleJob(date21, () => {
-  alertsGroup1.forEach((group) => {
-    client
-      .sendMessage(
-        group,
-        "*Price Movement Alert*\n\nUS Fed Reserve Data will be published in 15 mins, at 9pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-      )
-      .then((res) => {
-        console.log("SENT ALERT MESSAGE TO ", group);
-      })
-      .catch((err) => {
-        console.log("ERROR WHILE SENDING TO ", group);
-      });
-  });
-});
-
-schedule.scheduleJob(date22, () => {
-  alertsGroup2.forEach((group) => {
-    client
-      .sendMessage(
-        group,
-        "*Price Movement Alert*\n\nUS Fed Reserve Data will be published in 15 mins, at 9pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-      )
-      .then((res) => {
-        console.log("SENT ALERT MESSAGE TO ", group);
-      })
-      .catch((err) => {
-        console.log("ERROR WHILE SENDING TO ", group);
-      });
-  });
 });
 
 
@@ -981,7 +930,7 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!\n\n${redCircle} *Please Note:* TT Bar stock will arrive Thursday 7pm.`
+              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!`
             );
             client.sendMessage(
               "919946147016@c.us",
