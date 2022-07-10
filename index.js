@@ -62,7 +62,12 @@ const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { MessageMedia } = require('whatsapp-web.js');
-const media = await MessageMedia.fromUrl('https://msspricess.b-cdn.net/orderM.jpg');
+
+
+async function grabPic() {
+  const media = await MessageMedia.fromUrl('https://via.placeholder.com/350x150.png');
+  return media;
+}
 
 
 
@@ -411,8 +416,10 @@ client.on("message", async (message) => {
   } // end !commands
 
   if (message.body.toLowerCase() === "!pic") {
-    message.reply(media);
-  }
+    grabPic.then((pic) => {
+      message.reply(pic);
+    });
+    }
 
 
   if (message.body.toLowerCase() === "!bookings") {
