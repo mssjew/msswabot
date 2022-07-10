@@ -762,8 +762,8 @@ client.on("message", async (message) => {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
-      } else if (quantity > 10) {
-        message.reply(`${redXEmoji} Sorry, you can only fix a maximum 10TT in one order.\n\nPlease start a new order if you would like to fix more.`);
+      } else if (quantity > 15) {
+        message.reply(`${redXEmoji} Sorry, you can only fix a maximum 15TT in one order.\n\nIf you want to fix more than 15 TT please start another order.`);
       } else {
         goldPrice().then((price) => {
           if (isNaN(TT_PREMIUM)) {
