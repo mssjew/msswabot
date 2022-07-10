@@ -64,14 +64,6 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { MessageMedia } = require('whatsapp-web.js');
 
 
-async function grabPic() {
-  const media = await MessageMedia.fromUrl('https://via.placeholder.com/350x150.png');
-  return media;
-}
-
-
-
-
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
 let TT_PREMIUM = 0;
@@ -345,6 +337,12 @@ async function goldAPIStatus() {
   });
   return resp.data.result;
 }
+
+async function grabPic() {
+  const media = await MessageMedia.fromUrl('https://via.placeholder.com/350x150.png');
+  return media;
+}
+
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
