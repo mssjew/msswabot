@@ -414,7 +414,7 @@ client.on("message", async (message) => {
   } // end !commands
 
   if (message.body.toLowerCase() === "!pic") {
-    grabPic.then((pic) => {
+    grabPic().then((pic) => {
       message.reply(pic);
     });
     }
