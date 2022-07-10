@@ -339,7 +339,7 @@ async function goldAPIStatus() {
 }
 
 async function grabPic() {
-  const media = await MessageMedia.fromUrl('https://via.placeholder.com/350x150.png');
+  const media = await MessageMedia.fromUrl('https://msspricess.b-cdn.net/orderM.jpg');
   return media;
 }
 
