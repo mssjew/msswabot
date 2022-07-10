@@ -339,7 +339,7 @@ async function goldAPIStatus() {
 }
 
 async function grabPic() {
-  const media = await MessageMedia.fromUrl('https://msspricess.b-cdn.net/orderM.jpg');
+  const media = await MessageMedia.fromUrl('https://msspricess.b-cdn.net/orderM2.jpg');
   return media;
 }
 
@@ -806,9 +806,10 @@ client.on("message", async (message) => {
 
             if(newFlag) {
               grabPic().then(pic => {
-                chat.sendMessage(pic).then(message.reply(
+                chat.sendMessage(pic)
+                message.reply(
                   `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
-                ));
+                )
               })
             } else {
               message.reply(
