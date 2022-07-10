@@ -723,21 +723,25 @@ client.on("message", async (message) => {
       } else if (message.from === OM_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#6950";
+        newFlag = true;
       } else if (message.from === MUNTHER_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9643";
       } else if (message.from === CHANDNI_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9236";
+        newFlag = true;
       } else if (message.from === SUDEEP_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#9473";
       } else if (message.from === MUKESH_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#5784";
+        newFlag = true;
       } else if (message.from === MATTATHIL_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#5016";
+        newFlag = true;
       } else if (message.from === JALAL_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#1293";
@@ -759,15 +763,18 @@ client.on("message", async (message) => {
       } else if (message.from === FAIZA_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#4841";
+        newFlag = true;
       } else if (message.from === EVERSHINE_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#6555";
       } else if (message.from === FAREEDA_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#4897";
+        newFlag = true;
       } else if (message.from === JP_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#4496";
+        newFlag = true;
       } else if (message.from === DUMMY_SARAJ) {
         TT_PREMIUM = -2;
         fixingCode = "#4496";
@@ -800,12 +807,16 @@ client.on("message", async (message) => {
             if(newFlag) {
               grabPic().then(pic => {
                 chat.sendMessage(pic)
-              })
+              }).then( message.reply(
+                `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
+              ));
+            } else {
+              message.reply(
+                `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
+              );
             }
 
-            message.reply(
-              `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
-            );
+           
           }
         });
       }
