@@ -61,6 +61,11 @@ const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
+const { MessageMedia } = require('whatsapp-web.js');
+const media = await MessageMedia.fromUrl('https://msspricess.b-cdn.net/orderM.jpg');
+
+
+
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
@@ -404,6 +409,11 @@ client.on("message", async (message) => {
       "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!booking* = 24/7 Fixing Service. (min. 5 TT)"
     );
   } // end !commands
+
+  if (message.body.toLowerCase() === "!pic") {
+    message.reply(media);
+  }
+
 
   if (message.body.toLowerCase() === "!bookings") {
     let company = "";
