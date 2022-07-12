@@ -723,7 +723,7 @@ client.on("message", async (message) => {
       } else if (message.from === OM_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#6950";
-        newFlag = true;
+        newFlag = false;
       } else if (message.from === MUNTHER_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9643";
