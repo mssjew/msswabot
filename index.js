@@ -708,7 +708,7 @@ client.on("message", async (message) => {
     } else {
       newFlag = false;
       if (message.from === MAHARANI_GROUP) {
-        TT_PREMIUM = -2;
+        TT_PREMIUM = -3;
         fixingCode = "#1317";
       } else if (message.from === NEW_MARHABA_GROUP) {
         TT_PREMIUM = -2;
@@ -776,7 +776,7 @@ client.on("message", async (message) => {
         fixingCode = "#4496";
         newFlag = true;
       } else if (message.from === DUMMY_SARAJ) {
-        TT_PREMIUM = -2;
+        TT_PREMIUM = -3.5;
         fixingCode = "#4496";
         newFlag = true;
       } else {
@@ -933,7 +933,7 @@ client.on("message", async (message) => {
             return;
           }
 
-          if (quantity >= 20) {
+          if (quantity >= 16) {
             message.reply("Quantity error, please restart your order.");
             return;
           } else if (quantity < 0) {
