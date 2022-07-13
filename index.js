@@ -176,41 +176,15 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 8, 14, 10, 0);
-const date1 = new Date(2022, 6, 8, 14, 15, 0);
-const date2 = new Date(2022, 6, 8, 14, 15, 30);
-// const priceCheck = schedule.scheduleJob("*/1 * * * *", () => {
-//   pCounter++;
-
-//   goldPrice().then((price) => {
-//     console.log(`Running Price Check No. ${pCounter} - $${price}`);
-//     if(price > 2000) {
-//       client
-//       .sendMessage(
-//       "97339439432-1562572137@g.us",
-//       "*Price Alert*\n\nGold above $2000."
-//     )
-//     .then((res) => {
-//       console.log("Gold Alert Sent");
-//       priceCheck.cancel();
-//       console.log("Price Check Cancelled Due to Success");
-//     })
-//     .catch((err) => {
-//       console.log("Gold Alert Failed To Send");
-//     });
-//     }
-
-//   }).catch((err) => console.log("Error on gold price check per min: ", err));
-
-// });
-
-// "*Price Movement Alert Test*\n\nUS Monthly Inflation Announcement in 10 mins (At 4.30pm BH Time).\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+const date0 = new Date(2022, 6, 13, 14, 10, 0);
+const date1 = new Date(2022, 6, 13, 14, 15, 0);
+const date2 = new Date(2022, 6, 13, 14, 15, 30);
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Unemployment alert will send in 5 mins, it should be 3.10pm now"
+      "Inflation alert will send in 5 mins, it should be 3.10pm now"
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -225,7 +199,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -241,7 +215,7 @@ schedule.scheduleJob(date2, () => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
@@ -737,7 +711,7 @@ client.on("message", async (message) => {
       } else if (message.from === MUKESH_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#5784";
-        newFlag = true;
+        newFlag = false;
       } else if (message.from === MATTATHIL_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#5016";
