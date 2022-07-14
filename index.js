@@ -782,12 +782,12 @@ client.on("message", async (message) => {
               grabPic().then(pic => {
                 chat.sendMessage(pic)
                 message.reply(
-                  `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                  `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                 )
               })
             } else {
               message.reply(
-                `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
               );
             }
 
@@ -883,32 +883,30 @@ client.on("message", async (message) => {
             console.log(`Char ${i}: `, quoted.body[i]);
           }
   
-
-
-          if (quoted.body.slice(14, 15) === " ") {
-            quantity = parseInt(quoted.body.slice(13, 14));
+          if (quoted.body.slice(44, 45) === " ") {
+            quantity = parseInt(quoted.body.slice(43, 44));
           } else {
-            quantity = parseInt(quoted.body.slice(13, 15));
+            quantity = parseInt(quoted.body.slice(43, 45));
           }
 
           if (quantity >= 10) {
-            unitPrice = parseInt(quoted.body.slice(24, 28));
+            unitPrice = parseInt(quoted.body.slice(55, 59));
           } else {
-            unitPrice = parseInt(quoted.body.slice(23, 27));
+            unitPrice = parseInt(quoted.body.slice(54, 58));
           }
 
           
 
           if (isNaN(quantity)) {
             message.reply(
-              "Calculation error, please try again.\nIf you receive this error again please contact MSS directly for fixing."
+              "Calculation error, please try again.\nIf error occurs again, somebody from our team will fix your TT manually."
             );
             return;
           }
 
           if (isNaN(unitPrice)) {
             message.reply(
-              "Calculation error, please try again.\nIf you receive this error again please contact MSS directly for fixing."
+              "Calculation error, please try again.\nIf error occurs again, somebody from our team will fix your TT manually."
             );
             return;
           }
