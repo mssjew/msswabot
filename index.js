@@ -926,7 +926,7 @@ client.on("message", async (message) => {
           if (
             !quoted.fromMe ||
             !quoted.hasQuotedMsg ||
-            !quoted.body.startsWith("Order to fix") ||
+            !quoted.body.startsWith("*REVIEW PRICE THEN CONFIRM:*") ||
             quoted.body.length < 150
           ) {
             message.reply("Not a fixing message. PIN code not applicable.");
