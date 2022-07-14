@@ -782,12 +782,12 @@ client.on("message", async (message) => {
               grabPic().then(pic => {
                 chat.sendMessage(pic)
                 message.reply(
-                  `*REVIEW PRICE AND CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                  `Order to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                 )
               })
             } else {
               message.reply(
-                `*REVIEW PRICE AND CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                `Order to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
               );
             }
 
