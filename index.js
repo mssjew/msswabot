@@ -176,9 +176,9 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 13, 14, 10, 0);
-const date1 = new Date(2022, 6, 13, 14, 15, 0);
-const date2 = new Date(2022, 6, 13, 14, 15, 30);
+const date0 = new Date(2022, 6, 14, 14, 10, 0);
+const date1 = new Date(2022, 6, 14, 14, 15, 0);
+const date2 = new Date(2022, 6, 14, 14, 15, 30);
 
 schedule.scheduleJob(date0, () => {
   client
@@ -199,7 +199,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -215,7 +215,7 @@ schedule.scheduleJob(date2, () => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
@@ -715,7 +715,7 @@ client.on("message", async (message) => {
       } else if (message.from === MATTATHIL_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#5016";
-        newFlag = true;
+        newFlag = false;
       } else if (message.from === JALAL_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#1293";
@@ -782,12 +782,12 @@ client.on("message", async (message) => {
               grabPic().then(pic => {
                 chat.sendMessage(pic)
                 message.reply(
-                  `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
+                  `*REVIEW PRICE AND CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                 )
               })
             } else {
               message.reply(
-                `Order to fix ${quantity} TT at BD${ttPrice} each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire and you will have to place a new order.\n\n*Your fixing code is ${fixingCode}*, please include the #.`
+                `*REVIEW PRICE AND CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order please quote this message and reply with your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
               );
             }
 
@@ -824,7 +824,7 @@ client.on("message", async (message) => {
       } else if (message.body === "#6950") {
         fixerName = "Om Jewellery";
       } else if (message.body === "#0001") {
-        fixerName = "Dummy Jewellers";
+        fixerName = "DUMMY ORDER";
       } else if (message.body === "#1317") {
         fixerName = "Maharani Jewellers";
       } else if (message.body === "#1299") {
@@ -942,7 +942,7 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!`
+              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!\n\n${redCircle} *Note:* TT Bar Stock will arrive Saturday 7pm.`
             );
             client.sendMessage(
               "919946147016@c.us",
