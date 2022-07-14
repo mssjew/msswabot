@@ -878,10 +878,6 @@ client.on("message", async (message) => {
             );
             return;
           }
-
-          for (let i = 0; i < quoted.body.length; i++) {
-            console.log(`Char ${i}: `, quoted.body[i]);
-          }
   
           if (quoted.body.slice(44, 45) === " ") {
             quantity = parseInt(quoted.body.slice(43, 44));
