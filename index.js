@@ -56,7 +56,14 @@ const sajeevNumber = "919946147016@c.us";
 const izharNumber = "97333737302@c.us";
 
 const alertsGroup1 = [MAHARANI_GROUP, AL_SARRAJ_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, MSS_DAILY_REPORT];
+
 const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP];
+
+
+const ttGroup1 = [MAHARANI_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP];
+
+const ttGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP];
+
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 
 const qrcode = require("qrcode-terminal");
@@ -176,15 +183,15 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 14, 14, 10, 0);
-const date1 = new Date(2022, 6, 14, 14, 15, 0);
-const date2 = new Date(2022, 6, 14, 14, 15, 30);
+const date0 = new Date(2022, 6, 16, 18, 35, 0);
+const date1 = new Date(2022, 6, 16, 18, 36, 0);
+const date2 = new Date(2022, 6, 16, 18, 36, 30);
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Inflation alert will send in 5 mins, it should be 3.10pm now"
+      "Dear Customer,\n\nTT Bar stock is now available."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -195,11 +202,11 @@ schedule.scheduleJob(date0, () => {
 });
 
 schedule.scheduleJob(date1, () => {
-  alertsGroup1.forEach((group) => {
+  ttGroup1.forEach((group) => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "Dear Customer,\n\nTT Bar stock is now available."
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -211,11 +218,11 @@ schedule.scheduleJob(date1, () => {
 });
 
 schedule.scheduleJob(date2, () => {
-  alertsGroup2.forEach(group => {
+  ttGroup2.forEach(group => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "Dear Customer,\n\nTT Bar stock is now available."
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
@@ -226,6 +233,40 @@ schedule.scheduleJob(date2, () => {
 
   })
 });
+
+
+// schedule.scheduleJob(date1, () => {
+//   alertsGroup1.forEach((group) => {
+//     client
+//       .sendMessage(
+//         group,
+//         "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//       )
+//       .then((res) => {
+//         console.log("SENT ALERT MESSAGE TO ", group);
+//       })
+//       .catch((err) => {
+//         console.log("ERROR WHILE SENDING TO ", group);
+//       });
+//   });
+// });
+
+// schedule.scheduleJob(date2, () => {
+//   alertsGroup2.forEach(group => {
+//     client
+//     .sendMessage(
+//       group,
+//       "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT MESSAGE TO ", group);
+//     })
+//     .catch((err) => {
+//       console.log("ERROR WHILE SENDING TO ", group);
+//     });
+
+//   })
+// });
 
 
 
