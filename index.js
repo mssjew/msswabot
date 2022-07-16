@@ -49,7 +49,7 @@ const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
 const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 
-const PRICE_CORRECTOR = 0;
+const PRICE_CORRECTOR = -1;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
@@ -942,7 +942,7 @@ client.on("message", async (message) => {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!\n\n${redCircle} *Note:* TT Bar Stock will arrive Saturday 7pm.`
+              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!`
             );
             client.sendMessage(
               "919946147016@c.us",
