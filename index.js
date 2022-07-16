@@ -183,9 +183,9 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 16, 18, 35, 0);
-const date1 = new Date(2022, 6, 16, 18, 36, 0);
-const date2 = new Date(2022, 6, 16, 18, 36, 30);
+const date0 = new Date(2022, 6, 16, 18, 37, 30);
+const date1 = new Date(2022, 6, 16, 18, 38, 0);
+const date2 = new Date(2022, 6, 16, 18, 38, 30);
 
 schedule.scheduleJob(date0, () => {
   client
