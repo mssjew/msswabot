@@ -49,7 +49,7 @@ const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
 const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 
-const PRICE_CORRECTOR = 0;
+const PRICE_CORRECTOR = 6;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
@@ -814,7 +814,7 @@ client.on("message", async (message) => {
             );
           } else {
             const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-            const ttPrice = Math.ceil(ttRate) + TT_PREMIUM;
+            const ttPrice = Math.round(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
             const totalPriceFormatted = numberWithCommas(totalPrice);
