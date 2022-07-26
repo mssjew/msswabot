@@ -48,6 +48,8 @@ const FAIZA_GROUP = "120363024241328715@g.us"; //4841 FAIZA JEWELLERY
 const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
 const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
+///
+const THANGALS_DEMO = "120363043914306999@g.us";//1234
 
 const PRICE_CORRECTOR = 3.5;
 
@@ -183,15 +185,15 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 16, 18, 37, 30);
-const date1 = new Date(2022, 6, 16, 18, 38, 0);
-const date2 = new Date(2022, 6, 16, 18, 3, 30);
+const date0 = new Date(2022, 6, 26, 15, 40, 0);
+const date1 = new Date(2022, 6, 26, 15, 45, 0);
+const date2 = new Date(2022, 6, 26, 15, 45, 30);
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Dear Customer,\n\nTT Bar stock is now available."
+      "Consumer Confidence Alert will send in 5 mins, should be 4.40pm now."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -201,46 +203,12 @@ schedule.scheduleJob(date0, () => {
     });
 });
 
-schedule.scheduleJob(date1, () => {
-  ttGroup1.forEach((group) => {
-    client
-      .sendMessage(
-        group,
-        "Dear Customer,\n\nTT Bar stock is now available."
-      )
-      .then((res) => {
-        console.log("SENT ALERT MESSAGE TO ", group);
-      })
-      .catch((err) => {
-        console.log("ERROR WHILE SENDING TO ", group);
-      });
-  });
-});
-
-schedule.scheduleJob(date2, () => {
-  ttGroup2.forEach(group => {
-    client
-    .sendMessage(
-      group,
-      "Dear Customer,\n\nTT Bar stock is now available."
-    )
-    .then((res) => {
-      console.log("SENT ALERT MESSAGE TO ", group);
-    })
-    .catch((err) => {
-      console.log("ERROR WHILE SENDING TO ", group);
-    });
-
-  })
-});
-
-
 // schedule.scheduleJob(date1, () => {
-//   alertsGroup1.forEach((group) => {
+//   ttGroup1.forEach((group) => {
 //     client
 //       .sendMessage(
 //         group,
-//         "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//         "Dear Customer,\n\nTT Bar stock is now available."
 //       )
 //       .then((res) => {
 //         console.log("SENT ALERT MESSAGE TO ", group);
@@ -252,11 +220,11 @@ schedule.scheduleJob(date2, () => {
 // });
 
 // schedule.scheduleJob(date2, () => {
-//   alertsGroup2.forEach(group => {
+//   ttGroup2.forEach(group => {
 //     client
 //     .sendMessage(
 //       group,
-//       "*Price Movement Alert*\n\nUS Consumer Pricing and Unemployment Data will be published in 15 mins, at 3.30pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//       "Dear Customer,\n\nTT Bar stock is now available."
 //     )
 //     .then((res) => {
 //       console.log("SENT ALERT MESSAGE TO ", group);
@@ -267,6 +235,40 @@ schedule.scheduleJob(date2, () => {
 
 //   })
 // });
+
+
+schedule.scheduleJob(date1, () => {
+  alertsGroup1.forEach((group) => {
+    client
+      .sendMessage(
+        group,
+        "*Price Movement Alert*\n\nUS Consumer Confidence Data will be published in 15 mins, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      )
+      .then((res) => {
+        console.log("SENT ALERT MESSAGE TO ", group);
+      })
+      .catch((err) => {
+        console.log("ERROR WHILE SENDING TO ", group);
+      });
+  });
+});
+
+schedule.scheduleJob(date2, () => {
+  alertsGroup2.forEach(group => {
+    client
+    .sendMessage(
+      group,
+      "*Price Movement Alert*\n\nUS Consumer Confidence Data will be published in 15 mins, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+    )
+    .then((res) => {
+      console.log("SENT ALERT MESSAGE TO ", group);
+    })
+    .catch((err) => {
+      console.log("ERROR WHILE SENDING TO ", group);
+    });
+
+  })
+});
 
 
 
