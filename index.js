@@ -50,7 +50,8 @@ const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 ///
 const THANGALS_DEMO = "120363043914306999@g.us";//1234
-const CHEMMANUR_GROUP = "120363026813742205@g.us"
+const CHEMMANUR_GROUP = "120363026813742205@g.us";//4472
+// Chemmanur Jewellers
 
 const PRICE_CORRECTOR = 3.5;
 
@@ -99,6 +100,7 @@ const VALID_CODES = [
   "#6555",
   "#4897",
   "#4496",
+  "#4472",
   "#0001",
 ];
 
@@ -187,24 +189,10 @@ const quantityCalc = (arr) => {
 };
 
 
-const dateNow = new Date(2022, 6, 27, 18, 54, 0);
 const date0 = new Date(2022, 6, 27, 19, 40, 0);
 const date1 = new Date(2022, 6, 27, 19, 45, 0);
 const date2 = new Date(2022, 6, 27, 19, 45, 30);
 
-schedule.scheduleJob(dateNow, () => {
-  client
-    .sendMessage(
-      hamzaNumber,
-      "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO HS");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
 
 schedule.scheduleJob(date0, () => {
   client
@@ -467,9 +455,7 @@ client.on("message", async (message) => {
       company = "Kenz Al Bahrain";
       mainRange = "Kenz_K00010!D2:L101";
     } else if (
-      message.from === AL_SARRAJ_GROUP ||
-      message.from === DUMMY_SARAJ
-    ) {
+      message.from === AL_SARRAJ_GROUP) {
       company = "Al Sarraj Jewellers";
       mainRange = "AlSarraj_!D2:L101";
     } else if (message.from === OM_GROUP) {
@@ -520,10 +506,16 @@ client.on("message", async (message) => {
     } else if (message.from === JP_GROUP) {
       company = "J and P Jewellers";
       mainRange = "J_and_P!D2:L101";
+    } else if (message.from === CHEMMANUR_GROUP ||
+      message.from === DUMMY_SARAJ) {
+      company = "Chemmanur Jewellers";
+      mainRange = "CHEMMANUR_JEWELLERY!D2:L101";
     } else {
       company = "";
       mainRange = "NA";
     }
+
+
 
     //1293 Al-Jalal Jewellery *
     //9152 Al-Arefi Jewellery*
@@ -679,7 +671,8 @@ client.on("message", async (message) => {
       message.from === ALAA_GROUP ||
       message.from === LIBERTY_GROUP ||
       message.from === FAIZA_GROUP ||
-      message.from === FAREEDA_GROUP
+      message.from === FAREEDA_GROUP ||
+      message.from === CHEMMANUR_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (
@@ -809,9 +802,13 @@ client.on("message", async (message) => {
         TT_PREMIUM = -2;
         fixingCode = "#4496";
         newFlag = true;
+      } else if (message.from === CHEMMANUR_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#4472";
+        newFlag = true;
       } else if (message.from === DUMMY_SARAJ) {
-        TT_PREMIUM = -3.5;
-        fixingCode = "#4496";
+        TT_PREMIUM = 0;
+        fixingCode = "#0101";
         newFlag = true;
       } else {
         TT_PREMIUM = 0;
@@ -921,6 +918,8 @@ client.on("message", async (message) => {
         fixerName = "Fareeda Jewellery";
       } else if (message.body === "#4496") {
         fixerName = "J and P Jewellers";
+      } else if (message.body === "#4472") {
+        fixerName = "Chemmanur Jewellers";
       }
 
       message
