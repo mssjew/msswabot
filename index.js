@@ -50,6 +50,7 @@ const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 ///
 const THANGALS_DEMO = "120363043914306999@g.us";//1234
+const CHEMMANUR_GROUP = "120363026813742205@g.us"
 
 const PRICE_CORRECTOR = 3.5;
 
@@ -59,7 +60,7 @@ const izharNumber = "97333737302@c.us";
 
 const alertsGroup1 = [MAHARANI_GROUP, AL_SARRAJ_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, MSS_DAILY_REPORT];
 
-const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP];
+const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, CHEMMANUR_GROUP];
 
 
 const ttGroup1 = [MAHARANI_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP];
@@ -185,15 +186,31 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 6, 26, 15, 40, 0);
-const date1 = new Date(2022, 6, 26, 15, 45, 0);
-const date2 = new Date(2022, 6, 26, 15, 45, 30);
+
+const dateNow = new Date(2022, 6, 27, 18, 54, 0);
+const date0 = new Date(2022, 6, 27, 19, 40, 0);
+const date1 = new Date(2022, 6, 27, 19, 45, 0);
+const date2 = new Date(2022, 6, 27, 19, 45, 30);
+
+schedule.scheduleJob(dateNow, () => {
+  client
+    .sendMessage(
+      hamzaNumber,
+      "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO HS");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
+});
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Consumer Confidence Alert will send in 5 mins, should be 4.40pm now."
+      "FOMC Alert will send in 5 mins, should be 8.40pm now."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -242,7 +259,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Consumer Confidence Data will be published in 15 mins, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -258,7 +275,7 @@ schedule.scheduleJob(date2, () => {
     client
     .sendMessage(
       group,
-      "*Price Movement Alert*\n\nUS Consumer Confidence Data will be published in 15 mins, at 5pm Bahrain Time.\n\nGold price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
     )
     .then((res) => {
       console.log("SENT ALERT MESSAGE TO ", group);
