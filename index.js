@@ -735,7 +735,7 @@ client.on("message", async (message) => {
     } else {
       newFlag = false;
       if (message.from === MAHARANI_GROUP) {
-        TT_PREMIUM = -3;
+        TT_PREMIUM = -4;
         fixingCode = "#1317";
       } else if (message.from === NEW_MARHABA_GROUP) {
         TT_PREMIUM = -2;
