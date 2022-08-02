@@ -7,8 +7,8 @@ const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
 
-const CURR_MONTH = "July 2022";
-const MONTH_SEP = "Jul";
+const CURR_MONTH = "August 2022";
+const MONTH_SEP = "Aug";
 
 var mainRange = ``;
 
@@ -445,7 +445,8 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase() === "!bookings") {
     let company = "";
 
-    if (message.from === MAHARANI_GROUP) {
+    if (message.from === MAHARANI_GROUP  ||
+      message.from === DUMMY_SARAJ) {
       company = "Maharani Jewellers";
       mainRange = "Maharani_K00014!D2:L101";
     } else if (message.from === NEW_MARHABA_GROUP) {
@@ -506,8 +507,7 @@ client.on("message", async (message) => {
     } else if (message.from === JP_GROUP) {
       company = "J and P Jewellers";
       mainRange = "J_and_P!D2:L101";
-    } else if (message.from === CHEMMANUR_GROUP ||
-      message.from === DUMMY_SARAJ) {
+    } else if (message.from === CHEMMANUR_GROUP) {
       company = "Chemmanur Jewellers";
       mainRange = "CHEMMANUR_JEWELLERY!D2:L101";
     } else {
