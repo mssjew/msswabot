@@ -53,7 +53,7 @@ const THANGALS_DEMO = "120363043914306999@g.us";//1234
 const CHEMMANUR_GROUP = "120363026813742205@g.us";//4472
 // Chemmanur Jewellers
 
-const PRICE_CORRECTOR = 3.5;
+const PRICE_CORRECTOR = 0;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
