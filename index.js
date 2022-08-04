@@ -51,6 +51,10 @@ const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 ///
 const THANGALS_DEMO = "120363043914306999@g.us";//1234
 const CHEMMANUR_GROUP = "120363026813742205@g.us";//4472
+
+const JASRA_GROUP = "120363024380410414@g.us"; //8293
+const SONA_GROUP = "120363043168822900@g.us"//1152
+
 // Chemmanur Jewellers
 
 const PRICE_CORRECTOR = 0;
@@ -59,14 +63,14 @@ const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
 const izharNumber = "97333737302@c.us";
 
-const alertsGroup1 = [MAHARANI_GROUP, AL_SARRAJ_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, MSS_DAILY_REPORT];
+const alertsGroup1 = [MAHARANI_GROUP, AL_SARRAJ_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, MSS_DAILY_REPORT, JASRA_GROUP];
 
-const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, CHEMMANUR_GROUP];
+const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, CHEMMANUR_GROUP, SONA_GROUP];
 
 
-const ttGroup1 = [MAHARANI_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP];
+const ttGroup1 = [MAHARANI_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, CHEMMANUR_GROUP, JASRA_GROUP];
 
-const ttGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP];
+const ttGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, SONA_GROUP];
 
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 
@@ -101,6 +105,8 @@ const VALID_CODES = [
   "#4897",
   "#4496",
   "#4472",
+  "#8293",
+  "#1152",
   "#0001",
 ];
 
@@ -126,6 +132,12 @@ const VALID_CODES = [
 //6555 Evershine Jewellery
 //4897 FAREEDA JEWELLERY
 //4496 J AND P JEWELLERS
+
+//8293 Jasra
+//1152 Sona
+
+
+
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -189,24 +201,24 @@ const quantityCalc = (arr) => {
 };
 
 
-const date0 = new Date(2022, 6, 27, 19, 40, 0);
-const date1 = new Date(2022, 6, 27, 19, 45, 0);
-const date2 = new Date(2022, 6, 27, 19, 45, 30);
+// const date0 = new Date(2022, 6, 27, 19, 40, 0);
+// const date1 = new Date(2022, 6, 27, 19, 45, 0);
+// const date2 = new Date(2022, 6, 27, 19, 45, 30);
 
 
-schedule.scheduleJob(date0, () => {
-  client
-    .sendMessage(
-      hamzaNumber,
-      "FOMC Alert will send in 5 mins, should be 8.40pm now."
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO HS");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
+// schedule.scheduleJob(date0, () => {
+//   client
+//     .sendMessage(
+//       hamzaNumber,
+//       "FOMC Alert will send in 5 mins, should be 8.40pm now."
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT REMINDER TO HS");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+//     });
+// });
 
 // schedule.scheduleJob(date1, () => {
 //   ttGroup1.forEach((group) => {
@@ -242,38 +254,38 @@ schedule.scheduleJob(date0, () => {
 // });
 
 
-schedule.scheduleJob(date1, () => {
-  alertsGroup1.forEach((group) => {
-    client
-      .sendMessage(
-        group,
-        "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-      )
-      .then((res) => {
-        console.log("SENT ALERT MESSAGE TO ", group);
-      })
-      .catch((err) => {
-        console.log("ERROR WHILE SENDING TO ", group);
-      });
-  });
-});
+// schedule.scheduleJob(date1, () => {
+//   alertsGroup1.forEach((group) => {
+//     client
+//       .sendMessage(
+//         group,
+//         "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//       )
+//       .then((res) => {
+//         console.log("SENT ALERT MESSAGE TO ", group);
+//       })
+//       .catch((err) => {
+//         console.log("ERROR WHILE SENDING TO ", group);
+//       });
+//   });
+// });
 
-schedule.scheduleJob(date2, () => {
-  alertsGroup2.forEach(group => {
-    client
-    .sendMessage(
-      group,
-      "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-    )
-    .then((res) => {
-      console.log("SENT ALERT MESSAGE TO ", group);
-    })
-    .catch((err) => {
-      console.log("ERROR WHILE SENDING TO ", group);
-    });
+// schedule.scheduleJob(date2, () => {
+//   alertsGroup2.forEach(group => {
+//     client
+//     .sendMessage(
+//       group,
+//       "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT MESSAGE TO ", group);
+//     })
+//     .catch((err) => {
+//       console.log("ERROR WHILE SENDING TO ", group);
+//     });
 
-  })
-});
+//   })
+// });
 
 
 
@@ -431,7 +443,7 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!commands") {
     message.reply(
-      "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!booking* = 24/7 Fixing Service. (min. 5 TT)"
+      "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!fix* = 24/7 Fixing Service."
     );
   } // end !commands
 
@@ -650,9 +662,13 @@ client.on("message", async (message) => {
   //4897 FAREEDA JEWELLERY 0 *
   //4496 J AND P JEWELLERS -2 *
 
+
+//8293 Jasra +2
+//1152 Sona +2
+
   if (message.body.toLowerCase() === "!tt") {
     if (
-      message.from === MAHARANI_GROUP ||
+
       message.from === NEW_MARHABA_GROUP ||
       message.from === EVERSHINE_GROUP ||
       message.from === JP_GROUP ||
@@ -661,7 +677,7 @@ client.on("message", async (message) => {
       message.from === MUKESH_GROUP
     ) {
       TT_PREMIUM = -2;
-    } else if (message.from === KENZ_GROUP) {
+    } else if (message.from === KENZ_GROUP || message.from === MAHARANI_GROUP) {
       console.log("MESSAGE FROM KENZ");
       TT_PREMIUM = -3;
     } else if (
@@ -683,7 +699,12 @@ client.on("message", async (message) => {
       message.from === SHAHZAIB_GROUP
     ) {
       TT_PREMIUM = -1;
-    } else {
+    } else if (
+      message.from === JASRA_GROUP ||
+      message.from === SONA_GROUP
+    ) {
+      TT_PREMIUM = +2;
+    }else {
       TT_PREMIUM = 0;
     }
 
@@ -723,6 +744,11 @@ client.on("message", async (message) => {
   //6555  Evershine Jewellery -2 *
   //4897 FAREEDA JEWELLERY 0 *
   //4496 J AND P JEWELLERS -2 *
+
+//8293 Jasra +2
+//1152 Sona +2
+
+  
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
 
@@ -805,6 +831,14 @@ client.on("message", async (message) => {
       } else if (message.from === CHEMMANUR_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#4472";
+        newFlag = true;
+      } else if (message.from === JASRA_GROUP) {
+        TT_PREMIUM = 2;
+        fixingCode = "#8293";
+        newFlag = true;
+      } else if (message.from === SONA_GROUP) {
+        TT_PREMIUM = 2;
+        fixingCode = "#1152";
         newFlag = true;
       } else if (message.from === DUMMY_SARAJ) {
         TT_PREMIUM = 0;
@@ -920,6 +954,10 @@ client.on("message", async (message) => {
         fixerName = "J and P Jewellers";
       } else if (message.body === "#4472") {
         fixerName = "Chemmanur Jewellers";
+      } else if (message.body === "#8293") {
+        fixerName = "Al Jasrah Jewellers";
+      } else if (message.body === "#1152") {
+        fixerName = "Sonaj Jewellers";
       }
 
       message
