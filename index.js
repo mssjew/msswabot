@@ -201,24 +201,26 @@ const quantityCalc = (arr) => {
 };
 
 
-// const date0 = new Date(2022, 6, 27, 19, 40, 0);
-// const date1 = new Date(2022, 6, 27, 19, 45, 0);
-// const date2 = new Date(2022, 6, 27, 19, 45, 30);
+const date0 = new Date(2022, 7, 5, 14, 10, 0);
+const date1 = new Date(2022, 7, 5, 14, 15, 0);
+const date2 = new Date(2022, 7, 5, 14, 15, 30);
 
 
-// schedule.scheduleJob(date0, () => {
-//   client
-//     .sendMessage(
-//       hamzaNumber,
-//       "FOMC Alert will send in 5 mins, should be 8.40pm now."
-//     )
-//     .then((res) => {
-//       console.log("SENT ALERT REMINDER TO HS");
-//     })
-//     .catch((err) => {
-//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-//     });
-// });
+
+
+schedule.scheduleJob(date0, () => {
+  client
+    .sendMessage(
+      hamzaNumber,
+      "Unemployment Alert will send in 5 mins, should be 3.10pm now."
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO HS");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
+});
 
 // schedule.scheduleJob(date1, () => {
 //   ttGroup1.forEach((group) => {
@@ -254,21 +256,37 @@ const quantityCalc = (arr) => {
 // });
 
 
-// schedule.scheduleJob(date1, () => {
-//   alertsGroup1.forEach((group) => {
-//     client
-//       .sendMessage(
-//         group,
-//         "*Price Movement Alert*\n\nFOMC Statement will be published at 9pm. Fed Chairman Jerome Powell will be speaking at 9.30pm.\n\nGold price is expected to move between 9 and 10pm.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-//       )
-//       .then((res) => {
-//         console.log("SENT ALERT MESSAGE TO ", group);
-//       })
-//       .catch((err) => {
-//         console.log("ERROR WHILE SENDING TO ", group);
-//       });
-//   });
-// });
+schedule.scheduleJob(date1, () => {
+  alertsGroup1.forEach((group) => {
+    client
+      .sendMessage(
+        group,
+        "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      )
+      .then((res) => {
+        console.log("SENT ALERT MESSAGE TO ", group);
+      })
+      .catch((err) => {
+        console.log("ERROR WHILE SENDING TO ", group);
+      });
+  });
+});
+
+schedule.scheduleJob(date2, () => {
+  alertsGroup2.forEach((group) => {
+    client
+      .sendMessage(
+        group,
+        "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+      )
+      .then((res) => {
+        console.log("SENT ALERT MESSAGE TO ", group);
+      })
+      .catch((err) => {
+        console.log("ERROR WHILE SENDING TO ", group);
+      });
+  });
+});
 
 // schedule.scheduleJob(date2, () => {
 //   alertsGroup2.forEach(group => {
@@ -443,7 +461,7 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!commands") {
     message.reply(
-      "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!fix* = 24/7 Fixing Service."
+      "*!price* = Live Gold Price.\n\n*!tt* = Live TT Rate.\n\n*!fix* = 24/7 Fixing Service.\n\n*!bookings* = View your monthly TT bookings."
     );
   } // end !commands
 
