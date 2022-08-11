@@ -673,10 +673,9 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!p2") {
     goldPrice2().then((price) => {
-      console.log(price);
+      console.log(price.data);
       console.log("-------------------");
-      console.log("-------------------");
-      console.log(price.results[0].ask_price);
+      console.log(price.data.results[0]);
     });
   }
 
