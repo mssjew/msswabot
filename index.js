@@ -665,7 +665,7 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase() === "!price") {
-    goldPrice().then((price) => {
+    goldPrice2().then((price) => {
       message.reply(`Current Price: $${price}`);
     });
   }
@@ -744,7 +744,7 @@ client.on("message", async (message) => {
       TT_PREMIUM = +2;
     }
 
-    goldPrice().then((price) => {
+    goldPrice2().then((price) => {
       if (isNaN(TT_PREMIUM)) {
         message.reply(
           "Application error.\nSorry, someone from our team will respond to your query now."
@@ -895,7 +895,7 @@ client.on("message", async (message) => {
       } else if (quantity > 15) {
         message.reply(`${redXEmoji} Sorry, you can only fix a maximum 15TT in one order.\n\nIf you want to fix more than 15 TT please start another order.`);
       } else {
-        goldPrice().then((price) => {
+        goldPrice2().then((price) => {
           if (isNaN(TT_PREMIUM)) {
             message.reply(
               "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
