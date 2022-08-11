@@ -381,6 +381,11 @@ async function goldPrice() {
   return resp.data.price;
 }
 
+async function goldPrice2() {
+  let resp = await axios.get("https://api.polygon.io/v3/quotes/C:XAU-USD?apiKey=MSrxp0wCzzxnwMtWQaCS9OA3ph2jlA9w");
+  return resp;
+}
+
 async function goldPriceStats() {
   let resp = await axios.get("https://www.goldapi.io/api/stat", {
     headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
@@ -664,6 +669,17 @@ client.on("message", async (message) => {
       message.reply(`Current Price: $${price}`);
     });
   }
+
+
+  if (message.body.toLowerCase() === "!p2") {
+    goldPrice2().then((price) => {
+      console.log(price);
+      console.log("-------------------");
+      console.log("-------------------");
+      console.log(price.results[0].ask_price);
+    });
+  }
+
 
   // 6572 sarraj *
   // 6950 om *
