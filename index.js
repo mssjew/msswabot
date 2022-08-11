@@ -666,7 +666,7 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!price") {
     goldPrice2().then((price) => {
-      message.reply(`Current Price: $${price}`);
+      message.reply(`Current Price: $${price.data.results[0].ask_price}`);
     });
   }
 
@@ -750,7 +750,7 @@ client.on("message", async (message) => {
           "Application error.\nSorry, someone from our team will respond to your query now."
         );
       } else {
-        const ttRate = (price + PRICE_CORRECTOR) * 1.417;
+        const ttRate = (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(`Current TT Rate: BD${ttPrice}\n\n_Please Note: When you enter the !fix command it will check the live gold price again. So if the price is volatile you might get a different TT rate._`);
       }
@@ -901,7 +901,7 @@ client.on("message", async (message) => {
               "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
             );
           } else {
-            const ttRate = (price + PRICE_CORRECTOR) * 1.417;
+            const ttRate = (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.round(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
