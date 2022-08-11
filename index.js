@@ -49,11 +49,15 @@ const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
 const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 ///
-const THANGALS_DEMO = "120363043914306999@g.us";//1234
+const THANGALS_DEMO = "120363043914306999@g.us";//1233
 const CHEMMANUR_GROUP = "120363026813742205@g.us";//4472
 
 const JASRA_GROUP = "120363024380410414@g.us"; //8293
 const SONA_GROUP = "120363043168822900@g.us"//1152
+
+
+const AGK_GROUP = "120363026257640092@g.us"//#1234
+
 
 // Chemmanur Jewellers
 
@@ -107,6 +111,7 @@ const VALID_CODES = [
   "#4472",
   "#8293",
   "#1152",
+  "#1234",
   "#0001",
 ];
 
@@ -540,6 +545,9 @@ client.on("message", async (message) => {
     } else if (message.from === CHEMMANUR_GROUP) {
       company = "Chemmanur Jewellers";
       mainRange = "CHEMMANUR_JEWELLERY!D2:L101";
+    } else if (message.from === AGK_GROUP) {
+      company = "AGK Jewellers";
+      mainRange = "AGK_A00010!D2:L101";
     } else {
       company = "";
       mainRange = "NA";
@@ -686,7 +694,6 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!tt") {
     if (
-
       message.from === NEW_MARHABA_GROUP ||
       message.from === EVERSHINE_GROUP ||
       message.from === JP_GROUP ||
@@ -706,7 +713,8 @@ client.on("message", async (message) => {
       message.from === LIBERTY_GROUP ||
       message.from === FAIZA_GROUP ||
       message.from === FAREEDA_GROUP ||
-      message.from === CHEMMANUR_GROUP
+      message.from === CHEMMANUR_GROUP ||
+      message.from == AGK_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (
@@ -862,6 +870,10 @@ client.on("message", async (message) => {
         TT_PREMIUM = 0;
         fixingCode = "#0101";
         newFlag = true;
+      } else if (message.from === AGK_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#1234";
+        newFlag = true;
       } else {
         TT_PREMIUM = 0;
       }
@@ -976,6 +988,8 @@ client.on("message", async (message) => {
         fixerName = "Al Jasrah Jewellers";
       } else if (message.body === "#1152") {
         fixerName = "Sonaj Jewellers";
+      } else if (message.body === "#1234") {
+        fixerName = "AGK Jewellers";
       }
 
       message
