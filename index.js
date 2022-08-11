@@ -729,8 +729,6 @@ client.on("message", async (message) => {
       message.from === SONA_GROUP
     ) {
       TT_PREMIUM = +2;
-    }else {
-      TT_PREMIUM = 0;
     }
 
     goldPrice().then((price) => {
