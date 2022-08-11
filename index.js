@@ -671,11 +671,9 @@ client.on("message", async (message) => {
   }
 
 
-  if (message.body.toLowerCase() === "!p2") {
+  if (message.body.toLowerCase() === "!pp") {
     goldPrice2().then((price) => {
-      console.log(price.data);
-      console.log("-------------------");
-      console.log(price.data.results[0]);
+      message.reply(`Current Price: $${price.data.results[0].ask_price}`);
     });
   }
 
