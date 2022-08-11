@@ -483,71 +483,71 @@ client.on("message", async (message) => {
     if (message.from === MAHARANI_GROUP  ||
       message.from === DUMMY_SARAJ) {
       company = "Maharani Jewellers";
-      mainRange = "Maharani_K00014!D2:L101";
+      mainRange = "Maharani_K00014!D2:L201";
     } else if (message.from === NEW_MARHABA_GROUP) {
       company = "New Marhaba Jewellery";
-      mainRange = "NewMarhaba_N00001!D2:L101";
+      mainRange = "NewMarhaba_N00001!D2:L201";
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
-      mainRange = "Kenz_K00010!D2:L101";
+      mainRange = "Kenz_K00010!D2:L201";
     } else if (
       message.from === AL_SARRAJ_GROUP) {
       company = "Al Sarraj Jewellers";
-      mainRange = "AlSarraj_!D2:L101";
+      mainRange = "AlSarraj_!D2:L201";
     } else if (message.from === OM_GROUP) {
       company = "Om Jewellery";
-      mainRange = "Om_O0001!D2:L101";
+      mainRange = "Om_O0001!D2:L201";
     } else if (message.from === MUNTHER_GROUP) {
       company = "Munther Jewellery";
-      mainRange = "Munther_M!D2:L101";
+      mainRange = "Munther_M!D2:L201";
     } else if (message.from === CHANDNI_GROUP) {
       company = "Chandni Jewellers";
-      mainRange = "Chandni!D2:L101";
+      mainRange = "Chandni!D2:L201";
     } else if (message.from === SUDEEP_GROUP) {
       company = "Sudeep Jewellery";
-      mainRange = "Sudeep_!D2:L101";
+      mainRange = "Sudeep_!D2:L201";
     } else if (message.from === MUKESH_GROUP) {
       company = "Mukesh & Brothers";
-      mainRange = "MukeshBros_!D2:L101";
+      mainRange = "MukeshBros_!D2:L201";
     } else if (message.from === MATTATHIL_GROUP) {
       company = "Mattathil Jewellers";
-      mainRange = "MATTATHIL_JEWELLERY!D2:L101";
+      mainRange = "MATTATHIL_JEWELLERY!D2:L201";
     } else if (message.from === JALAL_GROUP) {
       company = "Al-Jalal Jewellers";
-      mainRange = "Jalal_Jewellery!D2:L101";
+      mainRange = "Jalal_Jewellery!D2:L201";
     } else if (message.from === DDEVJI_GROUP) {
       company = "Dinesh Devji Jewellers";
-      mainRange = "Devji21_D00001!D2:L101";
+      mainRange = "Devji21_D00001!D2:L201";
     } else if (message.from === DILU_GROUP) {
       company = "Dilu Jewellers";
-      mainRange = "Dilu!D2:L101";
+      mainRange = "Dilu!D2:L201";
     } else if (message.from === ALAA_GROUP) {
       company = "Alaa Jewellery";
-      mainRange = "Alaa_A00086!D2:L101";
+      mainRange = "Alaa_A00086!D2:L201";
     } else if (message.from === LIBERTY_GROUP) {
       company = "Liberty Jewellery";
-      mainRange = "Liberty_L00001!D2:L101";
+      mainRange = "Liberty_L00001!D2:L201";
     } else if (message.from === SHAHZAIB_GROUP) {
       company = "Shahzaib Jewellery";
-      mainRange = "Shahzaib_!D2:L101";
+      mainRange = "Shahzaib_!D2:L201";
     } else if (message.from === FAIZA_GROUP) {
       company = "Faiza Jewellery";
-      mainRange = "Faiza!D2:L101";
+      mainRange = "Faiza!D2:L201";
     } else if (message.from === EVERSHINE_GROUP) {
       company = "Evershine Jewellery";
-      mainRange = "Evershine_Jewellery!D2:L101";
+      mainRange = "Evershine_Jewellery!D2:L201";
     } else if (message.from === FAREEDA_GROUP) {
       company = "Fareeda Jewellery";
-      mainRange = "FAREEDA_JEWELLERY!D2:L101";
+      mainRange = "FAREEDA_JEWELLERY!D2:L201";
     } else if (message.from === JP_GROUP) {
       company = "J and P Jewellers";
-      mainRange = "J_and_P!D2:L101";
+      mainRange = "J_and_P!D2:L201";
     } else if (message.from === CHEMMANUR_GROUP) {
       company = "Chemmanur Jewellers";
-      mainRange = "CHEMMANUR_JEWELLERY!D2:L101";
+      mainRange = "CHEMMANUR_JEWELLERY!D2:L201";
     } else if (message.from === AGK_GROUP) {
       company = "AGK Jewellers";
-      mainRange = "AGK!D2:L101";
+      mainRange = "AGK!D2:L201";
     } else {
       company = "";
       mainRange = "NA";
@@ -870,7 +870,6 @@ client.on("message", async (message) => {
         fixingCode = "#0101";
         newFlag = true;
       } else if (message.from === AGK_GROUP) {
-        TT_PREMIUM = 0;
         fixingCode = "#1234";
       } else {
         TT_PREMIUM = 0;
