@@ -547,7 +547,7 @@ client.on("message", async (message) => {
       mainRange = "CHEMMANUR_JEWELLERY!D2:L101";
     } else if (message.from === AGK_GROUP) {
       company = "AGK Jewellers";
-      mainRange = "AGK_A00010!D2:L101";
+      mainRange = "AGK!D2:L101";
     } else {
       company = "";
       mainRange = "NA";
@@ -713,8 +713,7 @@ client.on("message", async (message) => {
       message.from === LIBERTY_GROUP ||
       message.from === FAIZA_GROUP ||
       message.from === FAREEDA_GROUP ||
-      message.from === CHEMMANUR_GROUP ||
-      message.from == AGK_GROUP
+      message.from === CHEMMANUR_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (
@@ -873,7 +872,6 @@ client.on("message", async (message) => {
       } else if (message.from === AGK_GROUP) {
         TT_PREMIUM = 0;
         fixingCode = "#1234";
-        newFlag = true;
       } else {
         TT_PREMIUM = 0;
       }
@@ -1139,15 +1137,15 @@ client.on("message", async (message) => {
   }
 
   if (message.body === "!getpremium") {
-    const chat = await message.getChat();
-    if (
-      message.from === "97333737302@c.us" ||
-      message.from === "97338999888@c.us"
-    ) {
+    // const chat = await message.getChat();
+    // if (
+    //   message.from === "97333737302@c.us" ||
+    //   message.from === "97338999888@c.us"
+    // ) {
       message.reply(`Current Premium: BD${TT_PREMIUM}`);
-    } else {
-      message.reply("Not authorized.");
-    }
+    // } else {
+    //   message.reply("Not authorized.");
+    // }
   }
 
   if (message.body.includes("!apiStats")) {
