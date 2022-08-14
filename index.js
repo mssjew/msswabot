@@ -49,15 +49,13 @@ const EVERSHINE_GROUP = "120363041152671102@g.us"; //6555  Evershine Jewellery
 const FAREEDA_GROUP = "120363042406237560@g.us"; //4897 FAREEDA JEWELLERY
 const JP_GROUP = "120363042038578843@g.us"; //4496 J AND P JEWELLERS
 ///
-const THANGALS_DEMO = "120363043914306999@g.us";//1233
-const CHEMMANUR_GROUP = "120363026813742205@g.us";//4472
+const THANGALS_DEMO = "120363043914306999@g.us"; //1233
+const CHEMMANUR_GROUP = "120363026813742205@g.us"; //4472
 
 const JASRA_GROUP = "120363024380410414@g.us"; //8293
-const SONA_GROUP = "120363043168822900@g.us"//1152
+const SONA_GROUP = "120363043168822900@g.us"; //1152
 
-
-const AGK_GROUP = "120363026257640092@g.us"//#1234
-
+const AGK_GROUP = "120363026257640092@g.us"; //#1234
 
 // Chemmanur Jewellers
 
@@ -67,21 +65,71 @@ const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
 const izharNumber = "97333737302@c.us";
 
-const alertsGroup1 = [MAHARANI_GROUP, AL_SARRAJ_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, MSS_DAILY_REPORT, JASRA_GROUP];
+const alertsGroup1 = [
+  MAHARANI_GROUP,
+  AL_SARRAJ_GROUP,
+  KENZ_GROUP,
+  OM_GROUP,
+  NEW_MARHABA_GROUP,
+  MUNTHER_GROUP,
+  CHANDNI_GROUP,
+  SUDEEP_GROUP,
+  MUKESH_GROUP,
+  MATTATHIL_GROUP,
+  MSS_DAILY_REPORT,
+  JASRA_GROUP,
+];
 
-const alertsGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, CHEMMANUR_GROUP, SONA_GROUP];
+const alertsGroup2 = [
+  JALAL_GROUP,
+  AREFI_GROUP,
+  DDEVJI_GROUP,
+  DILU_GROUP,
+  ALAA_GROUP,
+  LIBERTY_GROUP,
+  SHAHZAIB_GROUP,
+  FAIZA_GROUP,
+  EVERSHINE_GROUP,
+  FAREEDA_GROUP,
+  JP_GROUP,
+  CHEMMANUR_GROUP,
+  SONA_GROUP,
+];
 
+const ttGroup1 = [
+  MAHARANI_GROUP,
+  KENZ_GROUP,
+  OM_GROUP,
+  NEW_MARHABA_GROUP,
+  MUNTHER_GROUP,
+  CHANDNI_GROUP,
+  SUDEEP_GROUP,
+  MUKESH_GROUP,
+  MATTATHIL_GROUP,
+  CHEMMANUR_GROUP,
+  JASRA_GROUP,
+];
 
-const ttGroup1 = [MAHARANI_GROUP, KENZ_GROUP, OM_GROUP, NEW_MARHABA_GROUP, MUNTHER_GROUP, CHANDNI_GROUP, SUDEEP_GROUP, MUKESH_GROUP, MATTATHIL_GROUP, CHEMMANUR_GROUP, JASRA_GROUP];
-
-const ttGroup2 = [JALAL_GROUP, AREFI_GROUP, DDEVJI_GROUP, DILU_GROUP, ALAA_GROUP, LIBERTY_GROUP, SHAHZAIB_GROUP, FAIZA_GROUP, EVERSHINE_GROUP, FAREEDA_GROUP, JP_GROUP, SONA_GROUP];
+const ttGroup2 = [
+  JALAL_GROUP,
+  AREFI_GROUP,
+  DDEVJI_GROUP,
+  DILU_GROUP,
+  ALAA_GROUP,
+  LIBERTY_GROUP,
+  SHAHZAIB_GROUP,
+  FAIZA_GROUP,
+  EVERSHINE_GROUP,
+  FAREEDA_GROUP,
+  JP_GROUP,
+  SONA_GROUP,
+];
 
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
 
 const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
-const { MessageMedia } = require('whatsapp-web.js');
-
+const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
@@ -140,9 +188,6 @@ const VALID_CODES = [
 
 //8293 Jasra
 //1152 Sona
-
-
-
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -205,13 +250,9 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-
 const date0 = new Date(2022, 7, 5, 14, 10, 0);
 const date1 = new Date(2022, 7, 5, 14, 15, 0);
 const date2 = new Date(2022, 7, 5, 14, 15, 30);
-
-
-
 
 schedule.scheduleJob(date0, () => {
   client
@@ -259,7 +300,6 @@ schedule.scheduleJob(date0, () => {
 
 //   })
 // });
-
 
 schedule.scheduleJob(date1, () => {
   alertsGroup1.forEach((group) => {
@@ -309,9 +349,6 @@ schedule.scheduleJob(date2, () => {
 
 //   })
 // });
-
-
-
 
 const unixConverter = (timestamp) => {
   var unix_timestamp = timestamp;
@@ -382,7 +419,9 @@ async function goldPrice() {
 }
 
 async function goldPrice2() {
-  let resp = await axios.get("https://api.polygon.io/v3/quotes/C:XAU-USD?apiKey=MSrxp0wCzzxnwMtWQaCS9OA3ph2jlA9w");
+  let resp = await axios.get(
+    "https://api.polygon.io/v3/quotes/C:XAU-USD?apiKey=MSrxp0wCzzxnwMtWQaCS9OA3ph2jlA9w"
+  );
   return resp;
 }
 
@@ -401,10 +440,11 @@ async function goldAPIStatus() {
 }
 
 async function grabPic() {
-  const media = await MessageMedia.fromUrl('https://msspricess.b-cdn.net/orderM3.jpg');
+  const media = await MessageMedia.fromUrl(
+    "https://msspricess.b-cdn.net/orderM3.jpg"
+  );
   return media;
 }
-
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -479,14 +519,18 @@ client.on("message", async (message) => {
     grabPic().then((pic) => {
       message.reply(pic);
     });
-    }
+  }
 
+  if (message.body.toLowerCase() === "!groups") {
+    message.reply(
+      "Group Numbers:\n\n0 - Maharani\n1 - New Marhaba\n2 Sarraj\n3 - Om\n4 - Munther\n5 - Chandni\n6 - Sudeep\n7 - Mukesh\n8 - Mattathil\n9 - Jalal\n10 - D. Devji\n11 - Dilu\n12 - Alaa\n13 - Liberty\n14 - Shahzaib\n15 - Faiza\n16 - Evershine\n17 - Fareeda\n18 - JP\n19 - Chemmanur\n20 - Jasra\n21 - Sonaj"
+    );
+  } // end !groups
 
   if (message.body.toLowerCase() === "!bookings") {
     let company = "";
 
-    if (message.from === MAHARANI_GROUP  ||
-      message.from === DUMMY_SARAJ) {
+    if (message.from === MAHARANI_GROUP || message.from === DUMMY_SARAJ) {
       company = "Maharani Jewellers";
       mainRange = "Maharani_K00014!D2:L201";
     } else if (message.from === NEW_MARHABA_GROUP) {
@@ -495,8 +539,7 @@ client.on("message", async (message) => {
     } else if (message.from === KENZ_GROUP) {
       company = "Kenz Al Bahrain";
       mainRange = "Kenz_K00010!D2:L201";
-    } else if (
-      message.from === AL_SARRAJ_GROUP) {
+    } else if (message.from === AL_SARRAJ_GROUP) {
       company = "Al Sarraj Jewellers";
       mainRange = "AlSarraj_!D2:L201";
     } else if (message.from === OM_GROUP) {
@@ -557,8 +600,6 @@ client.on("message", async (message) => {
       company = "";
       mainRange = "NA";
     }
-
-
 
     //1293 Al-Jalal Jewellery *
     //9152 Al-Arefi Jewellery*
@@ -670,13 +711,11 @@ client.on("message", async (message) => {
     });
   }
 
-
   if (message.body.toLowerCase() === "!pp") {
     goldPrice2().then((price) => {
       message.reply(`Current Price: $${price.data.results[0].ask_price}`);
     });
   }
-
 
   // 6572 sarraj *
   // 6950 om *
@@ -701,9 +740,8 @@ client.on("message", async (message) => {
   //4897 FAREEDA JEWELLERY 0 *
   //4496 J AND P JEWELLERS -2 *
 
-
-//8293 Jasra +2
-//1152 Sona +2
+  //8293 Jasra +2
+  //1152 Sona +2
 
   if (message.body.toLowerCase() === "!tt") {
     if (
@@ -737,10 +775,7 @@ client.on("message", async (message) => {
       message.from === SHAHZAIB_GROUP
     ) {
       TT_PREMIUM = -1;
-    } else if (
-      message.from === JASRA_GROUP ||
-      message.from === SONA_GROUP
-    ) {
+    } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
       TT_PREMIUM = +2;
     }
 
@@ -750,15 +785,17 @@ client.on("message", async (message) => {
           "Application error.\nSorry, someone from our team will respond to your query now."
         );
       } else {
-        const ttRate = (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
+        const ttRate =
+          (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
-        message.reply(`Current TT Rate: BD${ttPrice}\n\n_Please Note: When you enter the !fix command it will check the live gold price again. So if the price is volatile you might get a different TT rate._`);
+        message.reply(
+          `Current TT Rate: BD${ttPrice}\n\n_Please Note: When you enter the !fix command it will check the live gold price again. So if the price is volatile you might get a different TT rate._`
+        );
       }
     });
   }
 
   if (message.body.toLowerCase().includes("!fix")) {
-
     const chat = await message.getChat();
 
     // 6572 sarraj
@@ -799,7 +836,7 @@ client.on("message", async (message) => {
     } else {
       newFlag = false;
       if (message.from === MAHARANI_GROUP) {
-        TT_PREMIUM = -4;
+        TT_PREMIUM = -3;
         fixingCode = "#1317";
       } else if (message.from === NEW_MARHABA_GROUP) {
         TT_PREMIUM = -2;
@@ -895,7 +932,9 @@ client.on("message", async (message) => {
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
       } else if (quantity > 15) {
-        message.reply(`${redXEmoji} Sorry, you can only fix a maximum 15TT in one order.\n\nIf you want to fix more than 15 TT please start another order.`);
+        message.reply(
+          `${redXEmoji} Sorry, you can only fix a maximum 15TT in one order.\n\nIf you want to fix more than 15 TT please start another order.`
+        );
       } else {
         goldPrice2().then((price) => {
           if (isNaN(TT_PREMIUM)) {
@@ -903,34 +942,32 @@ client.on("message", async (message) => {
               "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
             );
           } else {
-            const ttRate = (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
+            const ttRate =
+              (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.round(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
             const totalPriceFormatted = numberWithCommas(totalPrice);
 
-            
-
-            if(newFlag) {
-              grabPic().then(pic => {
-                chat.sendMessage(pic)
+            if (newFlag) {
+              grabPic().then((pic) => {
+                chat.sendMessage(pic);
                 message.reply(
                   `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
-                )
-              })
-            } else if(!chat.isGroup) {
-              grabPic().then(pic => {
-                chat.sendMessage(pic)
+                );
+              });
+            } else if (!chat.isGroup) {
+              grabPic().then((pic) => {
+                chat.sendMessage(pic);
                 message.reply(
                   `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nAs this is not a group, you may use our Dummy Code to see how it works: *#0001*.`
-                )
-              })
-              
+                );
+              });
             } else {
               message.reply(
                 `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
               );
-              }
+            }
           }
         });
       }
@@ -992,9 +1029,9 @@ client.on("message", async (message) => {
         fixerName = "Liberty Jewellery";
       } else if (message.body === "#9325") {
         fixerName = "Shahzaib Jewellery";
-      }  else if (message.body === "#4841") {
+      } else if (message.body === "#4841") {
         fixerName = "Faiza Jewellery";
-      }  else if (message.body === "#6555") {
+      } else if (message.body === "#6555") {
         fixerName = "Evershine Jewellery";
       } else if (message.body === "#4897") {
         fixerName = "Fareeda Jewellery";
@@ -1025,7 +1062,7 @@ client.on("message", async (message) => {
             );
             return;
           }
-  
+
           if (quoted.body.slice(44, 45) === " ") {
             quantity = parseInt(quoted.body.slice(43, 44));
           } else {
@@ -1037,8 +1074,6 @@ client.on("message", async (message) => {
           } else {
             unitPrice = parseInt(quoted.body.slice(54, 58));
           }
-
-          
 
           if (isNaN(quantity)) {
             message.reply(
@@ -1084,7 +1119,9 @@ client.on("message", async (message) => {
           completedOrders.push(quoted.id.id);
 
           if (diff > 30000) {
-            message.reply(`${redXEmoji} You did not complete your order within the 30 second time limit.\n\nPlease start a new order again.`);
+            message.reply(
+              `${redXEmoji} You did not complete your order within the 30 second time limit.\n\nPlease start a new order again.`
+            );
           } else {
             message.reply(
               `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
@@ -1162,7 +1199,7 @@ client.on("message", async (message) => {
     //   message.from === "97333737302@c.us" ||
     //   message.from === "97338999888@c.us"
     // ) {
-      message.reply(`Current Premium: BD${TT_PREMIUM}`);
+    message.reply(`Current Premium: BD${TT_PREMIUM}`);
     // } else {
     //   message.reply("Not authorized.");
     // }
