@@ -758,6 +758,14 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase().includes("!fix")) {
+
+    const chat = await message.getChat();
+
+    if(!chat.isGroup) {
+      message.reply("Not a group.")
+    }
+
+
     // 6572 sarraj
     // 6950 om
     // 1317 maharani
