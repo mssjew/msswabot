@@ -761,11 +761,6 @@ client.on("message", async (message) => {
 
     const chat = await message.getChat();
 
-    if(!chat.isGroup) {
-      message.reply("Not a group.")
-    }
-
-
     // 6572 sarraj
     // 6950 om
     // 1317 maharani
@@ -777,22 +772,21 @@ client.on("message", async (message) => {
     // 5784 Mukesh
     // 5016 Mattathil
 
-  //1293 Al-Jalal Jewellery 0 *
-  //9152 Al-Arefi Jewellery N/A
-  //1124 Dinesh Devji Jewellers -1 *
-  //5324 Dilu Jewellery -1 *
-  //1175  Alaa Jewellery 0 *
-  //6309 Liberty Jewellery 0 *
-  //9325 Shahzaib Jewellers -1 *
-  //4841 FAIZA JEWELLERY 0 *
-  //6555  Evershine Jewellery -2 *
-  //4897 FAREEDA JEWELLERY 0 *
-  //4496 J AND P JEWELLERS -2 *
+    //1293 Al-Jalal Jewellery 0 *
+    //9152 Al-Arefi Jewellery N/A
+    //1124 Dinesh Devji Jewellers -1 *
+    //5324 Dilu Jewellery -1 *
+    //1175  Alaa Jewellery 0 *
+    //6309 Liberty Jewellery 0 *
+    //9325 Shahzaib Jewellers -1 *
+    //4841 FAIZA JEWELLERY 0 *
+    //6555  Evershine Jewellery -2 *
+    //4897 FAREEDA JEWELLERY 0 *
+    //4496 J AND P JEWELLERS -2 *
 
-//8293 Jasra +2
-//1152 Sona +2
+    //8293 Jasra +2
+    //1152 Sona +2
 
-  
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
 
@@ -915,6 +909,8 @@ client.on("message", async (message) => {
             const totalPrice = quantity * ttPrice;
             const totalPriceFormatted = numberWithCommas(totalPrice);
 
+            
+
             if(newFlag) {
               grabPic().then(pic => {
                 chat.sendMessage(pic)
@@ -922,13 +918,16 @@ client.on("message", async (message) => {
                   `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                 )
               })
+            } else if(!chat.isGroup) {
+              chat.sendMessage(pic)
+              message.reply(
+                `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nAs this is not a group, you may use our dummy code to see how it works: *#0001*.`
+              )
             } else {
               message.reply(
                 `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
               );
-            }
-
-           
+              }
           }
         });
       }
