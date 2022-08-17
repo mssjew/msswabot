@@ -77,7 +77,7 @@ const alertsGroup1 = [
   MUKESH_GROUP,
   MATTATHIL_GROUP,
   MSS_DAILY_REPORT,
-  JASRA_GROUP,
+  JASRA_GROUP
 ];
 
 const alertsGroup2 = [
@@ -93,7 +93,7 @@ const alertsGroup2 = [
   FAREEDA_GROUP,
   JP_GROUP,
   CHEMMANUR_GROUP,
-  SONA_GROUP,
+  SONA_GROUP
 ];
 
 const ttGroup1 = [
@@ -250,15 +250,15 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 7, 5, 14, 10, 0);
-const date1 = new Date(2022, 7, 5, 14, 15, 0);
-const date2 = new Date(2022, 7, 5, 14, 15, 30);
+const date0 = new Date(2022, 7, 17, 19, 30, 0);
+const date1 = new Date(2022, 7, 17, 19, 45, 0);
+const date2 = new Date(2022, 7, 17, 19, 45, 30);
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Unemployment Alert will send in 5 mins, should be 3.10pm now."
+      "FOMC Alert will send in 15 mins, should be 8.30pm now."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -306,7 +306,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS FOMC Data will be published in 15 mins, at 9pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -322,7 +322,7 @@ schedule.scheduleJob(date2, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Unemployment Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS FOMC Data will be published in 15 mins, at 9pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -521,9 +521,11 @@ client.on("message", async (message) => {
     });
   }
 
+  let PREMIUMS = [0, -3,];
+
   if (message.body.toLowerCase() === "!groups") {
     message.reply(
-      "Group Numbers:\n\n0 - Maharani\n1 - New Marhaba\n2 Sarraj\n3 - Om\n4 - Munther\n5 - Chandni\n6 - Sudeep\n7 - Mukesh\n8 - Mattathil\n9 - Jalal\n10 - D. Devji\n11 - Dilu\n12 - Alaa\n13 - Liberty\n14 - Shahzaib\n15 - Faiza\n16 - Evershine\n17 - Fareeda\n18 - JP\n19 - Chemmanur\n20 - Jasra\n21 - Sonaj"
+      "Group Numbers:\n\n1 - Maharani\n2 - New Marhaba\n3 - Sarraj\n4 - Om\n5 - Munther\n6 - Chandni\n7 - Sudeep\n8 - Mukesh\n9 - Mattathil\n10 - Jalal\n11 - D. Devji\n12 - Dilu\n13 - Alaa\n14 - Liberty\n15 - Shahzaib\n16 - Faiza\n17 - Evershine\n18 - Fareeda\n19 - JP\n20 - Chemmanur\n21 - Jasra\n22 - Sonaj"
     );
   } // end !groups
 
