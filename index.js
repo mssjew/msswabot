@@ -250,15 +250,15 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 7, 17, 19, 30, 0);
-const date1 = new Date(2022, 7, 17, 19, 45, 0);
-const date2 = new Date(2022, 7, 17, 19, 45, 30);
+const date0 = new Date(2022, 7, 26, 15, 43, 0);
+const date1 = new Date(2022, 7, 26, 15, 45, 0);
+const date2 = new Date(2022, 7, 26, 15, 45, 30);
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "FOMC Alert will send in 15 mins, should be 8.30pm now."
+      "Powell will send in 2 mins, should be 4.43pm now."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -306,7 +306,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS FOMC Data will be published in 15 mins, at 9pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Fed Chairman Jerome Powell will be speaking in 15 mins, at 5pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -322,7 +322,7 @@ schedule.scheduleJob(date2, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS FOMC Data will be published in 15 mins, at 9pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Fed Chairman Jerome Powell will be speaking in 15 mins, at 5pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
