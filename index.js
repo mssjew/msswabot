@@ -860,7 +860,7 @@ client.on("message", async (message) => {
       } else if (message.from === CHANDNI_GROUP) {
         TT_PREMIUM = -2;
         fixingCode = "#9236";
-        newFlag = true;
+        newFlag = false;
       } else if (message.from === SUDEEP_GROUP) {
         TT_PREMIUM = -1;
         fixingCode = "#9473";
