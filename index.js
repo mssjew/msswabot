@@ -250,15 +250,32 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 7, 26, 15, 43, 0);
-const date1 = new Date(2022, 7, 26, 15, 45, 0);
-const date2 = new Date(2022, 7, 26, 15, 45, 30);
+const date0 = new Date(2022, 8, 13, 14, 10, 0);
+const date1 = new Date(2022, 8, 13, 14, 15, 0);
+const date2 = new Date(2022, 8, 13, 14, 15, 30);
+
+const dateChecker = new Date(2022, 8, 13, 12, 10, 0);
+
+schedule.scheduleJob(dateChecker, () => {
+  client
+    .sendMessage(
+      hamzaNumber,
+      "This should send at 1.10pm"
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO HS");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
+});
+
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Powell will send in 2 mins, should be 4.43pm now."
+      "Inflation alert will send in 5 mins, should be 3.10pm now."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -306,7 +323,7 @@ schedule.scheduleJob(date1, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Fed Chairman Jerome Powell will be speaking in 15 mins, at 5pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
@@ -322,7 +339,7 @@ schedule.scheduleJob(date2, () => {
     client
       .sendMessage(
         group,
-        "*Price Movement Alert*\n\nUS Fed Chairman Jerome Powell will be speaking in 15 mins, at 5pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
       )
       .then((res) => {
         console.log("SENT ALERT MESSAGE TO ", group);
