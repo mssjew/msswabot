@@ -57,6 +57,11 @@ const SONA_GROUP = "120363043168822900@g.us"; //1152
 
 const AGK_GROUP = "120363026257640092@g.us"; //#1234
 
+const GORDHANDAS_GROUP = "120363046709727304@g.us"; //#6506
+
+
+
+
 // Chemmanur Jewellers
 
 const PRICE_CORRECTOR = 11;
@@ -93,7 +98,8 @@ const alertsGroup2 = [
   FAREEDA_GROUP,
   JP_GROUP,
   CHEMMANUR_GROUP,
-  SONA_GROUP
+  SONA_GROUP,
+  GORDHANDAS_GROUP
 ];
 
 const ttGroup1 = [
@@ -123,6 +129,7 @@ const ttGroup2 = [
   FAREEDA_GROUP,
   JP_GROUP,
   SONA_GROUP,
+  GORDHANDAS_GROUP
 ];
 
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
@@ -159,6 +166,7 @@ const VALID_CODES = [
   "#4472",
   "#8293",
   "#1152",
+  "#6506",
   "#1234",
   "#0001",
 ];
@@ -188,6 +196,8 @@ const VALID_CODES = [
 
 //8293 Jasra
 //1152 Sona
+
+//6506 Gordhandas Jewellers
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -791,7 +801,8 @@ client.on("message", async (message) => {
       message.from === MATTATHIL_GROUP ||
       message.from === DDEVJI_GROUP ||
       message.from === DILU_GROUP ||
-      message.from === SHAHZAIB_GROUP
+      message.from === SHAHZAIB_GROUP ||
+      message.from === GORDHANDAS_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
@@ -938,6 +949,10 @@ client.on("message", async (message) => {
         TT_PREMIUM = 0;
         fixingCode = "#0101";
         newFlag = true;
+      } else if (message.from === GORDHANDAS_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#6506";
+        newFlag = true;
       } else if (message.from === AGK_GROUP) {
         fixingCode = "#1234";
       } else {
@@ -1064,6 +1079,8 @@ client.on("message", async (message) => {
         fixerName = "Sonaj Jewellers";
       } else if (message.body === "#1234") {
         fixerName = "AGK Jewellers";
+      } else if (message.body === "#6506") {
+        fixerName = "Gordhandas Jewellers";
       }
 
       message
