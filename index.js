@@ -59,7 +59,7 @@ const AGK_GROUP = "120363026257640092@g.us"; //#1234
 
 // Chemmanur Jewellers
 
-const PRICE_CORRECTOR = 6.5;
+const PRICE_CORRECTOR = 7;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
