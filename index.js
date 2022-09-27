@@ -59,6 +59,8 @@ const AGK_GROUP = "120363026257640092@g.us"; //#1234
 
 const GORDHANDAS_GROUP = "120363046709727304@g.us"; //#6506
 
+const PRAKASH_GROUP = "120363027766357004@g.us";
+
 
 
 
@@ -82,7 +84,8 @@ const alertsGroup1 = [
   MUKESH_GROUP,
   MATTATHIL_GROUP,
   MSS_DAILY_REPORT,
-  JASRA_GROUP
+  JASRA_GROUP,
+  PRAKASH_GROUP
 ];
 
 const alertsGroup2 = [
@@ -167,6 +170,7 @@ const VALID_CODES = [
   "#8293",
   "#1152",
   "#6506",
+  "#1191",
   "#1234",
   "#0001",
 ];
@@ -198,6 +202,8 @@ const VALID_CODES = [
 //1152 Sona
 
 //6506 Gordhandas Jewellers
+
+//1191 Prakash Jewellery
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -628,7 +634,7 @@ client.on("message", async (message) => {
     } else {
       company = "";
       mainRange = "NA";
-    }
+    } //need to add ghorndas and prakash
 
     //1293 Al-Jalal Jewellery *
     //9152 Al-Arefi Jewellery*
@@ -772,6 +778,9 @@ client.on("message", async (message) => {
   //8293 Jasra +2
   //1152 Sona +2
 
+  //ghondras 0
+  //prakash 0
+
   if (message.body.toLowerCase() === "!tt") {
     if (
       message.from === NEW_MARHABA_GROUP ||
@@ -802,7 +811,8 @@ client.on("message", async (message) => {
       message.from === DDEVJI_GROUP ||
       message.from === DILU_GROUP ||
       message.from === SHAHZAIB_GROUP ||
-      message.from === GORDHANDAS_GROUP
+      message.from === GORDHANDAS_GROUP ||
+      message.from === PRAKASH_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
@@ -953,6 +963,10 @@ client.on("message", async (message) => {
         TT_PREMIUM = 0;
         fixingCode = "#6506";
         newFlag = true;
+      } else if (message.from === PRAKASH_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#1191";
+        newFlag = true;
       } else if (message.from === AGK_GROUP) {
         fixingCode = "#1234";
       } else {
@@ -1081,6 +1095,8 @@ client.on("message", async (message) => {
         fixerName = "AGK Jewellers";
       } else if (message.body === "#6506") {
         fixerName = "Gordhandas Jewellers";
+      } else if (message.body === "#1191") {
+        fixerName = "Prakash Jewellery";
       }
 
       message
