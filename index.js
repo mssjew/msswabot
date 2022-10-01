@@ -66,7 +66,7 @@ const PRAKASH_GROUP = "120363027766357004@g.us";
 
 // Chemmanur Jewellers
 
-const PRICE_CORRECTOR = 7;
+const PRICE_CORRECTOR = 7.2;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
