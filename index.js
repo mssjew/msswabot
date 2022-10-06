@@ -59,10 +59,12 @@ const AGK_GROUP = "120363026257640092@g.us"; //#1234
 
 const GORDHANDAS_GROUP = "120363046709727304@g.us"; //#6506
 
-const PRAKASH_GROUP = "120363027766357004@g.us";
+const PRAKASH_GROUP = "120363027766357004@g.us"; //1191
+
+const YAFIE_GROUP = "120363027711841766@g.us"; //4675
 
 
-
+//AL YAFIE JEWELLERIES CO. W.L.L
 
 // Chemmanur Jewellers
 
@@ -71,6 +73,7 @@ const PRICE_CORRECTOR = 3;
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
 const izharNumber = "97333737302@c.us";
+const zubairNumber = "97335470471@c.us";
 
 const alertsGroup1 = [
   MAHARANI_GROUP,
@@ -132,7 +135,8 @@ const ttGroup2 = [
   FAREEDA_GROUP,
   JP_GROUP,
   SONA_GROUP,
-  GORDHANDAS_GROUP
+  GORDHANDAS_GROUP,
+  YAFIE_GROUP
 ];
 
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
@@ -171,6 +175,7 @@ const VALID_CODES = [
   "#1152",
   "#6506",
   "#1191",
+  "#4675",
   "#1234",
   "#0001",
 ];
@@ -634,7 +639,7 @@ client.on("message", async (message) => {
     } else {
       company = "";
       mainRange = "NA";
-    } //need to add ghorndas and prakash
+    } //need to add ghorndas and prakash and yafies
 
     //1293 Al-Jalal Jewellery *
     //9152 Al-Arefi Jewellery*
@@ -812,7 +817,8 @@ client.on("message", async (message) => {
       message.from === DILU_GROUP ||
       message.from === SHAHZAIB_GROUP ||
       message.from === GORDHANDAS_GROUP ||
-      message.from === PRAKASH_GROUP
+      message.from === PRAKASH_GROUP ||
+      message.from === YAFIE_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
@@ -967,6 +973,10 @@ client.on("message", async (message) => {
         TT_PREMIUM = 0;
         fixingCode = "#1191";
         newFlag = true;
+      } else if (message.from === YAFIE_GROUP) {
+        TT_PREMIUM = 0;
+        fixingCode = "#4675";
+        newFlag = true;
       } else if (message.from === AGK_GROUP) {
         fixingCode = "#1234";
       } else {
@@ -1097,6 +1107,8 @@ client.on("message", async (message) => {
         fixerName = "Gordhandas Jewellers";
       } else if (message.body === "#1191") {
         fixerName = "Prakash Jewellery";
+      } else if (message.body === "#4675") {
+        fixerName = "Al Yafie Jewelleries";
       }
 
       message
@@ -1181,13 +1193,19 @@ client.on("message", async (message) => {
               )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!`
             );
             client.sendMessage(
-              "919946147016@c.us",
+              sajeevNumber,
               `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
                 unitPrice * quantity
               )}.\n\nUpdate Daily Fixing Sheet.`
             );
             client.sendMessage(
               "97339007836@c.us",
+              `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
+                unitPrice * quantity
+              )}.\n\nUpdate Daily Fixing Sheet.`
+            );
+            client.sendMessage(
+              zubairNumber,
               `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
                 unitPrice * quantity
               )}.\n\nUpdate Daily Fixing Sheet.`
