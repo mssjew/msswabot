@@ -817,12 +817,13 @@ client.on("message", async (message) => {
       message.from === DILU_GROUP ||
       message.from === SHAHZAIB_GROUP ||
       message.from === GORDHANDAS_GROUP ||
-      message.from === PRAKASH_GROUP ||
-      message.from === YAFIE_GROUP
+      message.from === PRAKASH_GROUP
     ) {
       TT_PREMIUM = 0;
     } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
       TT_PREMIUM = +2;
+    } else if (message.from === YAFIE_GROUP) {
+      TT_PREMIUM = -4;
     }
 
     goldPrice2().then((price) => {
@@ -974,7 +975,7 @@ client.on("message", async (message) => {
         fixingCode = "#1191";
         newFlag = true;
       } else if (message.from === YAFIE_GROUP) {
-        TT_PREMIUM = 0;
+        TT_PREMIUM = -4;
         fixingCode = "#4675";
         newFlag = true;
       } else if (message.from === AGK_GROUP) {
