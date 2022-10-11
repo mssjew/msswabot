@@ -977,7 +977,6 @@ client.on("message", async (message) => {
       } else if (message.from === YAFIE_GROUP) {
         TT_PREMIUM = -4;
         fixingCode = "#4675";
-        newFlag = true;
       } else if (message.from === AGK_GROUP) {
         fixingCode = "#1234";
       } else {
@@ -1189,7 +1188,7 @@ client.on("message", async (message) => {
             );
           } else {
             message.reply(
-              `Order confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
+              ` med for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
               )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!`
             );
