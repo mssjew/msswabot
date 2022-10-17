@@ -836,7 +836,7 @@ client.on("message", async (message) => {
           (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(
-          `Current TT Rate: *BD${ttPrice}*`;
+          `Current TT Rate: *BD${ttPrice}*`
         );
       }
     });
