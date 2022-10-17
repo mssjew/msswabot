@@ -836,7 +836,7 @@ client.on("message", async (message) => {
           (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(
-          `Current TT Rate: BD${ttPrice}\n\n_Please Note: When you enter the !fix command it will check the live gold price again. So if the price is volatile you might get a different TT rate._`
+          `Current TT Rate: *BD${ttPrice}*`;
         );
       }
     });
