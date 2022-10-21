@@ -18,6 +18,8 @@ const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
+// test 
+
 
 // const qabSellRange = "Summary!B11:B28";
 // const qabBuyRange = "Summary!C11:C28";
