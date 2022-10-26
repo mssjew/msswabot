@@ -68,7 +68,7 @@ const YAFIE_GROUP = "120363027711841766@g.us"; //4675
 
 // Chemmanur Jewellers
 
-const PRICE_CORRECTOR = 4;
+const PRICE_CORRECTOR = 4.1;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
