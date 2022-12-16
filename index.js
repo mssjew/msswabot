@@ -1116,6 +1116,7 @@ client.on("message", async (message) => {
       message
         .getQuotedMessage()
         .then((quoted) => {
+          console.log(quoted);
           let quantity = 0;
           let unitPrice = 0;
           const group = quoted.to;
