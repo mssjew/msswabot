@@ -481,7 +481,7 @@ async function goldAPIStatus() {
 
 async function grabPic() {
   const media = await MessageMedia.fromUrl(
-    "https://msspricess.b-cdn.net/orderM3.jpg"
+    "https://d1htfwxafklghc.cloudfront.net/guide.webp"
   );
   return media;
 }
