@@ -463,6 +463,7 @@ async function goldPrice2() {
     "https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=wLD-WysSDKBfHki3b3K9"
   );
   return resp.data.quotes[0].ask;
+
 }
 
 async function goldPriceStats() {
@@ -749,13 +750,13 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!price") {
     goldPrice2().then((price) => {
-      message.reply(`Current Price: $${price.data.results[0].ask_price}`);
+      message.reply(`Current Price: $${price}`);
     });
   }
 
   if (message.body.toLowerCase() === "!pp") {
     goldPrice2().then((price) => {
-      message.reply(`Current Price: $${price.data.results[0].ask_price}`);
+      message.reply(`Current Price: $${price}`);
     });
   }
 
@@ -835,7 +836,7 @@ client.on("message", async (message) => {
         );
       } else {
         const ttRate =
-          (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
+          (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(
           `Current TT Rate: *BD${ttPrice}*`
@@ -985,7 +986,7 @@ client.on("message", async (message) => {
             );
           } else {
             const ttRate =
-              (price.data.results[0].ask_price + PRICE_CORRECTOR) * 1.417;
+              (price + PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.round(ttRate) + TT_PREMIUM;
 
             const totalPrice = quantity * ttPrice;
