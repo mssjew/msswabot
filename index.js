@@ -275,17 +275,19 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2023, 0, 31, 19, 39, 0);
-// const date1 = new Date(2023, 1, 13, 14, 15, 0);
-// const date2 = new Date(2023, 1, 13, 14, 15, 30);
+const date0 = new Date(2023, 1, 1, 9, 00, 0);
+const date1 = new Date(2023, 1, 1, 13, 00, 0);
+const date2 = new Date(2023, 1, 1, 14, 45, 0);
+const date3 = new Date(2023, 1, 1, 18, 45, 0);
 
-const dateChecker = new Date(2022, 8, 13, 12, 10, 0);
+
+// const dateChecker = new Date(2022, 8, 13, 12, 10, 0);
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "This should send at 10.39pm"
+      "This should send at 12pm on 1st Feb 2023."
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -296,11 +298,56 @@ schedule.scheduleJob(date0, () => {
 });
 
 
-// schedule.scheduleJob(date0, () => {
+schedule.scheduleJob(date1, () => {
+  client
+    .sendMessage(
+      SIGNALS_GROUP,
+      "*15 Minute Alert*\n\n*News:* US Employment Data\n\n*Time:* 4.15PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move."
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
+});
+
+
+schedule.scheduleJob(date2, () => {
+  client
+    .sendMessage(
+      SIGNALS_GROUP,
+      "*15 Minute Alert*\n\n*News:* US Manufacturing Data\n\n*Time:* 6PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move."
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
+});
+
+schedule.scheduleJob(date3, () => {
+  client
+    .sendMessage(
+      SIGNALS_GROUP,
+      "*15 Minute Alert*\n\n*News:* US Interest Rate Update\n\n*Time:* 10PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move.\n\nFOMC conference will start at 10.30PM which will cause further movement in price."
+    )
+    .then((res) => {
+      console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
+    })
+    .catch((err) => {
+      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+    });
+});
+
+
+
+// schedule.scheduleJob(date2, () => {
 //   client
 //     .sendMessage(
-//       hamzaNumber,
-//       "Inflation alert will send in 5 mins, should be 3.10pm now."
+//       SIGNALS_GROUP,
+//       "*15 Minute Alert*\n\n*News:* US Employment Data\n\n*Time:* 4.15PM Bahrain Time\n\n*Impact*: High"
 //     )
 //     .then((res) => {
 //       console.log("SENT ALERT REMINDER TO HS");
