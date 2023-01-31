@@ -70,7 +70,7 @@ const YAFIE_GROUP = "120363027711841766@g.us"; //4675
 
 // Chemmanur Jewellers
 
-const PRICE_CORRECTOR = 1;
+const PRICE_CORRECTOR = 0;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
@@ -149,7 +149,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-const TT_PREMIUM = 1;
+const TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
   "#6950",
