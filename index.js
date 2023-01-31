@@ -65,6 +65,8 @@ const PRAKASH_GROUP = "120363027766357004@g.us"; //1191
 
 const YAFIE_GROUP = "120363027711841766@g.us"; //4675
 
+const SIGNALS_GROUP = "120363028259299612@g.us"
+
 
 //AL YAFIE JEWELLERIES CO. W.L.L
 
@@ -273,32 +275,17 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2022, 8, 13, 14, 10, 0);
-const date1 = new Date(2022, 8, 13, 14, 15, 0);
-const date2 = new Date(2022, 8, 13, 14, 15, 30);
+const date0 = new Date(2023, 0, 31, 19, 39, 0);
+// const date1 = new Date(2023, 1, 13, 14, 15, 0);
+// const date2 = new Date(2023, 1, 13, 14, 15, 30);
 
 const dateChecker = new Date(2022, 8, 13, 12, 10, 0);
-
-schedule.scheduleJob(dateChecker, () => {
-  client
-    .sendMessage(
-      hamzaNumber,
-      "This should send at 1.10pm"
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO HS");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
-
 
 schedule.scheduleJob(date0, () => {
   client
     .sendMessage(
       hamzaNumber,
-      "Inflation alert will send in 5 mins, should be 3.10pm now."
+      "This should send at 10.39pm"
     )
     .then((res) => {
       console.log("SENT ALERT REMINDER TO HS");
@@ -307,6 +294,21 @@ schedule.scheduleJob(date0, () => {
       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
     });
 });
+
+
+// schedule.scheduleJob(date0, () => {
+//   client
+//     .sendMessage(
+//       hamzaNumber,
+//       "Inflation alert will send in 5 mins, should be 3.10pm now."
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT REMINDER TO HS");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+//     });
+// });
 
 // schedule.scheduleJob(date1, () => {
 //   ttGroup1.forEach((group) => {
@@ -341,37 +343,37 @@ schedule.scheduleJob(date0, () => {
 //   })
 // });
 
-schedule.scheduleJob(date1, () => {
-  alertsGroup1.forEach((group) => {
-    client
-      .sendMessage(
-        group,
-        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-      )
-      .then((res) => {
-        console.log("SENT ALERT MESSAGE TO ", group);
-      })
-      .catch((err) => {
-        console.log("ERROR WHILE SENDING TO ", group);
-      });
-  });
-});
+// schedule.scheduleJob(date1, () => {
+//   alertsGroup1.forEach((group) => {
+//     client
+//       .sendMessage(
+//         group,
+//         "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//       )
+//       .then((res) => {
+//         console.log("SENT ALERT MESSAGE TO ", group);
+//       })
+//       .catch((err) => {
+//         console.log("ERROR WHILE SENDING TO ", group);
+//       });
+//   });
+// });
 
-schedule.scheduleJob(date2, () => {
-  alertsGroup2.forEach((group) => {
-    client
-      .sendMessage(
-        group,
-        "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
-      )
-      .then((res) => {
-        console.log("SENT ALERT MESSAGE TO ", group);
-      })
-      .catch((err) => {
-        console.log("ERROR WHILE SENDING TO ", group);
-      });
-  });
-});
+// schedule.scheduleJob(date2, () => {
+//   alertsGroup2.forEach((group) => {
+//     client
+//       .sendMessage(
+//         group,
+//         "*Price Movement Alert*\n\nUS Inflation Data will be published in 15 mins, at 3.30pm Bahrain time.\n\nGold Price is expected to move.\n\n_Disclaimer: This is not financial advice therefore MSS Jewellers holds no responsibility for any trades you may pursue_"
+//       )
+//       .then((res) => {
+//         console.log("SENT ALERT MESSAGE TO ", group);
+//       })
+//       .catch((err) => {
+//         console.log("ERROR WHILE SENDING TO ", group);
+//       });
+//   });
+// });
 
 // schedule.scheduleJob(date2, () => {
 //   alertsGroup2.forEach(group => {
