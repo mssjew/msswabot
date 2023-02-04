@@ -2,6 +2,13 @@ const axios = require("axios");
 const fs = require("fs");
 const schedule = require("node-schedule");
 var emoji = require("node-emoji");
+import { ChatGPTAPIBrowser } from 'chatgpt';
+const process = require("process")
+
+require("dotenv").config()
+
+const prefixEnabled = process.env.PREFIX_ENABLED == "true"
+const prefix = '!gpt'
 
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
@@ -19,7 +26,6 @@ const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
 // test 
-
 
 // const qabSellRange = "Summary!B11:B28";
 // const qabBuyRange = "Summary!C11:C28";
@@ -221,6 +227,12 @@ const client = new Client({
 
 client.initialize();
 
+const api = new ChatGPTAPIBrowser({
+  email: process.env.EMAIL,
+  password: process.env.PASSWORD
+})
+
+
 client.on("authenticated", () => {
   console.log("AUTHENTICATED");
 });
@@ -238,6 +250,41 @@ client.on("ready", () => {
   console.log("Client is ready!");
   console.log(Date.now());
 });
+
+
+const start = async () => {
+  // Ensure the API is properly authenticated
+  try {
+      await api.initSession()
+  } catch (error) {
+      console.error("[Whatsapp ChatGPT] Failed to authenticate with the ChatGPT API: " + error.message)
+      process.exit(1)
+  }
+}
+
+const handleMessage = async (message, prompt) => {
+  try {
+      const start = Date.now()
+
+      // Send the prompt to the API
+      console.log("[Whatsapp ChatGPT] Received prompt from " + message.from + ": " + prompt)
+      const response = await api.sendMessage(prompt)
+
+      console.log(`[Whatsapp ChatGPT] Answer to ${message.from}: ${response.response}`)
+
+      const end = Date.now() - start
+
+      console.log("[Whatsapp ChatGPT] ChatGPT took " + end + "ms")
+
+      // Send the response to the chat
+      message.reply(response.response)
+  } catch (error) {
+      console.error("An error occured", error)
+      message.reply("An error occured, please contact the administrator. (" + error.message + ")")
+  }
+}
+
+start()
 
 async function dataGrab(range) {
   try {
@@ -587,6 +634,18 @@ const completedOrders = [];
 
 client.on("message", async (message) => {
   const chat = await message.getChat();
+
+  if (prefixEnabled) {
+    if (message.body.startsWith(prefix)) {
+        // Get the rest of the message
+        const prompt = message.body.substring(prefix.length + 1);
+        await handleMessage(message, prompt)
+    }
+} else {
+    await handleMessage(message, message.body)
+}
+
+
   if (message.body.toLowerCase() === "!all") {
     message.reply(
       "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!apiStats\n!apiWorking"
