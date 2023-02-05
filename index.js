@@ -2,13 +2,6 @@ const axios = require("axios");
 const fs = require("fs");
 const schedule = require("node-schedule");
 var emoji = require("node-emoji");
-import { ChatGPTAPIBrowser } from 'chatgpt';
-const process = require("process")
-
-require("dotenv").config()
-
-const prefixEnabled = process.env.PREFIX_ENABLED == "true"
-const prefix = '!gpt'
 
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
@@ -26,6 +19,7 @@ const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
 // test 
+
 
 // const qabSellRange = "Summary!B11:B28";
 // const qabBuyRange = "Summary!C11:C28";
@@ -227,12 +221,6 @@ const client = new Client({
 
 client.initialize();
 
-const api = new ChatGPTAPIBrowser({
-  email: process.env.EMAIL,
-  password: process.env.PASSWORD
-})
-
-
 client.on("authenticated", () => {
   console.log("AUTHENTICATED");
 });
@@ -250,41 +238,6 @@ client.on("ready", () => {
   console.log("Client is ready!");
   console.log(Date.now());
 });
-
-
-const start = async () => {
-  // Ensure the API is properly authenticated
-  try {
-      await api.initSession()
-  } catch (error) {
-      console.error("[Whatsapp ChatGPT] Failed to authenticate with the ChatGPT API: " + error.message)
-      process.exit(1)
-  }
-}
-
-const handleMessage = async (message, prompt) => {
-  try {
-      const start = Date.now()
-
-      // Send the prompt to the API
-      console.log("[Whatsapp ChatGPT] Received prompt from " + message.from + ": " + prompt)
-      const response = await api.sendMessage(prompt)
-
-      console.log(`[Whatsapp ChatGPT] Answer to ${message.from}: ${response.response}`)
-
-      const end = Date.now() - start
-
-      console.log("[Whatsapp ChatGPT] ChatGPT took " + end + "ms")
-
-      // Send the response to the chat
-      message.reply(response.response)
-  } catch (error) {
-      console.error("An error occured", error)
-      message.reply("An error occured, please contact the administrator. (" + error.message + ")")
-  }
-}
-
-start()
 
 async function dataGrab(range) {
   try {
@@ -322,71 +275,71 @@ const quantityCalc = (arr) => {
   return retval;
 };
 
-const date0 = new Date(2023, 1, 1, 9, 00, 0);
-const date1 = new Date(2023, 1, 1, 13, 00, 0);
-const date2 = new Date(2023, 1, 1, 14, 45, 0);
-const date3 = new Date(2023, 1, 1, 18, 45, 0);
+// const date0 = new Date(2023, 1, 1, 9, 00, 0);
+// const date1 = new Date(2023, 1, 1, 13, 00, 0);
+// const date2 = new Date(2023, 1, 1, 14, 45, 0);
+// const date3 = new Date(2023, 1, 1, 18, 45, 0);
 
 
 // const dateChecker = new Date(2022, 8, 13, 12, 10, 0);
 
-schedule.scheduleJob(date0, () => {
-  client
-    .sendMessage(
-      hamzaNumber,
-      "This should send at 12pm on 1st Feb 2023."
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO HS");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
+// schedule.scheduleJob(date0, () => {
+//   client
+//     .sendMessage(
+//       hamzaNumber,
+//       "This should send at 12pm on 1st Feb 2023."
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT REMINDER TO HS");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+//     });
+// });
 
 
-schedule.scheduleJob(date1, () => {
-  client
-    .sendMessage(
-      SIGNALS_GROUP,
-      "*15 Minute Alert*\n\n*News:* US Employment Data\n\n*Time:* 4.15PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move."
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
+// schedule.scheduleJob(date1, () => {
+//   client
+//     .sendMessage(
+//       SIGNALS_GROUP,
+//       "*15 Minute Alert*\n\n*News:* US Employment Data\n\n*Time:* 4.15PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move."
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+//     });
+// });
 
 
-schedule.scheduleJob(date2, () => {
-  client
-    .sendMessage(
-      SIGNALS_GROUP,
-      "*15 Minute Alert*\n\n*News:* US Manufacturing Data\n\n*Time:* 6PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move."
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
+// schedule.scheduleJob(date2, () => {
+//   client
+//     .sendMessage(
+//       SIGNALS_GROUP,
+//       "*15 Minute Alert*\n\n*News:* US Manufacturing Data\n\n*Time:* 6PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move."
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+//     });
+// });
 
-schedule.scheduleJob(date3, () => {
-  client
-    .sendMessage(
-      SIGNALS_GROUP,
-      "*15 Minute Alert*\n\n*News:* US Interest Rate Update\n\n*Time:* 10PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move.\n\nFOMC conference will start at 10.30PM which will cause further movement in price."
-    )
-    .then((res) => {
-      console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
-    })
-    .catch((err) => {
-      console.log("ERROR IN SENDING ALERT REMINDER TO HS");
-    });
-});
+// schedule.scheduleJob(date3, () => {
+//   client
+//     .sendMessage(
+//       SIGNALS_GROUP,
+//       "*15 Minute Alert*\n\n*News:* US Interest Rate Update\n\n*Time:* 10PM Bahrain Time\n\nHigh Impact Data and Gold is expected to move.\n\nFOMC conference will start at 10.30PM which will cause further movement in price."
+//     )
+//     .then((res) => {
+//       console.log("SENT ALERT REMINDER TO SIGNALS GROUP");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
+//     });
+// });
 
 
 
@@ -634,18 +587,6 @@ const completedOrders = [];
 
 client.on("message", async (message) => {
   const chat = await message.getChat();
-
-  if (prefixEnabled) {
-    if (message.body.startsWith(prefix)) {
-        // Get the rest of the message
-        const prompt = message.body.substring(prefix.length + 1);
-        await handleMessage(message, prompt)
-    }
-} else {
-    await handleMessage(message, message.body)
-}
-
-
   if (message.body.toLowerCase() === "!all") {
     message.reply(
       "!help\n!commands\n!booking\n!price\n!tt\n!fix\n!setpremium\n!getpremium\n!apiStats\n!apiWorking"
