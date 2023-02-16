@@ -509,7 +509,7 @@ async function goldPrice() {
 
 async function goldPrice2() {
   let resp = await axios.get(
-    "https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=wLD-WysSDKBfHki3b3K9"
+    "https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=gUkkarv9QS3rDdC4nbNk"
   );
   return resp.data.quotes[0].ask;
 
