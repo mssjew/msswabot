@@ -885,9 +885,7 @@ client.on("message", async (message) => {
     //   TT_PREMIUM = +1;
     // }
 
-    if (message.from === ALSEEF_GROUP) {
-      TT_PREMIUM = -2;
-    };
+ 
 
     goldPrice2().then((price) => {
       if (isNaN(TT_PREMIUM)) {
@@ -895,12 +893,23 @@ client.on("message", async (message) => {
           "Application error.\nSorry, someone from our team will respond to your query now."
         );
       } else {
-        const ttRate =
+
+        if (message.from === ALSEEF_GROUP) {
+          const ttRate =
+          (price + PRICE_CORRECTOR) * 1.417;
+        const ttPrice = Math.round(ttRate) - 2;
+        message.reply(
+          `Current TT Rate: *BD${ttPrice}*`
+        );
+        } else {
+          const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(
           `Current TT Rate: *BD${ttPrice}*`
         );
+        }
+       
       }
     });
   }
@@ -1029,7 +1038,7 @@ client.on("message", async (message) => {
         fixingCode = "#1234";
       } else if (message.from === ALSEEF_GROUP) {
         fixingCode = "#4046";
-        TT_PREMIUM = -2;
+
       }
       const quantity = getQuantity(message.body);
 
@@ -1049,9 +1058,20 @@ client.on("message", async (message) => {
             );
           } else {
             console.log(TT_PREMIUM);
+
+
             const ttRate =
               (price + PRICE_CORRECTOR) * 1.417;
-            const ttPrice = Math.round(ttRate) + TT_PREMIUM;
+
+           
+            let ttPrice;
+
+            if (message.from === ALSEEF_GROUP) {
+              ttPrice = Math.round(ttRate) - 2;
+            } else {
+               ttPrice = Math.round(ttRate) + TT_PREMIUM;
+            }
+          
           
 
             const totalPrice = quantity * ttPrice;
