@@ -65,7 +65,9 @@ const PRAKASH_GROUP = "120363027766357004@g.us"; //1191
 
 const YAFIE_GROUP = "120363027711841766@g.us"; //4675
 
-const SIGNALS_GROUP = "120363028259299612@g.us"
+const SIGNALS_GROUP = "120363028259299612@g.us";
+
+const ALSEEF_GROUP = "120363046622693684@g.us"; // 4046
 
 
 //AL YAFIE JEWELLERIES CO. W.L.L
@@ -109,7 +111,8 @@ const alertsGroup2 = [
   JP_GROUP,
   CHEMMANUR_GROUP,
   SONA_GROUP,
-  GORDHANDAS_GROUP
+  GORDHANDAS_GROUP,
+  ALSEEF_GROUP
 ];
 
 const ttGroup1 = [
@@ -151,7 +154,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-const TT_PREMIUM = 0;
+let TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
   "#6950",
@@ -181,6 +184,7 @@ const VALID_CODES = [
   "#1191",
   "#4675",
   "#1234",
+  "#4046",
   "#0001",
 ];
 
@@ -213,6 +217,9 @@ const VALID_CODES = [
 //6506 Gordhandas Jewellers
 
 //1191 Prakash Jewellery
+
+//4046 Al Seef Jewellery
+
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -878,6 +885,10 @@ client.on("message", async (message) => {
     //   TT_PREMIUM = +1;
     // }
 
+    if (message.from === ALSEEF_GROUP) {
+      TT_PREMIUM = -3;
+    };
+
     goldPrice2().then((price) => {
       if (isNaN(TT_PREMIUM)) {
         message.reply(
@@ -1016,7 +1027,11 @@ client.on("message", async (message) => {
         fixingCode = "#4675";
       } else if (message.from === AGK_GROUP) {
         fixingCode = "#1234";
-      } 
+      } else if (message.from === ALSEEF_GROUP) {
+        fixingCode = "#4046";
+        newFlag = true;
+        TT_PREMIUM = -3;
+      }
       const quantity = getQuantity(message.body);
 
       if (input !== `!fix ${quantity} tt` || quantity <= 0) {
@@ -1143,6 +1158,8 @@ client.on("message", async (message) => {
         fixerName = "Prakash Jewellery";
       } else if (message.body === "#4675") {
         fixerName = "Al Yafie Jewelleries";
+      } else if (message.body = "#4046") {
+        fixerName = "Al Seef Jewellery";
       }
 
       message
