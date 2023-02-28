@@ -1029,7 +1029,6 @@ client.on("message", async (message) => {
         fixingCode = "#1234";
       } else if (message.from === ALSEEF_GROUP) {
         fixingCode = "#4046";
-        newFlag = true;
         TT_PREMIUM = -2;
       }
       const quantity = getQuantity(message.body);
@@ -1049,9 +1048,11 @@ client.on("message", async (message) => {
               "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
             );
           } else {
+            console.log(TT_PREMIUM);
             const ttRate =
               (price + PRICE_CORRECTOR) * 1.417;
             const ttPrice = Math.round(ttRate) + TT_PREMIUM;
+          
 
             const totalPrice = quantity * ttPrice;
             const totalPriceFormatted = numberWithCommas(totalPrice);
