@@ -154,7 +154,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-let TT_PREMIUM = 0;
+var TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
   "#6950",
