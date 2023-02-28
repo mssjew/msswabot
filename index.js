@@ -1081,19 +1081,19 @@ client.on("message", async (message) => {
               grabPic().then((pic) => {
                 chat.sendMessage(pic);
                 message.reply(
-                  `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                  `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                 );
               });
             } else if (!chat.isGroup) {
               grabPic().then((pic) => {
                 chat.sendMessage(pic);
                 message.reply(
-                  `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nAs this is not a group, you may use our Dummy Code to see how it works: *#0001*.`
+                  `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nAs this is not a group, you may use our Dummy Code to see how it works: *#0001*.`
                 );
               });
             } else {
               message.reply(
-                `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *30 seconds*.\n\nAfter 30 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
               );
             }
           }
@@ -1254,9 +1254,9 @@ client.on("message", async (message) => {
 
           completedOrders.push(quoted.id.id);
 
-          if (diff > 30000) {
+          if (diff > 60000) {
             message.reply(
-              `${redXEmoji} You did not complete your order within the 30 second time limit.\n\nPlease start a new order again.`
+              `${redXEmoji} You did not complete your order within the 60 second time limit.\n\nPlease start a new order again.`
             );
           } else {
             message.reply(
