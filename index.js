@@ -886,7 +886,7 @@ client.on("message", async (message) => {
     // }
 
     if (message.from === ALSEEF_GROUP) {
-      TT_PREMIUM = -3;
+      TT_PREMIUM = -2;
     };
 
     goldPrice2().then((price) => {
@@ -1030,7 +1030,7 @@ client.on("message", async (message) => {
       } else if (message.from === ALSEEF_GROUP) {
         fixingCode = "#4046";
         newFlag = true;
-        TT_PREMIUM = -3;
+        TT_PREMIUM = -2;
       }
       const quantity = getQuantity(message.body);
 
