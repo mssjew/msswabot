@@ -1190,14 +1190,14 @@ client.on("message", async (message) => {
         fixerName = "Prakash Jewellery";
       } else if (message.body === "#4675") {
         fixerName = "Al Yafie Jewelleries";
-      } else if (message.body = "#4046") {
+      } else if (message.body === "#4046") {
         fixerName = "Al Seef Jewellery";
-      } else if (message.body = "#7693") {
+      } else if (message.body === "#7693") {
         fixerName = "City Mashallah Jewellery";
-      } else if (message.body = "#7694") {
+      } else if (message.body === "#7694") {
         fixerName = "New Mashallah Jewellery";
       }
-
+ 
       message
         .getQuotedMessage()
         .then((quoted) => {
