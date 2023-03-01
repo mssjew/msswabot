@@ -70,6 +70,12 @@ const SIGNALS_GROUP = "120363028259299612@g.us";
 const ALSEEF_GROUP = "120363046622693684@g.us"; // 4046
 
 
+const CITY_MASHALLAH_GROUP = "120363050526117412@g.us"; //7693
+
+
+const NEW_MASHALLAH_GROUP = "120363069297702474@g.us"; //7694
+
+
 //AL YAFIE JEWELLERIES CO. W.L.L
 
 // Chemmanur Jewellers
@@ -185,6 +191,8 @@ const VALID_CODES = [
   "#4675",
   "#1234",
   "#4046",
+  "#7693",
+  "#7694",
   "#0001",
 ];
 
@@ -894,7 +902,7 @@ client.on("message", async (message) => {
         );
       } else {
 
-        if (message.from === ALSEEF_GROUP) {
+        if (message.from === ALSEEF_GROUP || message.from === CITY_MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) - 2;
@@ -1038,7 +1046,10 @@ client.on("message", async (message) => {
         fixingCode = "#1234";
       } else if (message.from === ALSEEF_GROUP) {
         fixingCode = "#4046";
-
+      } else if (message.from === CITY_MASHALLAH_GROUP) {
+        fixingCode = "#7693";
+      } else if (message.from === NEW_MASHALLAH_GROUP) {
+        fixingCode = "#7694";
       }
       const quantity = getQuantity(message.body);
 
@@ -1066,7 +1077,7 @@ client.on("message", async (message) => {
            
             let ttPrice;
 
-            if (message.from === ALSEEF_GROUP) {
+            if (message.from === ALSEEF_GROUP || message.from === CITY_MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
               ttPrice = Math.round(ttRate) - 2;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
@@ -1181,6 +1192,10 @@ client.on("message", async (message) => {
         fixerName = "Al Yafie Jewelleries";
       } else if (message.body = "#4046") {
         fixerName = "Al Seef Jewellery";
+      } else if (message.body = "#7693") {
+        fixerName = "City Mashallah Jewellery";
+      } else if (message.body = "#7694") {
+        fixerName = "New Mashallah Jewellery";
       }
 
       message
