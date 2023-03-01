@@ -72,6 +72,8 @@ const ALSEEF_GROUP = "120363046622693684@g.us"; // 4046
 
 const MASHALLAH_GROUP = "120363050526117412@g.us"; //7693
 
+const NEW_MASHALLAH_GROUP = "120363069297702474@g.us";
+
 
 
 
@@ -900,10 +902,10 @@ client.on("message", async (message) => {
         );
       } else {
 
-        if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP) {
+        if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.round(ttRate) - 2;
+        const ttPrice = Math.floor(ttRate) - 3;
         message.reply(
           `Current TT Rate: *BD${ttPrice}*`
         );
@@ -1073,7 +1075,7 @@ client.on("message", async (message) => {
            
             let ttPrice;
 
-            if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP) {
+            if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
               ttPrice = Math.floor(ttRate) - 3;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
