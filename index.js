@@ -1078,7 +1078,7 @@ client.on("message", async (message) => {
             let ttPrice;
 
             if (message.from === ALSEEF_GROUP || message.from === CITY_MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
-              ttPrice = Math.round(ttRate) - 2;
+              ttPrice = Math.floor(ttRate) - 3;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
             }
