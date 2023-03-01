@@ -70,10 +70,9 @@ const SIGNALS_GROUP = "120363028259299612@g.us";
 const ALSEEF_GROUP = "120363046622693684@g.us"; // 4046
 
 
-const CITY_MASHALLAH_GROUP = "120363050526117412@g.us"; //7693
+const MASHALLAH_GROUP = "120363050526117412@g.us"; //7693
 
 
-const NEW_MASHALLAH_GROUP = "120363069297702474@g.us"; //7694
 
 
 //AL YAFIE JEWELLERIES CO. W.L.L
@@ -191,8 +190,7 @@ const VALID_CODES = [
   "#4675",
   "#1234",
   "#4046",
-  "#7693",
-  "#7694",
+  "#5769",
   "#0001",
 ];
 
@@ -902,7 +900,7 @@ client.on("message", async (message) => {
         );
       } else {
 
-        if (message.from === ALSEEF_GROUP || message.from === CITY_MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
+        if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP) {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) - 2;
@@ -1046,10 +1044,8 @@ client.on("message", async (message) => {
         fixingCode = "#1234";
       } else if (message.from === ALSEEF_GROUP) {
         fixingCode = "#4046";
-      } else if (message.from === CITY_MASHALLAH_GROUP) {
-        fixingCode = "#7693";
-      } else if (message.from === NEW_MASHALLAH_GROUP) {
-        fixingCode = "#7694";
+      } else if (message.from === MASHALLAH_GROUP) {
+        fixingCode = "#5769";
       }
       const quantity = getQuantity(message.body);
 
@@ -1057,9 +1053,9 @@ client.on("message", async (message) => {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
-      } else if (quantity > 15) {
+      } else if (quantity > 20) {
         message.reply(
-          `${redXEmoji} Sorry, you can only fix a maximum 15TT in one order.\n\nIf you want to fix more than 15 TT please start another order.`
+          `${redXEmoji} Sorry, you can only fix a maximum 20TT in one order.\n\nIf you want to fix more than 20 TT please start another order immediately after.`
         );
       } else {
         goldPrice2().then((price) => {
@@ -1077,7 +1073,7 @@ client.on("message", async (message) => {
            
             let ttPrice;
 
-            if (message.from === ALSEEF_GROUP || message.from === CITY_MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
+            if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP) {
               ttPrice = Math.floor(ttRate) - 3;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
@@ -1192,10 +1188,8 @@ client.on("message", async (message) => {
         fixerName = "Al Yafie Jewelleries";
       } else if (message.body === "#4046") {
         fixerName = "Al Seef Jewellery";
-      } else if (message.body === "#7693") {
-        fixerName = "City Mashallah Jewellery";
-      } else if (message.body === "#7694") {
-        fixerName = "New Mashallah Jewellery";
+      } else if (message.body === "#5769") {
+        fixerName = "Mashallah Group";
       }
  
       message
