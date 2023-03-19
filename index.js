@@ -1055,7 +1055,7 @@ client.on("message", async (message) => {
         message.reply(
           `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
         );
-      } else if (quantity > 20) {
+      } else if (quantity > 30) {
         message.reply(
           `${redXEmoji} Sorry, you can only fix a maximum 20TT in one order.\n\nIf you want to fix more than 20 TT please start another order immediately after.`
         );
@@ -1236,7 +1236,7 @@ client.on("message", async (message) => {
             return;
           }
 
-          if (quantity >= 16) {
+          if (quantity >= 31) {
             message.reply("Quantity error, please restart your order.");
             return;
           } else if (quantity < 0) {
