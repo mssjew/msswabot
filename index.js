@@ -905,7 +905,7 @@ client.on("message", async (message) => {
         if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.floor(ttRate) - 3;
+        const ttPrice = Math.floor(ttRate) - 1.5;
         message.reply(
           `Current TT Rate: *BD${ttPrice}*`
         );
@@ -1076,7 +1076,7 @@ client.on("message", async (message) => {
             let ttPrice;
 
             if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
-              ttPrice = Math.floor(ttRate) - 3;
+              ttPrice = Math.floor(ttRate) - 1.5;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
             }
