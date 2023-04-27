@@ -907,14 +907,14 @@ client.on("message", async (message) => {
           (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.floor(ttRate) - 1;
         message.reply(
-          `Current TT Rate: *BD${ttPrice}*`
+          `Current TT Rate: *BD${ttPrice}*\n\n*Please note: TT Bar stock will arrive Monday (1st May) night.*`
         );
         } else {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
         const ttPrice = Math.round(ttRate) + TT_PREMIUM;
         message.reply(
-          `Current TT Rate: *BD${ttPrice}*`
+          `Current TT Rate: *BD${ttPrice}*\n\n*Please note: TT Bar stock will arrive Monday (1st May) night.*`
         );
         }
        
@@ -1273,7 +1273,7 @@ client.on("message", async (message) => {
             message.reply(
               `Confirmed for *${fixerName}* ${greenTickEmoji}\n\n${quantity} TT fixed at BD${unitPrice} each.\n\n*Total = BD${numberWithCommas(
                 unitPrice * quantity
-              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!`
+              )}*\n\n*This message is your confirmation and proof of booking.* ${greenTickEmoji}\n\nThank you!\n\n*Please note: TT Bar stock will arrive Monday (1st May) night.*`
             );
             client.sendMessage(
               sajeevNumber,
