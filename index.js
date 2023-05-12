@@ -161,7 +161,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-var TT_PREMIUM = 1;
+var TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
   "#6950",
@@ -905,7 +905,7 @@ client.on("message", async (message) => {
         if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.floor(ttRate);
+        const ttPrice = Math.floor(ttRate) - 1;
         message.reply(
           `Current TT Rate: *BD${ttPrice}*`
         );
@@ -1076,7 +1076,7 @@ client.on("message", async (message) => {
             let ttPrice;
 
             if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
-              ttPrice = Math.floor(ttRate);
+              ttPrice = Math.floor(ttRate) - 1;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
             }
