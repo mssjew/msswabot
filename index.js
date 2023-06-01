@@ -76,6 +76,11 @@ const NEW_MASHALLAH_GROUP = "120363069297702474@g.us";
 
 
 
+const JUMBO_GROUP = "120363140988869999@g.us"; //3209
+
+
+
+
 
 //AL YAFIE JEWELLERIES CO. W.L.L
 
@@ -193,6 +198,7 @@ const VALID_CODES = [
   "#1234",
   "#4046",
   "#5769",
+  "#3209",
   "#0001",
 ];
 
@@ -227,6 +233,8 @@ const VALID_CODES = [
 //1191 Prakash Jewellery
 
 //4046 Al Seef Jewellery
+
+// 3209 Jumbo gold.
 
 
 const client = new Client({
@@ -902,10 +910,10 @@ client.on("message", async (message) => {
         );
       } else {
 
-        if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
+        if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP || message.from === JUMBO_GROUP) {
           const ttRate =
           (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.floor(ttRate) + 3;
+        const ttPrice = Math.floor(ttRate) + 2;
         message.reply(
           `Current TT Rate: *BD${ttPrice}*`
         );
@@ -1048,6 +1056,8 @@ client.on("message", async (message) => {
         fixingCode = "#4046";
       } else if (message.from === MASHALLAH_GROUP) {
         fixingCode = "#5769";
+      } else if(message.from === JUMBO_GROUP) {
+        fixingCode = "#3209";
       }
       const quantity = getQuantity(message.body);
 
@@ -1075,8 +1085,8 @@ client.on("message", async (message) => {
            
             let ttPrice;
 
-            if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP) {
-              ttPrice = Math.floor(ttRate) + 3;
+            if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP || message.from === JUMBO_GROUP) {
+              ttPrice = Math.floor(ttRate) + 2;
             } else {
                ttPrice = Math.round(ttRate) + TT_PREMIUM;
             }
@@ -1192,6 +1202,8 @@ client.on("message", async (message) => {
         fixerName = "Al Seef Jewellery";
       } else if (message.body === "#5769") {
         fixerName = "Mashallah Group";
+      } else if (message.body === "#3209") {
+        fixerName = "Jumbo Gold";
       }
  
       message
