@@ -18,8 +18,7 @@ const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
 // const buyRange = "Summary!C11:C38";
-// test 
-
+// test
 
 // const qabSellRange = "Summary!B11:B28";
 // const qabBuyRange = "Summary!C11:C28";
@@ -69,18 +68,11 @@ const SIGNALS_GROUP = "120363028259299612@g.us";
 
 const ALSEEF_GROUP = "120363046622693684@g.us"; // 4046
 
-
 const MASHALLAH_GROUP = "120363050526117412@g.us"; //7693
 
 const NEW_MASHALLAH_GROUP = "120363069297702474@g.us";
 
-
-
 const JUMBO_GROUP = "120363140988869999@g.us"; //3209
-
-
-
-
 
 //AL YAFIE JEWELLERIES CO. W.L.L
 
@@ -106,7 +98,7 @@ const alertsGroup1 = [
   MATTATHIL_GROUP,
   MSS_DAILY_REPORT,
   JASRA_GROUP,
-  PRAKASH_GROUP
+  PRAKASH_GROUP,
 ];
 
 const alertsGroup2 = [
@@ -124,7 +116,7 @@ const alertsGroup2 = [
   CHEMMANUR_GROUP,
   SONA_GROUP,
   GORDHANDAS_GROUP,
-  ALSEEF_GROUP
+  ALSEEF_GROUP,
 ];
 
 const ttGroup1 = [
@@ -155,7 +147,7 @@ const ttGroup2 = [
   JP_GROUP,
   SONA_GROUP,
   GORDHANDAS_GROUP,
-  YAFIE_GROUP
+  YAFIE_GROUP,
 ];
 
 const internalGroups = [MSS_DAILY_REPORT, KENZ_GROUP];
@@ -166,7 +158,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-var TT_PREMIUM = 4;
+var TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
   "#6950",
@@ -236,7 +228,6 @@ const VALID_CODES = [
 
 // 3209 Jumbo gold.
 
-
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: { headless: true },
@@ -303,7 +294,6 @@ const quantityCalc = (arr) => {
 // const date2 = new Date(2023, 1, 1, 14, 45, 0);
 // const date3 = new Date(2023, 1, 1, 18, 45, 0);
 
-
 // const dateChecker = new Date(2022, 8, 13, 12, 10, 0);
 
 // schedule.scheduleJob(date0, () => {
@@ -320,7 +310,6 @@ const quantityCalc = (arr) => {
 //     });
 // });
 
-
 // schedule.scheduleJob(date1, () => {
 //   client
 //     .sendMessage(
@@ -334,7 +323,6 @@ const quantityCalc = (arr) => {
 //       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
 //     });
 // });
-
 
 // schedule.scheduleJob(date2, () => {
 //   client
@@ -363,8 +351,6 @@ const quantityCalc = (arr) => {
 //       console.log("ERROR IN SENDING ALERT REMINDER TO HS");
 //     });
 // });
-
-
 
 // schedule.scheduleJob(date2, () => {
 //   client
@@ -535,7 +521,6 @@ async function goldPrice2() {
     "https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=gUkkarv9QS3rDdC4nbNk"
   );
   return resp.data.quotes[0].ask;
-
 }
 
 async function goldPriceStats() {
@@ -634,7 +619,7 @@ client.on("message", async (message) => {
     });
   }
 
-  let PREMIUMS = [0, -3,];
+  let PREMIUMS = [0, -3];
 
   if (message.body.toLowerCase() === "!groups") {
     message.reply(
@@ -901,31 +886,26 @@ client.on("message", async (message) => {
     //   TT_PREMIUM = +1;
     // }
 
- 
-
     goldPrice2().then((price) => {
       if (isNaN(TT_PREMIUM)) {
         message.reply(
           "Application error.\nSorry, someone from our team will respond to your query now."
         );
       } else {
-
-        if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP || message.from === JUMBO_GROUP) {
-          const ttRate =
-          (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.floor(ttRate) + 2;
-        message.reply(
-          `Current TT Rate: *BD${ttPrice}*`
-        );
+        if (
+          message.from === ALSEEF_GROUP ||
+          message.from === MASHALLAH_GROUP ||
+          message.from === NEW_MASHALLAH_GROUP ||
+          message.from === JUMBO_GROUP
+        ) {
+          const ttRate = (price + PRICE_CORRECTOR) * 1.417;
+          const ttPrice = Math.floor(ttRate) -1;
+          message.reply(`Current TT Rate: *BD${ttPrice}*`);
         } else {
-          const ttRate =
-          (price + PRICE_CORRECTOR) * 1.417;
-        const ttPrice = Math.round(ttRate) + TT_PREMIUM;
-        message.reply(
-          `Current TT Rate: *BD${ttPrice}*`
-        );
+          const ttRate = (price + PRICE_CORRECTOR) * 1.417;
+          const ttPrice = Math.round(ttRate) + TT_PREMIUM;
+          message.reply(`Current TT Rate: *BD${ttPrice}*`);
         }
-       
       }
     });
   }
@@ -979,41 +959,30 @@ client.on("message", async (message) => {
 
         fixingCode = "#1393";
       } else if (message.from === AL_SARRAJ_GROUP) {
-
         fixingCode = "#6572";
       } else if (message.from === OM_GROUP) {
-
         fixingCode = "#6950";
         newFlag = false;
       } else if (message.from === MUNTHER_GROUP) {
-  
         fixingCode = "#9643";
       } else if (message.from === CHANDNI_GROUP) {
-
         fixingCode = "#9236";
         newFlag = false;
       } else if (message.from === SUDEEP_GROUP) {
-
         fixingCode = "#9473";
       } else if (message.from === MUKESH_GROUP) {
-
         fixingCode = "#5784";
         newFlag = false;
       } else if (message.from === MATTATHIL_GROUP) {
-   
         fixingCode = "#5016";
         newFlag = false;
       } else if (message.from === JALAL_GROUP) {
-     
         fixingCode = "#1293";
       } else if (message.from === DDEVJI_GROUP) {
-       
         fixingCode = "#1124";
       } else if (message.from === DILU_GROUP) {
-     
         fixingCode = "#5324";
       } else if (message.from === ALAA_GROUP) {
-        
         fixingCode = "#1175";
       } else if (message.from === LIBERTY_GROUP) {
         fixingCode = "#6309";
@@ -1056,7 +1025,7 @@ client.on("message", async (message) => {
         fixingCode = "#4046";
       } else if (message.from === MASHALLAH_GROUP) {
         fixingCode = "#5769";
-      } else if(message.from === JUMBO_GROUP) {
+      } else if (message.from === JUMBO_GROUP) {
         fixingCode = "#3209";
       }
       const quantity = getQuantity(message.body);
@@ -1078,20 +1047,20 @@ client.on("message", async (message) => {
           } else {
             console.log(TT_PREMIUM);
 
+            const ttRate = (price + PRICE_CORRECTOR) * 1.417;
 
-            const ttRate =
-              (price + PRICE_CORRECTOR) * 1.417;
-
-           
             let ttPrice;
 
-            if (message.from === ALSEEF_GROUP || message.from === MASHALLAH_GROUP || message.from === NEW_MASHALLAH_GROUP || message.from === JUMBO_GROUP) {
-              ttPrice = Math.floor(ttRate) + 2;
+            if (
+              message.from === ALSEEF_GROUP ||
+              message.from === MASHALLAH_GROUP ||
+              message.from === NEW_MASHALLAH_GROUP ||
+              message.from === JUMBO_GROUP
+            ) {
+              ttPrice = Math.floor(ttRate) -1;
             } else {
-               ttPrice = Math.round(ttRate) + TT_PREMIUM;
+              ttPrice = Math.round(ttRate) + TT_PREMIUM;
             }
-          
-          
 
             const totalPrice = quantity * ttPrice;
             const totalPriceFormatted = numberWithCommas(totalPrice);
@@ -1205,7 +1174,7 @@ client.on("message", async (message) => {
       } else if (message.body === "#3209") {
         fixerName = "Jumbo Gold";
       }
- 
+
       message
         .getQuotedMessage()
         .then((quoted) => {
