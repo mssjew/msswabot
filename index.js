@@ -1001,7 +1001,7 @@ client.on("message", async (message) => {
         newFlag = true;
       } else if (message.from === CHEMMANUR_GROUP) {
         fixingCode = "#4472";
-        newFlag = true;
+        newFlag = false;
       } else if (message.from === JASRA_GROUP) {
         fixingCode = "#8293";
         newFlag = true;
@@ -1246,7 +1246,7 @@ client.on("message", async (message) => {
 
           completedOrders.push(quoted.id.id);
 
-          if (diff > 60000) {
+          if (diff > 90000) {
             message.reply(
               `${redXEmoji} You did not complete your order within the 60 second time limit.\n\nPlease start a new order again.`
             );
