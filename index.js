@@ -903,7 +903,7 @@ client.on("message", async (message) => {
           message.reply(`Current TT Rate: *BD${ttPrice}*`);
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.round(ttRate) + TT_PREMIUM;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
           message.reply(`Current TT Rate: *BD${ttPrice}*`);
         }
       }
@@ -1059,7 +1059,7 @@ client.on("message", async (message) => {
             ) {
               ttPrice = Math.floor(ttRate) -2;
             } else {
-              ttPrice = Math.round(ttRate) + TT_PREMIUM;
+              ttPrice = Math.floor(ttRate) + TT_PREMIUM;
             }
 
             const totalPrice = quantity * ttPrice;
