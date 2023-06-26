@@ -899,7 +899,7 @@ client.on("message", async (message) => {
           message.from === JUMBO_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) -1;
+          const ttPrice = Math.floor(ttRate) -2;
           message.reply(`Current TT Rate: *BD${ttPrice}*`);
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
@@ -1057,7 +1057,7 @@ client.on("message", async (message) => {
               message.from === NEW_MASHALLAH_GROUP ||
               message.from === JUMBO_GROUP
             ) {
-              ttPrice = Math.floor(ttRate) -1;
+              ttPrice = Math.floor(ttRate) -2;
             } else {
               ttPrice = Math.round(ttRate) + TT_PREMIUM;
             }
