@@ -896,7 +896,8 @@ client.on("message", async (message) => {
           message.from === ALSEEF_GROUP ||
           message.from === MASHALLAH_GROUP ||
           message.from === NEW_MASHALLAH_GROUP ||
-          message.from === JUMBO_GROUP
+          message.from === JUMBO_GROUP ||
+          message.from === DDEVJI_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate) -2;
@@ -1055,7 +1056,8 @@ client.on("message", async (message) => {
               message.from === ALSEEF_GROUP ||
               message.from === MASHALLAH_GROUP ||
               message.from === NEW_MASHALLAH_GROUP ||
-              message.from === JUMBO_GROUP
+              message.from === JUMBO_GROUP ||
+              message.from === DDEVJI_GROUP
             ) {
               ttPrice = Math.floor(ttRate) -2;
             } else {
