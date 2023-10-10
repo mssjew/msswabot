@@ -158,7 +158,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 
-var TT_PREMIUM = 0;
+var TT_PREMIUM = 6;
 const VALID_CODES = [
   "#6572",
   "#6950",
@@ -900,7 +900,7 @@ client.on("message", async (message) => {
           message.from === DDEVJI_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) -2;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 2;
           message.reply(`Current TT Rate: *BD${ttPrice}*\n\n*Note*: Stock will arrive Thursday 12th evening.`);
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
@@ -1059,7 +1059,7 @@ client.on("message", async (message) => {
               message.from === JUMBO_GROUP ||
               message.from === DDEVJI_GROUP
             ) {
-              ttPrice = Math.floor(ttRate) -2;
+              ttPrice = Math.floor(ttRate) +TT_PREMIUM-2;
             } else {
               ttPrice = Math.floor(ttRate) + TT_PREMIUM;
             }
