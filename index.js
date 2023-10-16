@@ -901,11 +901,11 @@ client.on("message", async (message) => {
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 2;
-          message.reply(`Current TT Rate: *BD${ttPrice}*`);
+          message.reply(`TT Rate: *BD${ttPrice}*`);
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
-          message.reply(`Current TT Rate: *BD${ttPrice}*`);
+          message.reply(`TT Rate: *BD${ttPrice}*`);
         }
       }
     });
