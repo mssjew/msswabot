@@ -885,7 +885,7 @@ client.on("message", async (message) => {
     // } else if (message.from === YAFIE_GROUP) {
     //   TT_PREMIUM = +1;
     // }
-    message.reply("Gold Market is Closed.\n\nOur team will respond to your enquiry shortly.\n\nFor bookings you can call us at 17215101 or 33539888.\n\nSystem will be active again on Monday morning when the gold market opens, thank you for understanding.");
+    message.reply("Gold market is closed on Saturday and Sunday.\n\nOur team will respond to your enquiry shortly.\n\nFor bookings you can call us at 17215101 or 33539888.\n\nSystem will be active Monday 1am Bahrain time.");
     // goldPrice2().then((price) => {
     //   if (isNaN(TT_PREMIUM)) {
     //     message.reply(
@@ -912,7 +912,7 @@ client.on("message", async (message) => {
   }
 
   if (message.body.toLowerCase().includes("!fix")) {
-    message.reply("Our system is closed when the gold market is closed.\n\nOur team will respond to your enquiry shortly.\n\nFor bookings you can call us at 17215101 or 33539888.\n\nSystem will be active again on Monday morning when the gold market opens, thank you for understanding.");
+    message.reply("Gold market is closed on Saturday and Sunday.\n\nOur team will respond to your enquiry shortly.\n\nYou can reach us at 17215101 or 33539888.\n\nSystem will be active Monday 1am Bahrain time.");
    
     // const chat = await message.getChat();
 
