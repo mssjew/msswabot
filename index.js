@@ -1017,7 +1017,7 @@ client.on("message", async (message) => {
         );
       } else if (quantity > 30) {
         message.reply(
-          `${redXEmoji} Sorry, you can only fix a maximum 20TT in one order.\n\nIf you want to fix more than 20 TT please start another order immediately after.`
+          `${redXEmoji} Sorry, you can only fix a maximum 30TT in one order.\n\nIf you want to fix more than 30 TT please contact us at 17215101 or 33539888, thank you.`
         );
       } else {
         goldPrice2().then((price) => {
@@ -1080,7 +1080,7 @@ client.on("message", async (message) => {
   }
 
   if (isACode(message.body) && message.hasQuotedMsg) {
-    if (VALID_CODES.includes(message.body)) {
+    if (VALID_CODES.includes(message.body)) {h
       let fixerName = "";
 
       // ["#6572", "#6950", "#1317", "#1299", "#0000"];
