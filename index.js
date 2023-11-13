@@ -1080,7 +1080,7 @@ client.on("message", async (message) => {
   }
 
   if (isACode(message.body) && message.hasQuotedMsg) {
-    if (VALID_CODES.includes(message.body)) {h
+    if (VALID_CODES.includes(message.body)) {
       let fixerName = "";
 
       // ["#6572", "#6950", "#1317", "#1299", "#0000"];
