@@ -165,10 +165,27 @@ const client = new Client({
   authStrategy: new NoAuth(),
   puppeteer: {
 		args: ['--no-sandbox'],
+    headless: true,
   }
 });
 
+client.on('qr', qr => {
+  qrcode.generate(qr, {small: true});
+});
+
+client.on('ready', () => {
+  console.log('Client is ready!');
+});
+
+client.on("auth_failure", (msg) => {
+  // Fired if session restore was unsuccessful
+  console.error("AUTHENTICATION FAILURE", msg);
+});
+
 client.initialize();
+
+
+
 
 
 var TT_PREMIUM = 0;
@@ -243,23 +260,10 @@ const VALID_CODES = [
 
 
 
-client.on("authenticated", () => {
-  console.log("AUTHENTICATED");
-});
 
-client.on("auth_failure", (msg) => {
-  // Fired if session restore was unsuccessful
-  console.error("AUTHENTICATION FAILURE", msg);
-});
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-});
 
-client.on("ready", () => {
-  console.log("Client is ready!");
-  console.log(Date.now());
-});
+
 
 async function dataGrab(range) {
   try {
