@@ -156,25 +156,21 @@ const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { MessageMedia } = require("whatsapp-web.js");
 
-const { Client, NoAuth } = require('whatsapp-web.js');
-
-
-
+const { Client, NoAuth } = require("whatsapp-web.js");
 
 const client = new Client({
   authStrategy: new NoAuth(),
   puppeteer: {
-		args: ['--no-sandbox'],
-    headless: true,
-  }
+    args: ["--no-sandbox"]
+  },
 });
 
-client.on('qr', qr => {
-  qrcode.generate(qr, {small: true});
+client.on("qr", (qr) => {
+  qrcode.generate(qr, { small: true });
 });
 
-client.on('ready', () => {
-  console.log('Client is ready!');
+client.on("ready", () => {
+  console.log("Client is ready!");
 });
 
 client.on("auth_failure", (msg) => {
@@ -183,10 +179,6 @@ client.on("auth_failure", (msg) => {
 });
 
 client.initialize();
-
-
-
-
 
 var TT_PREMIUM = 0;
 const VALID_CODES = [
@@ -257,13 +249,6 @@ const VALID_CODES = [
 //4046 Al Seef Jewellery
 
 // 3209 Jumbo gold.
-
-
-
-
-
-
-
 
 async function dataGrab(range) {
   try {
@@ -861,7 +846,6 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase() === "!tt") {
     // message.reply("🔴 *Gold Market Closed* 🔴\n\nOur team will respond to your enquiry shortly.\n\nYou can reach us at 17215101 or 33539888.\n\nSystem will be active Monday morning.");
 
-
     if (
       message.from === NEW_MARHABA_GROUP ||
       message.from === EVERSHINE_GROUP ||
@@ -928,10 +912,9 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase().includes("!fix")) {
     // message.reply("🔴 *Gold Market Closed* 🔴\n\nOur team will respond to your enquiry shortly.\n\nYou can reach us at 17215101 or 33539888.\n\nSystem will be active Monday 1am Bahrain time.");
-   
+
     const chat = await message.getChat();
 
- 
     let fixingCode = "";
     const input = message.body.trim().toLowerCase();
 
@@ -1051,7 +1034,7 @@ client.on("message", async (message) => {
               message.from === JUMBO_GROUP ||
               message.from === DDEVJI_GROUP
             ) {
-              ttPrice = Math.floor(ttRate) +TT_PREMIUM-1;
+              ttPrice = Math.floor(ttRate) + TT_PREMIUM - 1;
             } else {
               ttPrice = Math.floor(ttRate) + TT_PREMIUM;
             }
@@ -1082,7 +1065,6 @@ client.on("message", async (message) => {
         });
       }
     }
-
   } // end of if !fix if/else
 
   if (isACode(message.body) && !message.hasQuotedMsg) {
