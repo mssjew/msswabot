@@ -159,10 +159,7 @@ const { MessageMedia } = require("whatsapp-web.js");
 const { Client, NoAuth } = require("whatsapp-web.js");
 
 const client = new Client({
-  authStrategy: new NoAuth(),
-  puppeteer: {
-    args: ["--no-sandbox"]
-  },
+  authStrategy: new NoAuth()
 });
 
 client.on("qr", (qr) => {
@@ -173,12 +170,11 @@ client.on("ready", () => {
   console.log("Client is ready!");
 });
 
-client.on("auth_failure", (msg) => {
-  // Fired if session restore was unsuccessful
-  console.error("AUTHENTICATION FAILURE", msg);
-});
-
 client.initialize();
+
+
+
+
 
 var TT_PREMIUM = 0;
 const VALID_CODES = [
