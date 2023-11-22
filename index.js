@@ -156,7 +156,15 @@ const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { MessageMedia } = require("whatsapp-web.js");
 
-const { Client, LocalAuth } = require("whatsapp-web.js");
+const { Client, NoAuth } = require('whatsapp-web.js');
+
+
+
+
+const client = new Client({
+  authStrategy: new NoAuth(),
+  puppeteer: { headless: true },
+});
 
 var TT_PREMIUM = 0;
 const VALID_CODES = [
@@ -228,10 +236,6 @@ const VALID_CODES = [
 
 // 3209 Jumbo gold.
 
-const client = new Client({
-  authStrategy: new NoAuth(),
-  puppeteer: { headless: true },
-});
 
 client.initialize();
 
