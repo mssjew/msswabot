@@ -229,7 +229,7 @@ const VALID_CODES = [
 // 3209 Jumbo gold.
 
 const client = new Client({
-  authStrategy: new LocalAuth(),
+  authStrategy: new NoAuth(),
   puppeteer: { headless: true },
 });
 
@@ -1243,19 +1243,13 @@ client.on("message", async (message) => {
               sajeevNumber,
               `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
                 unitPrice * quantity
-              )}.\n\nUpdate Daily Fixing Sheet.`
-            );
-            client.sendMessage(
-              "97339007836@c.us",
-              `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
-                unitPrice * quantity
-              )}.\n\nUpdate Daily Fixing Sheet.`
+              )}.`
             );
             client.sendMessage(
               zubairNumber,
               `${redCircle} Fixing Alert ${redCircle}\n\n${fixerName} just booked ${quantity} TT at BD${unitPrice} each.\n\nTotal = BD${numberWithCommas(
                 unitPrice * quantity
-              )}.\n\nUpdate Daily Fixing Sheet.`
+              )}.`
             );
           }
         })
