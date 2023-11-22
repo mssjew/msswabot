@@ -163,8 +163,13 @@ const { Client, NoAuth } = require('whatsapp-web.js');
 
 const client = new Client({
   authStrategy: new NoAuth(),
-  puppeteer: { headless: true },
+  puppeteer: {
+		args: ['--no-sandbox'],
+  }
 });
+
+client.initialize();
+
 
 var TT_PREMIUM = 0;
 const VALID_CODES = [
@@ -237,7 +242,6 @@ const VALID_CODES = [
 // 3209 Jumbo gold.
 
 
-client.initialize();
 
 client.on("authenticated", () => {
   console.log("AUTHENTICATED");
