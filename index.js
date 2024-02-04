@@ -3,6 +3,8 @@ const fs = require("fs");
 const schedule = require("node-schedule");
 var emoji = require("node-emoji");
 
+const API_KEY = "mQK2zB2lxayaitBVpJEC";
+
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
@@ -511,7 +513,7 @@ async function goldPrice() {
 
 async function goldPrice2() {
   let resp = await axios.get(
-    "https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=UdH2AVy1g_PfTObGqA9d"
+    `https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=${API_KEY}`
   );
   return resp.data.quotes[0].ask;
 }
