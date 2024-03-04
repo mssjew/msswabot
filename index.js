@@ -5,6 +5,9 @@ var emoji = require("node-emoji");
 
 const API_KEY = "mQK2zB2lxayaitBVpJEC";
 
+console.log(`Running Node.js version ${process.version}`);
+
+
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
