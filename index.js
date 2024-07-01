@@ -192,7 +192,7 @@ client.on("ready", () => {
 
 client.initialize();
 
-var TT_PREMIUM = 5;
+var TT_PREMIUM = 1;
 const VALID_CODES = [
   "#6572",
   "#6950",
@@ -858,44 +858,44 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase() === "!tt") {
     // message.reply("🔴 *Gold Market Closed* 🔴\n\nOur team will respond to your enquiry shortly.\n\nYou can reach us at 17215101 or 33539888.\n\nSystem will be active Monday morning.");
 
-    if (
-      message.from === NEW_MARHABA_GROUP ||
-      message.from === EVERSHINE_GROUP ||
-      message.from === JP_GROUP ||
-      message.from === MUNTHER_GROUP ||
-      message.from === CHANDNI_GROUP ||
-      message.from === MUKESH_GROUP
-    ) {
-      TT_PREMIUM = 5;
-    } else if (message.from === KENZ_GROUP || message.from === MAHARANI_GROUP) {
-      console.log("MESSAGE FROM KENZ");
-      TT_PREMIUM = 5;
-    } else if (
-      message.from === AL_SARRAJ_GROUP ||
-      message.from === OM_GROUP ||
-      message.from === JALAL_GROUP ||
-      message.from === ALAA_GROUP ||
-      message.from === LIBERTY_GROUP ||
-      message.from === FAIZA_GROUP ||
-      message.from === FAREEDA_GROUP ||
-      message.from === CHEMMANUR_GROUP
-    ) {
-      TT_PREMIUM = 5;
-    } else if (
-      message.from === SUDEEP_GROUP ||
-      message.from === MATTATHIL_GROUP ||
-      message.from === DDEVJI_GROUP ||
-      message.from === DILU_GROUP ||
-      message.from === SHAHZAIB_GROUP ||
-      message.from === GORDHANDAS_GROUP ||
-      message.from === PRAKASH_GROUP
-    ) {
-      TT_PREMIUM = 5;
-    } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
-      TT_PREMIUM = 5;
-    } else if (message.from === YAFIE_GROUP) {
-      TT_PREMIUM = 5;
-    }
+    // if (
+    //   message.from === NEW_MARHABA_GROUP ||
+    //   message.from === EVERSHINE_GROUP ||
+    //   message.from === JP_GROUP ||
+    //   message.from === MUNTHER_GROUP ||
+    //   message.from === CHANDNI_GROUP ||
+    //   message.from === MUKESH_GROUP
+    // ) {
+    //   TT_PREMIUM = 1;
+    // } else if (message.from === KENZ_GROUP || message.from === MAHARANI_GROUP) {
+    //   console.log("MESSAGE FROM KENZ");
+    //   TT_PREMIUM = 1;
+    // } else if (
+    //   message.from === AL_SARRAJ_GROUP ||
+    //   message.from === OM_GROUP ||
+    //   message.from === JALAL_GROUP ||
+    //   message.from === ALAA_GROUP ||
+    //   message.from === LIBERTY_GROUP ||
+    //   message.from === FAIZA_GROUP ||
+    //   message.from === FAREEDA_GROUP ||
+    //   message.from === CHEMMANUR_GROUP
+    // ) {
+    //   TT_PREMIUM = 1;
+    // } else if (
+    //   message.from === SUDEEP_GROUP ||
+    //   message.from === MATTATHIL_GROUP ||
+    //   message.from === DDEVJI_GROUP ||
+    //   message.from === DILU_GROUP ||
+    //   message.from === SHAHZAIB_GROUP ||
+    //   message.from === GORDHANDAS_GROUP ||
+    //   message.from === PRAKASH_GROUP
+    // ) {
+    //   TT_PREMIUM = 1;
+    // } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
+    //   TT_PREMIUM = 1;
+    // } else if (message.from === YAFIE_GROUP) {
+    //   TT_PREMIUM = 1;
+    // }
 
     goldPrice2().then((price) => {
       if (isNaN(TT_PREMIUM)) {
@@ -907,11 +907,10 @@ client.on("message", async (message) => {
           message.from === ALSEEF_GROUP ||
           message.from === MASHALLAH_GROUP ||
           message.from === NEW_MASHALLAH_GROUP ||
-          message.from === JUMBO_GROUP ||
-          message.from === DDEVJI_GROUP
+          message.from === JUMBO_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
+          const ttPrice = Math.floor(ttRate);
           message.reply(`TT Rate: *BD${ttPrice}*`);
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
@@ -923,13 +922,7 @@ client.on("message", async (message) => {
   } // end of !tt function
 
   if (message.body.toLowerCase().includes("!fix")) {
-    if (
-      message.from === DUMMY_SARAJ ||
-      message.from === ALSEEF_GROUP ||
-      message.from === MASHALLAH_GROUP ||
-      message.from === AL_SARRAJ_GROUP ||
-      message.from === MUKESH_GROUP
-    ) {
+
       const chat = await message.getChat();
 
       let fixingCode = "";
@@ -944,86 +937,83 @@ client.on("message", async (message) => {
       } else {
         newFlag = false;
 
-        // if (message.from === MAHARANI_GROUP) {
-        //   fixingCode = "#1317";
-        // } else if (message.from === NEW_MARHABA_GROUP) {
-        //   fixingCode = "#1299";
-        // } else if (message.from === KENZ_GROUP) {
-        //   console.log("MESSAGE FROM KENZ");
-
-        //   fixingCode = "#1393";
-        // } else if (message.from === AL_SARRAJ_GROUP) {
-        //   fixingCode = "#6572";
-        // } else if (message.from === OM_GROUP) {
-        //   fixingCode = "#6950";
-        //   newFlag = false;
-        // } else if (message.from === MUNTHER_GROUP) {
-        //   fixingCode = "#9643";
-        // } else if (message.from === CHANDNI_GROUP) {
-        //   fixingCode = "#9236";
-        //   newFlag = false;
-        // } else if (message.from === SUDEEP_GROUP) {
-        //   fixingCode = "#9473";
-        // } else if (message.from === MUKESH_GROUP) {
-        //   fixingCode = "#5784";
-        //   newFlag = false;
-        // } else if (message.from === MATTATHIL_GROUP) {
-        //   fixingCode = "#5016";
-        //   newFlag = false;
-        // } else if (message.from === JALAL_GROUP) {
-        //   fixingCode = "#1293";
-        // } else if (message.from === DDEVJI_GROUP) {
-        //   fixingCode = "#1124";
-        // } else if (message.from === DILU_GROUP) {
-        //   fixingCode = "#5324";
-        // } else if (message.from === ALAA_GROUP) {
-        //   fixingCode = "#1175";
-        // } else if (message.from === LIBERTY_GROUP) {
-        //   fixingCode = "#6309";
-        // } else if (message.from === SHAHZAIB_GROUP) {
-        //   fixingCode = "#9325";
-        // } else if (message.from === FAIZA_GROUP) {
-        //   fixingCode = "#4841";
-        //   newFlag = true;
-        // } else if (message.from === EVERSHINE_GROUP) {
-        //   fixingCode = "#6555";
-        // } else if (message.from === FAREEDA_GROUP) {
-        //   fixingCode = "#4897";
-        //   newFlag = true;
-        // } else if (message.from === JP_GROUP) {
-        //   fixingCode = "#4496";
-        //   newFlag = true;
-        // } else if (message.from === CHEMMANUR_GROUP) {
-        //   fixingCode = "#4472";
-        //   newFlag = false;
-        // } else if (message.from === JASRA_GROUP) {
-        //   fixingCode = "#8293";
-        //   newFlag = true;
-        // } else if (message.from === SONA_GROUP) {
-        //   fixingCode = "#1152";
-        //   newFlag = true;
-        // } else if (message.from === DUMMY_SARAJ) {
-        //   fixingCode = "#0101";
-        //   newFlag = true;
-        // } else if (message.from === GORDHANDAS_GROUP) {
-        //   fixingCode = "#6506";
-        //   newFlag = true;
-        // } else if (message.from === PRAKASH_GROUP) {
-        //   fixingCode = "#1191";
-        //   newFlag = true;
-        // } else if (message.from === YAFIE_GROUP) {
-        //   fixingCode = "#4675";
-        // } else if (message.from === AGK_GROUP) {
-        //   fixingCode = "#1234";
-        // } else if (message.from === ALSEEF_GROUP) {
-        //   fixingCode = "#4046";
-        // } else if (message.from === MASHALLAH_GROUP) {
-        //   fixingCode = "#5769";
-        // } else if (message.from === JUMBO_GROUP) {
-        //   fixingCode = "#3209";
-        // }
-
-        if (message.from === DUMMY_SARAJ) {
+        if (message.from === MAHARANI_GROUP) {
+          fixingCode = "#1317";
+        } else if (message.from === NEW_MARHABA_GROUP) {
+          fixingCode = "#1299";
+        } else if (message.from === KENZ_GROUP) {
+          console.log("MESSAGE FROM KENZ");
+          fixingCode = "#1393";
+        } else if (message.from === AL_SARRAJ_GROUP) {
+          fixingCode = "#6572";
+        } else if (message.from === OM_GROUP) {
+          fixingCode = "#6950";
+          newFlag = false;
+        } else if (message.from === MUNTHER_GROUP) {
+          fixingCode = "#9643";
+        } else if (message.from === CHANDNI_GROUP) {
+          fixingCode = "#9236";
+          newFlag = false;
+        } else if (message.from === SUDEEP_GROUP) {
+          fixingCode = "#9473";
+        } else if (message.from === MUKESH_GROUP) {
+          fixingCode = "#5784";
+          newFlag = false;
+        } else if (message.from === MATTATHIL_GROUP) {
+          fixingCode = "#5016";
+          newFlag = false;
+        } else if (message.from === JALAL_GROUP) {
+          fixingCode = "#1293";
+        } else if (message.from === DDEVJI_GROUP) {
+          fixingCode = "#1124";
+        } else if (message.from === DILU_GROUP) {
+          fixingCode = "#5324";
+        } else if (message.from === ALAA_GROUP) {
+          fixingCode = "#1175";
+        } else if (message.from === LIBERTY_GROUP) {
+          fixingCode = "#6309";
+        } else if (message.from === SHAHZAIB_GROUP) {
+          fixingCode = "#9325";
+        } else if (message.from === FAIZA_GROUP) {
+          fixingCode = "#4841";
+          newFlag = true;
+        } else if (message.from === EVERSHINE_GROUP) {
+          fixingCode = "#6555";
+        } else if (message.from === FAREEDA_GROUP) {
+          fixingCode = "#4897";
+          newFlag = true;
+        } else if (message.from === JP_GROUP) {
+          fixingCode = "#4496";
+          newFlag = true;
+        } else if (message.from === CHEMMANUR_GROUP) {
+          fixingCode = "#4472";
+          newFlag = false;
+        } else if (message.from === JASRA_GROUP) {
+          fixingCode = "#8293";
+          newFlag = true;
+        } else if (message.from === SONA_GROUP) {
+          fixingCode = "#1152";
+          newFlag = true;
+        } else if (message.from === DUMMY_SARAJ) {
+          fixingCode = "#0101";
+          newFlag = true;
+        } else if (message.from === GORDHANDAS_GROUP) {
+          fixingCode = "#6506";
+          newFlag = true;
+        } else if (message.from === PRAKASH_GROUP) {
+          fixingCode = "#1191";
+          newFlag = true;
+        } else if (message.from === YAFIE_GROUP) {
+          fixingCode = "#4675";
+        } else if (message.from === AGK_GROUP) {
+          fixingCode = "#1234";
+        } else if (message.from === ALSEEF_GROUP) {
+          fixingCode = "#4046";
+        } else if (message.from === MASHALLAH_GROUP) {
+          fixingCode = "#5769";
+        } else if (message.from === JUMBO_GROUP) {
+          fixingCode = "#3209";
+        } else if (message.from === DUMMY_SARAJ) {
           fixingCode = "#0101";
           newFlag = true;
         } else if (message.from === ALSEEF_GROUP) {
@@ -1063,10 +1053,9 @@ client.on("message", async (message) => {
                 message.from === ALSEEF_GROUP ||
                 message.from === MASHALLAH_GROUP ||
                 message.from === NEW_MASHALLAH_GROUP ||
-                message.from === JUMBO_GROUP ||
-                message.from === DDEVJI_GROUP
+                message.from === JUMBO_GROUP
               ) {
-                ttPrice = Math.floor(ttRate) + TT_PREMIUM;
+                ttPrice = Math.floor(ttRate);
               } else {
                 ttPrice = Math.floor(ttRate) + TT_PREMIUM;
               }
@@ -1097,12 +1086,8 @@ client.on("message", async (message) => {
           });
         }
       }
-    } else {
-
-      message.reply("Our team will fix your order manually.\n\nIf you do not get a response in time please call direct on 17215101 or 33539888.");
-
-    }
-  } // end of if !fix if/else
+    } 
+   // end of if !fix if/else
 
   if (isACode(message.body) && !message.hasQuotedMsg) {
     message.reply(
