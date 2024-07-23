@@ -192,7 +192,7 @@ client.on("ready", () => {
 
 client.initialize();
 
-var TT_PREMIUM = 1;
+var TT_PREMIUM = 0;
 const VALID_CODES = [
   "#6572",
   "#6950",
@@ -922,6 +922,8 @@ client.on("message", async (message) => {
   } // end of !tt function
 
   if (message.body.toLowerCase().includes("!fix")) {
+
+      let newFlag;
 
       const chat = await message.getChat();
 
