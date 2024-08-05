@@ -911,11 +911,11 @@ client.on("message", async (message) => {
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate);
-          message.reply(`TT Rate: *BD${ttPrice}*`);
+          message.reply(`TT Rate: *BD${ttPrice}*\n\n*Stock available on Friday 09 August.*`);
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
-          message.reply(`TT Rate: *BD${ttPrice}*`);
+          message.reply(`TT Rate: *BD${ttPrice}*\n\n*Stock available on Friday 09 August.*`);
         }
       }
     });
