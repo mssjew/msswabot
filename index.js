@@ -10,6 +10,7 @@ console.log(`Running Node.js version ${process.version}`);
 const greenTickEmoji = emoji.get("white_check_mark");
 const redXEmoji = emoji.get("x");
 const redCircle = emoji.get("red_circle");
+const greenTick = emoji.get("white_check_mark");
 
 const CURR_MONTH = "August 2022";
 const MONTH_SEP = "Aug";
@@ -18,6 +19,9 @@ var mainRange = ``;
 
 const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
+
+
+var stockAvailable = false; 
 
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
@@ -911,11 +915,24 @@ client.on("message", async (message) => {
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate);
-          message.reply(`TT Rate: *BD${ttPrice}*`);
+          const replyMessage = `TT Rate: *BD${ttPrice}*`;
+
+          if (stockAvailable) {
+            message.reply(`${replyMessage}\n\nStock available. ${greenTick}`);
+          } else {
+            message.reply(`${replyMessage}\n\nStock currently unavailable. ${redXEmoji}`);
+          }
+
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
-          message.reply(`TT Rate: *BD${ttPrice}*`);
+          const replyMessage = `TT Rate: *BD${ttPrice}*`;
+
+          if (stockAvailable) {
+            message.reply(`${replyMessage}\n\nStock available. ${greenTick}`);
+          } else {
+            message.reply(`${replyMessage}\n\nStock currently unavailable. ${redXEmoji}`);
+          }
         }
       }
     });
@@ -1285,6 +1302,30 @@ client.on("message", async (message) => {
     }
   } // end if isCode()
 
+
+  if (message.body.toLowerCase() === "!stock available") {
+      // Check if the message is from the specific group
+      if (message.from === "120363165858859320@g.us") {
+        stockAvailable = true;
+        message.reply("Stock set as available.");
+      } else {
+        message.reply("You are not authorized to update the stock availability status.");
+      }
+    }
+
+    if (message.body.toLowerCase() === "!stock unavailable") {
+      // Check if the message is from the specific group
+      if (message.from === "120363165858859320@g.us") {
+        stockAvailable = false;
+        message.reply("Stock unavailability status updated.");
+      } else {
+        message.reply("You are not authorized to update the stock availability status.");
+      }
+    }
+  
+
+
+  
   if (message.body.includes("!setpremium")) {
     const chat = await message.getChat();
 
@@ -1321,6 +1362,8 @@ client.on("message", async (message) => {
     }
     //}
   }
+
+
 
   if (message.body === "!getpremium") {
     // const chat = await message.getChat();
