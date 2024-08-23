@@ -21,7 +21,7 @@ const URL_ONE = "1Dv8aUw29Nu5uF3bFJhQzoZGDaiMnwC9W0JBpXRpcRgU";
 const URL_TWO = "AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4";
 
 
-var stockAvailable = false; 
+var stockAvailable = true; 
 
 // const internalPos = "Summary!C3";
 // const sellRange = "Summary!B11:B38";
