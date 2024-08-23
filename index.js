@@ -1317,7 +1317,7 @@ client.on("message", async (message) => {
       // Check if the message is from the specific group
       if (message.from === "120363165858859320@g.us") {
         stockAvailable = false;
-        message.reply("Stock unavailability status updated.");
+        message.reply("Stock set as unavailable.");
       } else {
         message.reply("You are not authorized to update the stock availability status.");
       }
