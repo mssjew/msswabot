@@ -3,7 +3,7 @@ const fs = require("fs");
 const schedule = require("node-schedule");
 var emoji = require("node-emoji");
 
-const API_KEY = "K4Dlr-8Az2ZN9sxp72y1EC";
+const API_KEY = "K4Dlr-8Az2ZN9sxp72y1";
 
 console.log(`Running Node.js version ${process.version}`);
 
