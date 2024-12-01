@@ -1019,6 +1019,7 @@ client.on("message", async (message) => {
           fixingCode = "#6572";
         } else if (message.from === SUBHANALLAH_GROUP) {
           fixingCode = "#5542";
+          newFlag = true;
         }
         const quantity = getQuantity(message.body);
 
@@ -1064,14 +1065,8 @@ client.on("message", async (message) => {
                     `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                   );
                 });
-              } else if (!chat.isGroup) {
-                grabPic().then((pic) => {
-                  chat.sendMessage(pic);
-                  message.reply(
-                    `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nAs this is not a group, you may use our Dummy Code to see how it works: *#0001*.`
-                  );
-                });
-              } else {
+              }
+               else {
                 message.reply(
                   `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
                 );
