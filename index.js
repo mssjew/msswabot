@@ -84,6 +84,8 @@ const JUMBO_GROUP = "120363140988869999@g.us"; //3209
 
 const SUBHANALLAH_GROUP = "120363059808151254@g.us" //5542
 
+const MSS_BOOKINGS = "120363165858859320@g.us" //mss_bookings_hamza
+
 
 //AL YAFIE JEWELLERIES CO. W.L.L
 
@@ -866,44 +868,6 @@ client.on("message", async (message) => {
   if (message.body.toLowerCase() === "!tt") {
     // message.reply("🔴 *Gold Market Closed* 🔴\n\nOur team will respond to your enquiry shortly.\n\nYou can reach us at 17215101 or 33539888.\n\nSystem will be active Monday morning.");
 
-    // if (
-    //   message.from === NEW_MARHABA_GROUP ||
-    //   message.from === EVERSHINE_GROUP ||
-    //   message.from === JP_GROUP ||
-    //   message.from === MUNTHER_GROUP ||
-    //   message.from === CHANDNI_GROUP ||
-    //   message.from === MUKESH_GROUP
-    // ) {
-    //   TT_PREMIUM = 1;
-    // } else if (message.from === KENZ_GROUP || message.from === MAHARANI_GROUP) {
-    //   console.log("MESSAGE FROM KENZ");
-    //   TT_PREMIUM = 1;
-    // } else if (
-    //   message.from === AL_SARRAJ_GROUP ||
-    //   message.from === OM_GROUP ||
-    //   message.from === JALAL_GROUP ||
-    //   message.from === ALAA_GROUP ||
-    //   message.from === LIBERTY_GROUP ||
-    //   message.from === FAIZA_GROUP ||
-    //   message.from === FAREEDA_GROUP ||
-    //   message.from === CHEMMANUR_GROUP
-    // ) {
-    //   TT_PREMIUM = 1;
-    // } else if (
-    //   message.from === SUDEEP_GROUP ||
-    //   message.from === MATTATHIL_GROUP ||
-    //   message.from === DDEVJI_GROUP ||
-    //   message.from === DILU_GROUP ||
-    //   message.from === SHAHZAIB_GROUP ||
-    //   message.from === GORDHANDAS_GROUP ||
-    //   message.from === PRAKASH_GROUP
-    // ) {
-    //   TT_PREMIUM = 1;
-    // } else if (message.from === JASRA_GROUP || message.from === SONA_GROUP) {
-    //   TT_PREMIUM = 1;
-    // } else if (message.from === YAFIE_GROUP) {
-    //   TT_PREMIUM = 1;
-    // }
 
     goldPrice2().then((price) => {
       if (isNaN(TT_PREMIUM)) {
@@ -919,7 +883,7 @@ client.on("message", async (message) => {
           message.from === SUBHANALLAH_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) - 1;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 1;
           const replyMessage = `TT Rate: *BD${ttPrice}*`;
 
           if (stockAvailable) {
@@ -927,7 +891,7 @@ client.on("message", async (message) => {
           } else {
             message.reply(`${replyMessage}\n\nStock currently unavailable. ${redXEmoji}`);
           }
-
+          
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
           const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
@@ -1319,7 +1283,7 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!stock available") {
       // Check if the message is from the specific group
-      if (message.from === "120363165858859320@g.us") {
+      if (message.from === MSS_BOOKINGS) {
         stockAvailable = true;
         message.reply("Stock set as available.");
       } else {
@@ -1329,7 +1293,7 @@ client.on("message", async (message) => {
 
     if (message.body.toLowerCase() === "!stock unavailable") {
       // Check if the message is from the specific group
-      if (message.from === "120363165858859320@g.us") {
+      if (message.from === MSS_BOOKINGS) {
         stockAvailable = false;
         message.reply("Stock set as unavailable.");
       } else {
@@ -1339,57 +1303,55 @@ client.on("message", async (message) => {
   
 
 
+    if (message.body.includes("!setpremium")) {
+      const chat = await message.getChat();
+      
+      // Check if message is from MSS_BOOKINGS group
+      if (message.from !== MSS_BOOKINGS) {
+          message.reply("Not authorized. This command can only be used in the authorized group.");
+          return;
+      }
   
-  if (message.body.includes("!setpremium")) {
-    const chat = await message.getChat();
-
-    // if(message.author !== "97333737302@c.us"|| message.author !== "97338999888@c.us") {
-    //   message.reply("Not authorized.")
-    // } else {
-    if (message.body.trim().length < 13 || message.body.trim().length > 14) {
-      message.reply(
-        "Format:\n\n*!setpremium X*\n\nNegative premium: *!setpremium -X*\n\nX is a number from 0-9.\n\nAdds digit value 1.417 rate."
-      );
-      return;
-    } else if (message.body.trim().length === 13) {
-      if (isNaN(parseInt(message.body.slice(-1)))) {
-        message.reply(`${redXEmoji} Error\n\nPlease enter a digit from 0-9.`);
-      } else {
-        TT_PREMIUM = parseInt(message.body.slice(-1));
-
-        message.reply(`Premium changed. Type !getpremium to confirm.`);
+      if (message.body.trim().length < 13 || message.body.trim().length > 14) {
+          message.reply(
+              "Format:\n\n*!setpremium X*\n\nNegative premium: *!setpremium -X*\n\nX is a number from 0-9.\n\nAdds digit value 1.417 rate."
+          );
+          return;
+      } else if (message.body.trim().length === 13) {
+          if (isNaN(parseInt(message.body.slice(-1)))) {
+              message.reply(`${redXEmoji} Error\n\nPlease enter a digit from 0-9.`);
+          } else {
+              TT_PREMIUM = parseInt(message.body.slice(-1));
+              message.reply(`Premium changed. Type !getpremium to confirm.`);
+          }
+      } else if (message.body.trim().length === 14) {
+          if (message.body.trim()[12] !== "-") {
+              message.reply(
+                  `${redXEmoji} Error\n\nPlease use the correct format for negative premium:\n\n*!setpremium -X* where X is between 0-9.`
+              );
+          } else if (isNaN(parseInt(message.body.slice(-1)))) {
+              message.reply(`${redXEmoji} Error\n\nPlease enter a digit from 0-9.`);
+          } else {
+              TT_PREMIUM = 0 - parseInt(message.body.slice(-1));
+              message.reply(
+                  `Premium changed to *negative*. Type !getpremium to confirm.`
+              );
+          }
       }
-    } else if (message.body.trim().length === 14) {
-      if (message.body.trim()[12] !== "-") {
-        message.reply(
-          `${redXEmoji} Error\n\nPlease use the correct format for negative premium:\n\n*!setpremium -X* where X is between 0-9.`
-        );
-      } else if (isNaN(parseInt(message.body.slice(-1)))) {
-        message.reply(`${redXEmoji} Error\n\nPlease enter a digit from 0-9.`);
-      } else {
-        TT_PREMIUM = 0 - parseInt(message.body.slice(-1));
-
-        message.reply(
-          `Premium changed to *negative*. Type !getpremium to confirm.`
-        );
-      }
-    }
-    //}
   }
-
-
-
+  
   if (message.body === "!getpremium") {
-    // const chat = await message.getChat();
-    // if (
-    //   message.from === "97333737302@c.us" ||
-    //   message.from === "97338999888@c.us"
-    // ) {
-    message.reply(`Current Premium: BD${TT_PREMIUM}`);
-    // } else {
-    //   message.reply("Not authorized.");
-    // }
-  }
+    // Check if message is from MSS_BOOKINGS group
+    if (message.from !== MSS_BOOKINGS) {
+        message.reply("Not authorized. This command can only be used in the authorized group.");
+        return;
+    }
+    
+    const sign = TT_PREMIUM >= 0 ? "+" : ""; // Will show + for positive, - is automatic for negative
+    message.reply(`Current Premium: ${sign}${TT_PREMIUM}`);
+}
+
+
   if (message.body.includes("!apiStats")) {
     goldPriceStats().then((stat) => {
       message.reply(
