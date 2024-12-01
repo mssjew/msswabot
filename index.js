@@ -82,6 +82,9 @@ const NEW_MASHALLAH_GROUP = "120363069297702474@g.us";
 
 const JUMBO_GROUP = "120363140988869999@g.us"; //3209
 
+const SUBHANALLAH_GROUP = "120363059808151254@g.us" //5542
+
+
 //AL YAFIE JEWELLERIES CO. W.L.L
 
 // Chemmanur Jewellers
@@ -229,6 +232,7 @@ const VALID_CODES = [
   "#4046",
   "#5769",
   "#3209",
+  "#5542",
   "#0001",
 ];
 
@@ -533,7 +537,7 @@ async function goldPrice2() {
   let resp = await axios.get(
     `https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=${API_KEY}`
   );
-  return resp.data.quotes[0].ask;
+  return resp.data.quotes[0].mid;
 }
 
 async function goldPriceStats() {
@@ -911,10 +915,11 @@ client.on("message", async (message) => {
           message.from === ALSEEF_GROUP ||
           message.from === MASHALLAH_GROUP ||
           message.from === NEW_MASHALLAH_GROUP ||
-          message.from === JUMBO_GROUP
+          message.from === JUMBO_GROUP ||
+          message.from === SUBHANALLAH_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate);
+          const ttPrice = Math.floor(ttRate) - 1;
           const replyMessage = `TT Rate: *BD${ttPrice}*`;
 
           if (stockAvailable) {
@@ -1048,6 +1053,8 @@ client.on("message", async (message) => {
           newFlag = false;
         } else if (message.from === AL_SARRAJ_GROUP) {
           fixingCode = "#6572";
+        } else if (message.from === SUBHANALLAH_GROUP) {
+          fixingCode = "#5542";
         }
         const quantity = getQuantity(message.body);
 
@@ -1197,8 +1204,9 @@ client.on("message", async (message) => {
         fixerName = "Mashallah Group";
       } else if (message.body === "#3209") {
         fixerName = "Jumbo Gold";
+      } else if (message.body === "#5542") {
+        fixerName = "Subhanallah Jewellery";
       }
-
       message
         .getQuotedMessage()
         .then((quoted) => {
