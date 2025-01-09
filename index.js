@@ -84,6 +84,8 @@ const JUMBO_GROUP = "120363140988869999@g.us"; //3209
 
 const SUBHANALLAH_GROUP = "120363059808151254@g.us" //5542
 
+const MOKSHA_GROUP = "120363370304575792@g.us" //1798
+
 const MSS_BOOKINGS = "120363165858859320@g.us" //mss_bookings_hamza
 
 
@@ -235,6 +237,7 @@ const VALID_CODES = [
   "#5769",
   "#3209",
   "#5542",
+  "#1798",
   "#0001",
 ];
 
@@ -1019,8 +1022,13 @@ client.on("message", async (message) => {
           fixingCode = "#6572";
         } else if (message.from === SUBHANALLAH_GROUP) {
           fixingCode = "#5542";
-          newFlag = true;
+          newFlag = false;
+        } else if (message.from === MOKSHA_GROUP) {
+          fixingCode = "#1798";
+          newFlag = false;
         }
+        }
+        
         const quantity = getQuantity(message.body);
 
         if (input !== `!fix ${quantity} tt` || quantity <= 0) {
@@ -1165,7 +1173,10 @@ client.on("message", async (message) => {
         fixerName = "Jumbo Gold";
       } else if (message.body === "#5542") {
         fixerName = "Subhanallah Jewellery";
-      }
+      } else if (message.body === "#1798") {
+        fixerName = "Moksha Jewellery";
+      } 
+        
       message
         .getQuotedMessage()
         .then((quoted) => {
