@@ -829,7 +829,7 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase() === "!price") {
     goldPrice2().then((price) => {
-      message.reply(`Current Price: $${price}`);
+      message.reply(`Current Price: $${price+PRICE_CORRECTOR}`);
     });
   }
 
