@@ -93,7 +93,7 @@ const MSS_BOOKINGS = "120363165858859320@g.us" //mss_bookings_hamza
 
 // Chemmanur Jewellers
 
-const PRICE_CORRECTOR = -20;
+const PRICE_CORRECTOR = 0;
 
 const hamzaNumber = "97338999888@c.us";
 const sajeevNumber = "919946147016@c.us";
