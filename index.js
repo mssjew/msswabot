@@ -86,6 +86,8 @@ const SUBHANALLAH_GROUP = "120363059808151254@g.us" //5542
 
 const MOKSHA_GROUP = "120363370304575792@g.us" //1798
 
+const SOHO_GROUP = "120363418520524276@g.us" // 1397
+
 const MSS_BOOKINGS = "120363165858859320@g.us" //mss_bookings_hamza
 
 
@@ -238,6 +240,7 @@ const VALID_CODES = [
   "#3209",
   "#5542",
   "#1798",
+  "#1397",
   "#0001",
 ];
 
@@ -649,183 +652,183 @@ client.on("message", async (message) => {
     );
   } // end !groups
 
-  if (message.body.toLowerCase() === "!bookings") {
-    let company = "";
+  // if (message.body.toLowerCase() === "!bookings") {
+  //   let company = "";
 
-    if (message.from === MAHARANI_GROUP || message.from === DUMMY_SARAJ) {
-      company = "Maharani Jewellers";
-      mainRange = "Maharani_K00014!D2:L201";
-    } else if (message.from === NEW_MARHABA_GROUP) {
-      company = "New Marhaba Jewellery";
-      mainRange = "NewMarhaba_N00001!D2:L201";
-    } else if (message.from === KENZ_GROUP) {
-      company = "Kenz Al Bahrain";
-      mainRange = "Kenz_K00010!D2:L201";
-    } else if (message.from === AL_SARRAJ_GROUP) {
-      company = "Al Sarraj Jewellers";
-      mainRange = "AlSarraj_!D2:L201";
-    } else if (message.from === OM_GROUP) {
-      company = "Om Jewellery";
-      mainRange = "Om_O0001!D2:L201";
-    } else if (message.from === MUNTHER_GROUP) {
-      company = "Munther Jewellery";
-      mainRange = "Munther_M!D2:L201";
-    } else if (message.from === CHANDNI_GROUP) {
-      company = "Chandni Jewellers";
-      mainRange = "Chandni!D2:L201";
-    } else if (message.from === SUDEEP_GROUP) {
-      company = "Sudeep Jewellery";
-      mainRange = "Sudeep_!D2:L201";
-    } else if (message.from === MUKESH_GROUP) {
-      company = "Mukesh & Brothers";
-      mainRange = "MukeshBros_!D2:L201";
-    } else if (message.from === MATTATHIL_GROUP) {
-      company = "Mattathil Jewellers";
-      mainRange = "MATTATHIL_JEWELLERY!D2:L201";
-    } else if (message.from === JALAL_GROUP) {
-      company = "Al-Jalal Jewellers";
-      mainRange = "Jalal_Jewellery!D2:L201";
-    } else if (message.from === DDEVJI_GROUP) {
-      company = "Dinesh Devji Jewellers";
-      mainRange = "Devji21_D00001!D2:L201";
-    } else if (message.from === DILU_GROUP) {
-      company = "Dilu Jewellers";
-      mainRange = "Dilu!D2:L201";
-    } else if (message.from === ALAA_GROUP) {
-      company = "Alaa Jewellery";
-      mainRange = "Alaa_A00086!D2:L201";
-    } else if (message.from === LIBERTY_GROUP) {
-      company = "Liberty Jewellery";
-      mainRange = "Liberty_L00001!D2:L201";
-    } else if (message.from === SHAHZAIB_GROUP) {
-      company = "Shahzaib Jewellery";
-      mainRange = "Shahzaib_!D2:L201";
-    } else if (message.from === FAIZA_GROUP) {
-      company = "Faiza Jewellery";
-      mainRange = "Faiza!D2:L201";
-    } else if (message.from === EVERSHINE_GROUP) {
-      company = "Evershine Jewellery";
-      mainRange = "Evershine_Jewellery!D2:L201";
-    } else if (message.from === FAREEDA_GROUP) {
-      company = "Fareeda Jewellery";
-      mainRange = "FAREEDA_JEWELLERY!D2:L201";
-    } else if (message.from === JP_GROUP) {
-      company = "J and P Jewellers";
-      mainRange = "J_and_P!D2:L201";
-    } else if (message.from === CHEMMANUR_GROUP) {
-      company = "Chemmanur Jewellers";
-      mainRange = "CHEMMANUR_JEWELLERY!D2:L201";
-    } else if (message.from === AGK_GROUP) {
-      company = "AGK Jewellers";
-      mainRange = "AGK!D2:L201";
-    } else {
-      company = "";
-      mainRange = "NA";
-    } //need to add ghorndas and prakash and yafies
+  //   if (message.from === MAHARANI_GROUP || message.from === DUMMY_SARAJ) {
+  //     company = "Maharani Jewellers";
+  //     mainRange = "Maharani_K00014!D2:L201";
+  //   } else if (message.from === NEW_MARHABA_GROUP) {
+  //     company = "New Marhaba Jewellery";
+  //     mainRange = "NewMarhaba_N00001!D2:L201";
+  //   } else if (message.from === KENZ_GROUP) {
+  //     company = "Kenz Al Bahrain";
+  //     mainRange = "Kenz_K00010!D2:L201";
+  //   } else if (message.from === AL_SARRAJ_GROUP) {
+  //     company = "Al Sarraj Jewellers";
+  //     mainRange = "AlSarraj_!D2:L201";
+  //   } else if (message.from === OM_GROUP) {
+  //     company = "Om Jewellery";
+  //     mainRange = "Om_O0001!D2:L201";
+  //   } else if (message.from === MUNTHER_GROUP) {
+  //     company = "Munther Jewellery";
+  //     mainRange = "Munther_M!D2:L201";
+  //   } else if (message.from === CHANDNI_GROUP) {
+  //     company = "Chandni Jewellers";
+  //     mainRange = "Chandni!D2:L201";
+  //   } else if (message.from === SUDEEP_GROUP) {
+  //     company = "Sudeep Jewellery";
+  //     mainRange = "Sudeep_!D2:L201";
+  //   } else if (message.from === MUKESH_GROUP) {
+  //     company = "Mukesh & Brothers";
+  //     mainRange = "MukeshBros_!D2:L201";
+  //   } else if (message.from === MATTATHIL_GROUP) {
+  //     company = "Mattathil Jewellers";
+  //     mainRange = "MATTATHIL_JEWELLERY!D2:L201";
+  //   } else if (message.from === JALAL_GROUP) {
+  //     company = "Al-Jalal Jewellers";
+  //     mainRange = "Jalal_Jewellery!D2:L201";
+  //   } else if (message.from === DDEVJI_GROUP) {
+  //     company = "Dinesh Devji Jewellers";
+  //     mainRange = "Devji21_D00001!D2:L201";
+  //   } else if (message.from === DILU_GROUP) {
+  //     company = "Dilu Jewellers";
+  //     mainRange = "Dilu!D2:L201";
+  //   } else if (message.from === ALAA_GROUP) {
+  //     company = "Alaa Jewellery";
+  //     mainRange = "Alaa_A00086!D2:L201";
+  //   } else if (message.from === LIBERTY_GROUP) {
+  //     company = "Liberty Jewellery";
+  //     mainRange = "Liberty_L00001!D2:L201";
+  //   } else if (message.from === SHAHZAIB_GROUP) {
+  //     company = "Shahzaib Jewellery";
+  //     mainRange = "Shahzaib_!D2:L201";
+  //   } else if (message.from === FAIZA_GROUP) {
+  //     company = "Faiza Jewellery";
+  //     mainRange = "Faiza!D2:L201";
+  //   } else if (message.from === EVERSHINE_GROUP) {
+  //     company = "Evershine Jewellery";
+  //     mainRange = "Evershine_Jewellery!D2:L201";
+  //   } else if (message.from === FAREEDA_GROUP) {
+  //     company = "Fareeda Jewellery";
+  //     mainRange = "FAREEDA_JEWELLERY!D2:L201";
+  //   } else if (message.from === JP_GROUP) {
+  //     company = "J and P Jewellers";
+  //     mainRange = "J_and_P!D2:L201";
+  //   } else if (message.from === CHEMMANUR_GROUP) {
+  //     company = "Chemmanur Jewellers";
+  //     mainRange = "CHEMMANUR_JEWELLERY!D2:L201";
+  //   } else if (message.from === AGK_GROUP) {
+  //     company = "AGK Jewellers";
+  //     mainRange = "AGK!D2:L201";
+  //   } else {
+  //     company = "";
+  //     mainRange = "NA";
+  //   } //need to add ghorndas and prakash and yafies
 
-    //1293 Al-Jalal Jewellery *
-    //9152 Al-Arefi Jewellery*
-    //1124 Dinesh Devji Jewellers*
-    //5324 Dilu Jewellery
-    //1175  Alaa Jewellery
-    //6309 Liberty Jewellery
-    //9325 Shahzaib Jewellers
-    //4841 FAIZA JEWELLERY
-    //6555  Evershine Jewellery
-    //4897 FAREEDA JEWELLERY
-    //4496 J AND P JEWELLERS
+  //   //1293 Al-Jalal Jewellery *
+  //   //9152 Al-Arefi Jewellery*
+  //   //1124 Dinesh Devji Jewellers*
+  //   //5324 Dilu Jewellery
+  //   //1175  Alaa Jewellery
+  //   //6309 Liberty Jewellery
+  //   //9325 Shahzaib Jewellers
+  //   //4841 FAIZA JEWELLERY
+  //   //6555  Evershine Jewellery
+  //   //4897 FAREEDA JEWELLERY
+  //   //4496 J AND P JEWELLERS
 
-    console.log("MAIN RANGE BEFORE GRAB: ", mainRange);
-    dataGrab(mainRange)
-      .then((data) => {
-        console.log("MAIN RANGE AFTER GRAB: ", mainRange);
+  //   console.log("MAIN RANGE BEFORE GRAB: ", mainRange);
+  //   dataGrab(mainRange)
+  //     .then((data) => {
+  //       console.log("MAIN RANGE AFTER GRAB: ", mainRange);
 
-        let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n`;
+  //       let bookingsList = `*${CURR_MONTH} TT Bookings for ${company}:*\n`;
 
-        // const allBookings = data.filter(monthReturner).reverse();
+  //       // const allBookings = data.filter(monthReturner).reverse();
 
-        const monthBookings = monthSeparator(data, MONTH_SEP);
+  //       const monthBookings = monthSeparator(data, MONTH_SEP);
 
-        let totalMonthly = quantityCalc(monthBookings);
+  //       let totalMonthly = quantityCalc(monthBookings);
 
-        monthBookings.forEach((x) => {
-          bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}\n`;
-        });
+  //       monthBookings.forEach((x) => {
+  //         bookingsList += `\n*Date:* ${x[1]}\n*Amount:* ${x[3]} TT\n*Price:* ${x[4]}\n*Total:* ${x[5]}\n`;
+  //       });
 
-        bookingsList += `\n${CURR_MONTH} Total For ${company}: *${totalMonthly} TTs*`;
+  //       bookingsList += `\n${CURR_MONTH} Total For ${company}: *${totalMonthly} TTs*`;
 
-        message.reply(bookingsList);
+  //       message.reply(bookingsList);
 
-        // if (dayBookings.length === 0) {
-        //   const tableRow = document.createElement("tr");
-        //   currentTableBody.appendChild(tableRow);
+  //       // if (dayBookings.length === 0) {
+  //       //   const tableRow = document.createElement("tr");
+  //       //   currentTableBody.appendChild(tableRow);
 
-        //   for (let i = 0; i < 8; i++) {
-        //     const cell = document.createElement("td");
-        //     tableRow.appendChild(cell);
-        //     cell.textContent = "---";
-        //   }
+  //       //   for (let i = 0; i < 8; i++) {
+  //       //     const cell = document.createElement("td");
+  //       //     tableRow.appendChild(cell);
+  //       //     cell.textContent = "---";
+  //       //   }
 
-        //   dailyTotalSentence.textContent = "No bookings today.";
-        //   dailyTotalSentence.style.color = "crimson";
+  //       //   dailyTotalSentence.textContent = "No bookings today.";
+  //       //   dailyTotalSentence.style.color = "crimson";
 
-        // }
+  //       // }
 
-        // dayBookings.forEach((row) => {
-        //   row.shift();
-        //   const tableRow = document.createElement("tr");
-        //   currentTableBody.appendChild(tableRow);
-        //   row.forEach((cellData) => {
-        //     const cell = document.createElement("td");
-        //     tableRow.appendChild(cell);
-        //     cell.textContent = cellData;
+  //       // dayBookings.forEach((row) => {
+  //       //   row.shift();
+  //       //   const tableRow = document.createElement("tr");
+  //       //   currentTableBody.appendChild(tableRow);
+  //       //   row.forEach((cellData) => {
+  //       //     const cell = document.createElement("td");
+  //       //     tableRow.appendChild(cell);
+  //       //     cell.textContent = cellData;
 
-        //     if (cell.textContent === "PENDING") {
-        //       cell.classList.add("pending");
-        //     }
-        //     if (cell.textContent === "COMPLETE") {
-        //       cell.classList.add("complete");
-        //     }
-        //   });
-        // });
+  //       //     if (cell.textContent === "PENDING") {
+  //       //       cell.classList.add("pending");
+  //       //     }
+  //       //     if (cell.textContent === "COMPLETE") {
+  //       //       cell.classList.add("complete");
+  //       //     }
+  //       //   });
+  //       // });
 
-        // if (monthBookings.length === 0) {
-        //   const tableRow = document.createElement("tr");
-        //   monthTableBody.appendChild(tableRow);
+  //       // if (monthBookings.length === 0) {
+  //       //   const tableRow = document.createElement("tr");
+  //       //   monthTableBody.appendChild(tableRow);
 
-        //   for (let i = 0; i < 8; i++) {
-        //     const cell = document.createElement("td");
-        //     tableRow.appendChild(cell);
-        //     cell.textContent = "---";
-        //   }
+  //       //   for (let i = 0; i < 8; i++) {
+  //       //     const cell = document.createElement("td");
+  //       //     tableRow.appendChild(cell);
+  //       //     cell.textContent = "---";
+  //       //   }
 
-        //   monthlyTotalSentence.textContent = "No bookings this month.";
-        //   monthlyTotalSentence.style.color = "crimson";
+  //       //   monthlyTotalSentence.textContent = "No bookings this month.";
+  //       //   monthlyTotalSentence.style.color = "crimson";
 
-        // }
+  //       // }
 
-        // monthBookings.forEach((row) => {
-        //   row.shift();
-        //   const tableRow = document.createElement("tr");
-        //   monthTableBody.appendChild(tableRow);
-        //   row.forEach((cellData) => {
-        //     const cell = document.createElement("td");
-        //     tableRow.appendChild(cell);
-        //     cell.textContent = cellData;
+  //       // monthBookings.forEach((row) => {
+  //       //   row.shift();
+  //       //   const tableRow = document.createElement("tr");
+  //       //   monthTableBody.appendChild(tableRow);
+  //       //   row.forEach((cellData) => {
+  //       //     const cell = document.createElement("td");
+  //       //     tableRow.appendChild(cell);
+  //       //     cell.textContent = cellData;
 
-        //     if (cell.textContent === "PENDING") {
-        //       cell.classList.add("pending");
-        //     }
-        //     if (cell.textContent === "COMPLETE") {
-        //       cell.classList.add("complete");
-        //     }
-        //   });
-        // });//end febBookings
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  //       //     if (cell.textContent === "PENDING") {
+  //       //       cell.classList.add("pending");
+  //       //     }
+  //       //     if (cell.textContent === "COMPLETE") {
+  //       //       cell.classList.add("complete");
+  //       //     }
+  //       //   });
+  //       // });//end febBookings
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   if (message.body.toLowerCase() === "!price") {
     goldPrice2().then((price) => {
@@ -912,176 +915,175 @@ client.on("message", async (message) => {
 
   if (message.body.toLowerCase().includes("!fix")) {
 
-    message.reply("Sorry, we are not accepting fixing orders at this time.\n Please contact us at 17215101 or 33539888 during working hours, thank you.");
 
+      let newFlag;
 
+      const chat = await message.getChat();
 
-      // let newFlag;
+      let fixingCode = "";
+      const input = message.body.trim().toLowerCase();
 
-      // const chat = await message.getChat();
+      let randTT = Math.ceil(Math.random() * 10);
 
-      // let fixingCode = "";
-      // const input = message.body.trim().toLowerCase();
+      if (input.length < 5 || input.length > 10) {
+        message.reply(
+          `${redXEmoji} Error\n\nPlease use correct format\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
+        );
+      } else {
+        newFlag = false;
 
-      // let randTT = Math.ceil(Math.random() * 10);
-
-      // if (input.length < 5 || input.length > 10) {
-      //   message.reply(
-      //     `${redXEmoji} Error\n\nPlease use correct format\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
-      //   );
-      // } else {
-      //   newFlag = false;
-
-      //   if (message.from === MAHARANI_GROUP) {
-      //     fixingCode = "#1317";
-      //   } else if (message.from === NEW_MARHABA_GROUP) {
-      //     fixingCode = "#1299";
-      //   } else if (message.from === KENZ_GROUP) {
-      //     console.log("MESSAGE FROM KENZ");
-      //     fixingCode = "#1393";
-      //   } else if (message.from === AL_SARRAJ_GROUP) {
-      //     fixingCode = "#6572";
-      //   } else if (message.from === OM_GROUP) {
-      //     fixingCode = "#6950";
-      //     newFlag = false;
-      //   } else if (message.from === MUNTHER_GROUP) {
-      //     fixingCode = "#9643";
-      //   } else if (message.from === CHANDNI_GROUP) {
-      //     fixingCode = "#9236";
-      //     newFlag = false;
-      //   } else if (message.from === SUDEEP_GROUP) {
-      //     fixingCode = "#9473";
-      //   } else if (message.from === MUKESH_GROUP) {
-      //     fixingCode = "#5784";
-      //     newFlag = false;
-      //   } else if (message.from === MATTATHIL_GROUP) {
-      //     fixingCode = "#5016";
-      //     newFlag = false;
-      //   } else if (message.from === JALAL_GROUP) {
-      //     fixingCode = "#1293";
-      //   } else if (message.from === DDEVJI_GROUP) {
-      //     fixingCode = "#1124";
-      //   } else if (message.from === DILU_GROUP) {
-      //     fixingCode = "#5324";
-      //   } else if (message.from === ALAA_GROUP) {
-      //     fixingCode = "#1175";
-      //   } else if (message.from === LIBERTY_GROUP) {
-      //     fixingCode = "#6309";
-      //   } else if (message.from === SHAHZAIB_GROUP) {
-      //     fixingCode = "#9325";
-      //   } else if (message.from === FAIZA_GROUP) {
-      //     fixingCode = "#4841";
-      //     newFlag = true;
-      //   } else if (message.from === EVERSHINE_GROUP) {
-      //     fixingCode = "#6555";
-      //   } else if (message.from === FAREEDA_GROUP) {
-      //     fixingCode = "#4897";
-      //     newFlag = true;
-      //   } else if (message.from === JP_GROUP) {
-      //     fixingCode = "#4496";
-      //     newFlag = true;
-      //   } else if (message.from === CHEMMANUR_GROUP) {
-      //     fixingCode = "#4472";
-      //     newFlag = false;
-      //   } else if (message.from === JASRA_GROUP) {
-      //     fixingCode = "#8293";
-      //     newFlag = true;
-      //   } else if (message.from === SONA_GROUP) {
-      //     fixingCode = "#1152";
-      //     newFlag = true;
-      //   } else if (message.from === DUMMY_SARAJ) {
-      //     fixingCode = "#0101";
-      //     newFlag = true;
-      //   } else if (message.from === GORDHANDAS_GROUP) {
-      //     fixingCode = "#6506";
-      //     newFlag = true;
-      //   } else if (message.from === PRAKASH_GROUP) {
-      //     fixingCode = "#1191";
-      //     newFlag = true;
-      //   } else if (message.from === YAFIE_GROUP) {
-      //     fixingCode = "#4675";
-      //   } else if (message.from === AGK_GROUP) {
-      //     fixingCode = "#1234";
-      //   } else if (message.from === ALSEEF_GROUP) {
-      //     fixingCode = "#4046";
-      //   } else if (message.from === MASHALLAH_GROUP) {
-      //     fixingCode = "#5769";
-      //   } else if (message.from === JUMBO_GROUP) {
-      //     fixingCode = "#3209";
-      //   } else if (message.from === DUMMY_SARAJ) {
-      //     fixingCode = "#0101";
-      //     newFlag = true;
-      //   } else if (message.from === ALSEEF_GROUP) {
-      //     fixingCode = "#4046";
-      //   } else if (message.from === MASHALLAH_GROUP) {
-      //     fixingCode = "#5769";
-      //   } else if (message.from === MUKESH_GROUP) {
-      //     fixingCode = "#5784";
-      //     newFlag = false;
-      //   } else if (message.from === AL_SARRAJ_GROUP) {
-      //     fixingCode = "#6572";
-      //   } else if (message.from === SUBHANALLAH_GROUP) {
-      //     fixingCode = "#5542";
-      //     newFlag = false;
-      //   } else if (message.from === MOKSHA_GROUP) {
-      //     fixingCode = "#1798";
-      //     newFlag = false;
-      //   }
-      //   }
+        if (message.from === MAHARANI_GROUP) {
+          fixingCode = "#1317";
+        } else if (message.from === NEW_MARHABA_GROUP) {
+          fixingCode = "#1299";
+        } else if (message.from === KENZ_GROUP) {
+          console.log("MESSAGE FROM KENZ");
+          fixingCode = "#1393";
+        } else if (message.from === AL_SARRAJ_GROUP) {
+          fixingCode = "#6572";
+        } else if (message.from === OM_GROUP) {
+          fixingCode = "#6950";
+          newFlag = false;
+        } else if (message.from === MUNTHER_GROUP) {
+          fixingCode = "#9643";
+        } else if (message.from === CHANDNI_GROUP) {
+          fixingCode = "#9236";
+          newFlag = false;
+        } else if (message.from === SUDEEP_GROUP) {
+          fixingCode = "#9473";
+        } else if (message.from === MUKESH_GROUP) {
+          fixingCode = "#5784";
+          newFlag = false;
+        } else if (message.from === MATTATHIL_GROUP) {
+          fixingCode = "#5016";
+          newFlag = false;
+        } else if (message.from === JALAL_GROUP) {
+          fixingCode = "#1293";
+        } else if (message.from === DDEVJI_GROUP) {
+          fixingCode = "#1124";
+        } else if (message.from === DILU_GROUP) {
+          fixingCode = "#5324";
+        } else if (message.from === ALAA_GROUP) {
+          fixingCode = "#1175";
+        } else if (message.from === LIBERTY_GROUP) {
+          fixingCode = "#6309";
+        } else if (message.from === SHAHZAIB_GROUP) {
+          fixingCode = "#9325";
+        } else if (message.from === FAIZA_GROUP) {
+          fixingCode = "#4841";
+          newFlag = true;
+        } else if (message.from === EVERSHINE_GROUP) {
+          fixingCode = "#6555";
+        } else if (message.from === FAREEDA_GROUP) {
+          fixingCode = "#4897";
+          newFlag = true;
+        } else if (message.from === JP_GROUP) {
+          fixingCode = "#4496";
+          newFlag = true;
+        } else if (message.from === CHEMMANUR_GROUP) {
+          fixingCode = "#4472";
+          newFlag = false;
+        } else if (message.from === JASRA_GROUP) {
+          fixingCode = "#8293";
+          newFlag = true;
+        } else if (message.from === SONA_GROUP) {
+          fixingCode = "#1152";
+          newFlag = true;
+        } else if (message.from === DUMMY_SARAJ) {
+          fixingCode = "#0101";
+          newFlag = true;
+        } else if (message.from === GORDHANDAS_GROUP) {
+          fixingCode = "#6506";
+          newFlag = true;
+        } else if (message.from === PRAKASH_GROUP) {
+          fixingCode = "#1191";
+          newFlag = true;
+        } else if (message.from === YAFIE_GROUP) {
+          fixingCode = "#4675";
+        } else if (message.from === AGK_GROUP) {
+          fixingCode = "#1234";
+        } else if (message.from === ALSEEF_GROUP) {
+          fixingCode = "#4046";
+        } else if (message.from === MASHALLAH_GROUP) {
+          fixingCode = "#5769";
+        } else if (message.from === JUMBO_GROUP) {
+          fixingCode = "#3209";
+        } else if (message.from === DUMMY_SARAJ) {
+          fixingCode = "#0101";
+          newFlag = true;
+        } else if (message.from === ALSEEF_GROUP) {
+          fixingCode = "#4046";
+        } else if (message.from === MASHALLAH_GROUP) {
+          fixingCode = "#5769";
+        } else if (message.from === MUKESH_GROUP) {
+          fixingCode = "#5784";
+          newFlag = false;
+        } else if (message.from === AL_SARRAJ_GROUP) {
+          fixingCode = "#6572";
+        } else if (message.from === SUBHANALLAH_GROUP) {
+          fixingCode = "#5542";
+          newFlag = false;
+        } else if (message.from === MOKSHA_GROUP) {
+          fixingCode = "#1798";
+          newFlag = false;
+        } else if (message.from === SOHO_GROUP) {
+          fixingCode = "#1397";
+          newFlag = true;
+        }
         
-      //   const quantity = getQuantity(message.body);
+        const quantity = getQuantity(message.body);
 
-      //   if (input !== `!fix ${quantity} tt` || quantity <= 0) {
-      //     message.reply(
-      //       `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
-      //     );
-      //   } else if (quantity > 20) {
-      //     message.reply(
-      //       `${redXEmoji} Sorry, you can only fix a maximum 20TT in one order.\n\nIf you want to fix more than 20 TT please contact us at 17215101 or 33539888, thank you.`
-      //     );
-      //   } else {
-      //     goldPrice2().then((price) => {
-      //       if (isNaN(TT_PREMIUM)) {
-      //         message.reply(
-      //           "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
-      //         );
-      //       } else {
-      //         console.log(TT_PREMIUM);
+        if (input !== `!fix ${quantity} tt` || quantity <= 0) {
+          message.reply(
+            `${redXEmoji} Error\n\nPlease use correct format.\n\nTo fix ${randTT} TT you will type:\n\n*!fix ${randTT} TT*`
+          );
+        } else if (quantity > 20) {
+          message.reply(
+            `${redXEmoji} Sorry, you can only fix a maximum 20TT in one order.\n\nIf you want to fix more than 20 TT please contact us at 17215101 or 33539888, thank you.`
+          );
+        } else {
+          goldPrice2().then((price) => {
+            if (isNaN(TT_PREMIUM)) {
+              message.reply(
+                "Sorry, we are unable to process your request at this time.\nSomeone from our team will now process your order manually. "
+              );
+            } else {
+              console.log(TT_PREMIUM);
 
-      //         const ttRate = (price + PRICE_CORRECTOR) * 1.417;
+               const ttRate = (price + PRICE_CORRECTOR) * 1.417;
 
-      //         let ttPrice;
+              let ttPrice;
 
-      //         if (
-      //           message.from === ALSEEF_GROUP ||
-      //           message.from === MASHALLAH_GROUP ||
-      //           message.from === NEW_MASHALLAH_GROUP ||
-      //           message.from === JUMBO_GROUP
-      //         ) {
-      //           ttPrice = Math.floor(ttRate);
-      //         } else {
-      //           ttPrice = Math.floor(ttRate) + TT_PREMIUM;
-      //         }
+              if (
+                message.from === ALSEEF_GROUP ||
+                message.from === MASHALLAH_GROUP ||
+                message.from === NEW_MASHALLAH_GROUP ||
+                message.from === JUMBO_GROUP
+              ) {
+                ttPrice = Math.floor(ttRate)+TT_PREMIUM-1;
+              } else {
+                ttPrice = Math.floor(ttRate) + TT_PREMIUM;
+              }
 
-      //         const totalPrice = quantity * ttPrice;
-      //         const totalPriceFormatted = numberWithCommas(totalPrice);
+              const totalPrice = quantity * ttPrice;
+              const totalPriceFormatted = numberWithCommas(totalPrice);
 
-      //         if (newFlag) {
-      //           grabPic().then((pic) => {
-      //             chat.sendMessage(pic);
-      //             message.reply(
-      //               `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
-      //             );
-      //           });
-      //         }
-      //          else {
-      //           message.reply(
-      //             `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
-      //           );
-      //         }
-      //       }
-      //     });
-      //   }
+              if (newFlag) {
+                grabPic().then((pic) => {
+                  chat.sendMessage(pic);
+                  message.reply(
+                    `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                  );
+                });
+              }
+               else {
+                message.reply(
+                  `*REVIEW PRICE THEN CONFIRM:*\n\nOrder to fix ${quantity} TT at *BD${ttPrice}* each.\n\nTotal = *BD${totalPriceFormatted}*\n\nTo complete the order swipe right on this message and enter your 4-digit PIN code within *60 seconds*.\n\nAfter 60 seconds your order price will expire then you have to start a new order.\n\nYour fixing code is *${fixingCode}*, please include the # symbol.`
+                );
+              }
+            }
+          });
+        }
       }
     
 
@@ -1175,7 +1177,9 @@ client.on("message", async (message) => {
         fixerName = "Subhanallah Jewellery";
       } else if (message.body === "#1798") {
         fixerName = "Moksha Jewellery";
-      } 
+      } else if (message.body === "#1397") {
+        fixerName = "Soho Diamonds";
+      }
         
       message
         .getQuotedMessage()
