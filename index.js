@@ -3,7 +3,7 @@ const fs = require("fs");
 const schedule = require("node-schedule");
 var emoji = require("node-emoji");
 
-const API_KEY = "bZRzv-wp3xSZ9P2_NbfU";
+const API_KEY = "gUkkarv9QS3rDdC4nbNk";
 
 console.log(`Running Node.js version ${process.version}`);
 
@@ -1085,7 +1085,7 @@ client.on("message", async (message) => {
           });
         }
       }
-    }
+    } // end of if !fix
     
 
 
