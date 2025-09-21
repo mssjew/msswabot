@@ -174,26 +174,174 @@ const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { MessageMedia } = require("whatsapp-web.js");
 
 
-const { Client, NoAuth } = require("whatsapp-web.js");
+const { Client, LocalAuth } = require("whatsapp-web.js");
 
-const client = new Client();
+const client = new Client({
+  authStrategy: new LocalAuth({
+    clientId: "mss-bot"
+  }),
+  puppeteer: {
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--no-first-run',
+      '--disable-gpu',
+      '--window-size=1920,1080',
+      '--start-maximized'
+    ],
+    defaultViewport: null,
+    executablePath: process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : undefined
+  }
+});
 
-// const client = new Client({
-//   authStrategy: new NoAuth(),
-//   puppeteer: {
-//     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-// }
-// });
-
+let qrShown = false;
 client.on("qr", (qr) => {
+  console.log("\n=== QR CODE RECEIVED ===");
+  console.log("Scan this QR code with WhatsApp:");
   qrcode.generate(qr, { small: true });
+  console.log("\n=== WAITING FOR SCAN ===");
+  console.log("After scanning, watch for status updates below...\n");
+  
+  qrShown = true;
+  
+  // Set a timeout to check if we're stuck
+  setTimeout(async () => {
+    if (qrShown && !client.info) {
+      console.log("\n[WARNING] No response after 30 seconds. The client might be stuck.");
+      console.log("Current puppeteer state:", client.pupBrowser?.isConnected() ? "Connected" : "Not connected");
+      
+      // Try to manually trigger ready if WhatsApp is connected
+      try {
+        const state = await client.getState();
+        console.log("Client state:", state);
+      } catch (e) {
+        console.log("Could not get client state:", e.message);
+      }
+    }
+  }, 30000);
+});
+
+const log = (msg) => console.log(`[${new Date().toLocaleTimeString()}]`, msg);
+
+client.on("authenticated", () => {
+  log("✓ Client authenticated successfully!");
+  qrShown = false;
+  
+  // Force check for ready state after authentication
+  setTimeout(async () => {
+    try {
+      const isReady = await client.pupPage.evaluate(() => {
+        return window.WWebJS && window.WWebJS.isReady;
+      });
+      
+      if (isReady) {
+        log("✓ WhatsApp Web is ready (forced check)");
+        // Manually emit ready event if it hasn't fired
+        if (!client.info) {
+          client.emit('ready');
+        }
+      }
+    } catch (e) {
+      log("Error checking ready state: " + e.message);
+    }
+  }, 5000);
+});
+
+client.on("auth_failure", (msg) => {
+  log(`✗ Authentication failure: ${msg}`);
 });
 
 client.on("ready", () => {
-  console.log("Client is ready!");
+  log("✓ Client is ready!");
+  log(`Bot name: ${client.info?.pushname}`);
+  log(`Bot number: ${client.info?.wid?.user}`);
 });
 
-client.initialize();
+client.on("disconnected", (reason) => {
+  log(`✗ Client disconnected: ${reason}`);
+});
+
+client.on("change_state", (state) => {
+  log(`State changed: ${state}`);
+});
+
+client.on("loading_screen", (percent, message) => {
+  log(`Loading: ${percent}% - ${message}`);
+});
+
+// Add error handlers
+client.on('error', (error) => {
+  console.error('WhatsApp client error:', error);
+});
+
+// Listen for browser page events
+client.on('remote_session_saved', () => {
+  console.log('Remote session saved');
+});
+
+client.on('call', (call) => {
+  console.log('Call received');
+});
+
+// Add page console logging
+client.on('qr', () => {
+  setTimeout(() => {
+    if (client.pupPage) {
+      client.pupPage.on('console', msg => {
+        const text = msg.text();
+        // Filter out noise, only show relevant messages
+        if (!text.includes('Permissions-Policy') && !text.includes('Document-Policy')) {
+          console.log('Browser console:', msg.type(), text);
+        }
+      });
+      client.pupPage.on('pageerror', error => {
+        console.error('Browser page error:', error.message);
+      });
+      
+      // Check WhatsApp state every 5 seconds
+      let readyCheckInterval = setInterval(async () => {
+        try {
+          const status = await client.pupPage.evaluate(() => {
+            const result = {
+              hasStore: !!window.Store,
+              hasChat: window.Store && window.Store.Chat,
+              chatCount: window.Store && window.Store.Chat ? window.Store.Chat.getAll().length : 0,
+              isConnected: window.Store && window.Store.State && window.Store.State.Socket && window.Store.State.Socket.state === 'CONNECTED',
+              isReady: window.WWebJS && window.WWebJS.isReady
+            };
+            return result;
+          });
+          
+          console.log('[DEBUG] WhatsApp status:', status);
+          
+          if (status.isConnected && status.chatCount > 0 && !client.info) {
+            log("✓ WhatsApp is fully loaded, forcing ready event");
+            client.emit('ready');
+            clearInterval(readyCheckInterval);
+          }
+        } catch (e) {
+          // Store might not be loaded yet
+        }
+      }, 5000);
+    }
+  }, 5000);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+console.log("Starting WhatsApp client initialization...");
+client.initialize().catch(err => {
+  console.error("Failed to initialize client:", err);
+});
+
+// Add message_create to catch all messages including bot's own messages
+client.on("message_create", (message) => {
+  console.log("Message created:", message.from, message.body.substring(0, 50));
+});
 
 var TT_PREMIUM = 0;
 const VALID_CODES = [
