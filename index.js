@@ -173,20 +173,10 @@ const qrcode = require("qrcode-terminal");
 const { L } = require("qrcode-terminal/vendor/QRCode/QRErrorCorrectLevel");
 const { MessageMedia } = require("whatsapp-web.js");
 
-const wwebVersion = "2.2412.54";
+
 const { Client, NoAuth } = require("whatsapp-web.js");
 
-const client = new Client({
-  authStrategy: new NoAuth(), // your authstrategy here
-  puppeteer: {
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  },
-  // locking the wweb version
-  webVersionCache: {
-    type: "remote",
-    remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
-  },
-});
+const client = new Client();
 
 // const client = new Client({
 //   authStrategy: new NoAuth(),
