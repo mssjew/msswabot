@@ -1027,25 +1027,17 @@ client.on("message", async (message) => {
           message.from === SUBHANALLAH_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 1;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 1 + 5;
           const replyMessage = `TT Rate: *BD${ttPrice}*`;
 
-          if (stockAvailable) {
-            message.reply(`${replyMessage}\n\nStock available. ${greenTick}`);
-          } else {
-            message.reply(`${replyMessage}\n\nStock currently unavailable. ${redXEmoji}`);
-          }
+          message.reply(replyMessage);
           
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) + TT_PREMIUM;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM + 5;
           const replyMessage = `TT Rate: *BD${ttPrice}*`;
 
-          if (stockAvailable) {
-            message.reply(`${replyMessage}\n\nStock available. ${greenTick}`);
-          } else {
-            message.reply(`${replyMessage}\n\nStock currently unavailable. ${redXEmoji}`);
-          }
+          message.reply(replyMessage);
         }
       }
     });
