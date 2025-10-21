@@ -1027,14 +1027,14 @@ client.on("message", async (message) => {
           message.from === SUBHANALLAH_GROUP
         ) {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 1 + 5;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM - 1 + 15;
           const replyMessage = `TT Rate: *BD${ttPrice}*`;
 
           message.reply(replyMessage);
           
         } else {
           const ttRate = (price + PRICE_CORRECTOR) * 1.417;
-          const ttPrice = Math.floor(ttRate) + TT_PREMIUM + 5;
+          const ttPrice = Math.floor(ttRate) + TT_PREMIUM + 15;
           const replyMessage = `TT Rate: *BD${ttPrice}*`;
 
           message.reply(replyMessage);
